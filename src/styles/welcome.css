@@ -1,0 +1,83 @@
+/* welcome.css */
+.welcome-body {
+  background-color: rgb(189, 224, 246);
+  font-family: 'Roboto Serif', serif;
+  font-weight: bold;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center; /* Centrar horizontalmente */
+  align-items: center; /* Centrar verticalmente */
+  height: 100vh;
+}
+
+.welcome-container {
+  width: 600px;
+  height: 550px;
+  background-color: #ffffff;
+  border-radius: 24px;
+  display: flex;
+  justify-content: center; /* Centrar horizontalmente */
+  align-items: center; /* Centrar verticalmente */
+}
+
+.welcome-content {
+  width: 100%; /* Ancho máximo */
+  max-width: 600px; /* Ancho máximo */
+}
+
+.welcome-image {
+  width: 527px;
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.welcome-h2 {
+  color: #080a0b;
+  font-size: 48px;
+  font-family: "Inter";
+  letter-spacing: -1px;
+  text-align: center;
+  margin-bottom: 0; /* Reducir el espacio inferior del h2 */
+}
+
+.welcome-h3 {
+  color: #080a0b;
+  font-size: 40px;
+  font-family: "Inter";
+  letter-spacing: -1px;
+  text-align: center;
+  margin-top: 0; /* Reducir el espacio superior del h3 */
+}
+
+.welcome-button {
+  cursor: pointer;
+  width: 335px;
+  height: 48px;
+  border: 0;
+  border-radius: 100px;
+  background-color: rgb(189, 224, 246);
+  color: #000000;
+  font-size: 16px;
+  font-family: "Inter";
+  font-weight: 700;
+  outline: none;
+}
+
+.welcome-button:hover {
+  opacity: 0.8;
+}
+
+.welcome-signup {
+  font-size: 14px;
+  color: #848484;
+}
+
+.welcome-link {
+  text-decoration: none;
+  color: #5d5d5d;
+  font-weight: bold;
+  font-size: 14px;
+}
