@@ -1,113 +1,129 @@
-// Importación de módulos y estilos
 import React, { useState } from 'react';
+import axios from '../axiosConfig';
 import { useNavigate, Link } from 'react-router-dom';
 import '../styles/register.css';
 import portada from '../assets/portada.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEye, faEyeSlash, faLock, faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import { faEye, faEyeSlash, faLock, faEnvelope, faUser } from '@fortawesome/free-solid-svg-icons';
 
-function Register() { // Define el componente funcional Register
-  // Declaración de estados usando el hook useState
-  const navigate = useNavigate(); // Obtiene la función navigate del hook useNavigate
-  const [email, setEmail] = useState(''); // Estado para el correo electrónico
-  const [password, setPassword] = useState(''); // Estado para la contraseña
-  const [confirmPassword, setConfirmPassword] = useState(''); // Estado para la confirmación de contraseña
-  const [showPassword, setShowPassword] = useState(false); // Estado para mostrar/ocultar la contraseña
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false); // Estado para mostrar/ocultar la confirmación de contraseña
-  const [error, setError] = useState(''); // Estado para manejar errores
+function Register() {
+  const navigate = useNavigate();
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [error, setError] = useState('');
 
-  // Función para manejar el registro de usuario
   const handleRegister = async (event) => {
-    event.preventDefault(); // Evitar envío del formulario
+    event.preventDefault();
 
-    if (password !== confirmPassword) { // Comprobar si las contraseñas coinciden
-      setError('Las contraseñas no coinciden'); // Establecer mensaje de error
-      return; // Salir de la función
+    if (password !== confirmPassword) {
+      setError('Las contraseñas no coinciden');
+      return;
     }
 
-    // Envío al backend
+    try {
+      await axios.post('/user/signup', {
+        name,
+        email,
+        password,
+      });      
+      navigate('/login');
+    } catch (error) {
+      console.error("Error al registrar usuario:", error);
+      setError('Error al registrar usuario. Por favor, inténtelo de nuevo más tarde.');
+    }
   };
 
-  // Función para mostrar/ocultar la contraseña
   const toggleShowPassword = () => {
-    setShowPassword(!showPassword); // Cambiar el estado de mostrar/ocultar contraseña
+    setShowPassword(!showPassword);
   };
 
-  // Función para mostrar/ocultar la confirmación de contraseña
   const toggleShowConfirmPassword = () => {
-    setShowConfirmPassword(!showConfirmPassword); // Cambiar el estado de mostrar/ocultar confirmación de contraseña
+    setShowConfirmPassword(!showConfirmPassword);
   };
 
-  // Función para manejar el cambio en la confirmación de contraseña
   const handleConfirmPasswordChange = (e) => {
     const { value } = e.target;
-    setConfirmPassword(value); // Actualizar el estado de confirmación de contraseña
-    if (password !== value) { // Comprobar si las contraseñas coinciden
-      setError('Las contraseñas no coinciden'); // Establecer mensaje de error
+    setConfirmPassword(value);
+    if (password !== value) {
+      setError('Las contraseñas no coinciden');
     } else {
-      setError(''); // Borrar mensaje de error si las contraseñas coinciden
+      setError('');
     }
   };
 
   return (
-    <div className="register-container"> {/* Contenedor principal con clase register-container */}
-      <div className="register-content"> {/* Contenido con clase register-content */}
-        <img src={portada} alt="Portada Teamtastic" className="register-image" /> {/* Imagen de portada con clase register-image */}
-        <form onSubmit={handleRegister}> {/* Formulario de registro con función onSubmit */}
-          <div className="register-input-container"> {/* Contenedor de entrada de datos */}
-            <FontAwesomeIcon icon={faEnvelope} className="register-input-icon" /> {/* Icono de correo electrónico */}
+    <div className="register-container">
+      <div className="register-content">
+        <img src={portada} alt="Portada Teamtastic" className="register-image" />
+        <form onSubmit={handleRegister}>
+          <div className="register-input-container">
+            <FontAwesomeIcon icon={faUser} className="register-input-icon" />
+            <input
+              type="text"
+              placeholder="Nombre de Usuario" 
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+            />
+          </div>
+          <div className="register-input-container">
+            <FontAwesomeIcon icon={faEnvelope} className="register-input-icon" />
             <input
               type="email"
               placeholder="Correo electrónico" 
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-            /> {/* Input para el correo electrónico */}
+            />
           </div>
-          <div className="register-input-container"> {/* Contenedor de entrada de datos */}
-            <FontAwesomeIcon icon={faLock} className="register-input-icon" /> {/* Icono de contraseña */}
+          <div className="register-input-container">
+            <FontAwesomeIcon icon={faLock} className="register-input-icon" />
             <input
               type={showPassword ? 'text' : 'password'}
               placeholder="Contraseña"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
-            /> {/* Input para la contraseña */}
+            />
             <FontAwesomeIcon
               icon={showPassword ? faEyeSlash : faEye}
               className="register-icon"
               onClick={toggleShowPassword}
-            /> {/* Icono para mostrar/ocultar contraseña */}
+            />
           </div>
-          <div className="register-input-container"> {/* Contenedor de entrada de datos */}
-            <FontAwesomeIcon icon={faLock} className="register-input-icon" /> {/* Icono de confirmación de contraseña */}
+          <div className="register-input-container">
+            <FontAwesomeIcon icon={faLock} className="register-input-icon" />
             <input
               type={showConfirmPassword ? 'text' : 'password'}
               placeholder="Repetir contraseña"
               value={confirmPassword}
               onChange={handleConfirmPasswordChange}
               required
-            /> {/* Input para la confirmación de contraseña */}
+            />
             <FontAwesomeIcon
               icon={showConfirmPassword ? faEyeSlash : faEye}
               className="register-icon"
               onClick={toggleShowConfirmPassword}
-            /> {/* Icono para mostrar/ocultar confirmación de contraseña */}
+            />
           </div>
-          {error && <span className="register-error-message">{error}</span>} {/* Mensaje de error si las contraseñas no coinciden */}
-          <div className="register-input-container"> {/* Contenedor de entrada de datos */}
+          {error && <span className="register-error-message">{error}</span>}
+          <div className="register-input-container">
             <button className="register-button" type="submit">
               Registrarse
-            </button> {/* Botón para enviar el formulario de registro */}
+            </button>
           </div>
         </form>
-        <p className="register-signup"> {/* Párrafo de registro con clase register-signup */}
-          ¿Ya tienes una cuenta?{' '} {/* Texto de pregunta */}
-          <Link to="/login" className="register-link">Inicia sesión</Link> {/* Enlace de inicio de sesión con clase register-link */}
+        <p className="register-signup">
+          ¿Ya tienes una cuenta?{' '}
+          <Link to="/login" className="register-link">Inicia sesión</Link>
         </p>
       </div>
     </div>
   );
 }
 
-export default Register; // Exporta el componente Register por defecto
+export default Register;
