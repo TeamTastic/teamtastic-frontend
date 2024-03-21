@@ -1,96 +1,125 @@
 /* register.css */
+
+/* Estilos para el cuerpo de la página */
 body {
-  background-color: rgb(189, 224, 246);
-  font-family: 'Roboto Serif', serif;
-  font-weight: bold;
-  text-align: center;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  justify-content: center; /* Centrar horizontalmente */
-  align-items: center; /* Centrar verticalmente */
-  height: 100vh;
+  background-color: rgb(189, 224, 246); /* Color de fondo */
+  font-family: 'Roboto Serif', serif; /* Fuente */
+  font-weight: bold; /* Grosor de la fuente */
+  text-align: center; /* Alineación del texto */
+  margin: 0; /* Elimina el margen predeterminado */
+  padding: 0; /* Elimina el padding predeterminado */
+  display: flex; /* Usa flexbox para el diseño */
+  justify-content: center; /* Centra horizontalmente los elementos */
+  align-items: center; /* Centra verticalmente los elementos */
+  height: 100vh; /* Toma el 100% de la altura de la ventana */
 }
 
+/* Contenedor principal de registro */
 .register-container {
-  top: 143px;
-  width: 607px;
-  height: 573px;
-  background-color: #ffffff;
-  border-radius: 24px;
-  display: flex;
-  justify-content: center; /* Centrar horizontalmente */
-  align-items: center; /* Centrar verticalmente */
+  width: 600px; /* Ancho del contenedor */
+  height: 600px; /* Altura del contenedor */
+  background-color: #ffffff; /* Color de fondo */
+  border-radius: 24px; /* Radio de borde para esquinas redondeadas */
+  display: flex; /* Usa flexbox para el diseño */
+  justify-content: center; /* Centra horizontalmente los elementos */
+  align-items: center; /* Centra verticalmente los elementos */
 }
 
+/* Contenido dentro del contenedor de registro */
 .register-content {
   width: 100%; /* Ancho máximo */
   max-width: 600px; /* Ancho máximo */
 }
 
-/* Los estilos restantes permanecen sin cambios */
+/* Imagen dentro del formulario de registro */
 .register-image {
-  width: 527px;
-  background-position: center center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  margin: 0 auto; /* Centrar horizontalmente */
-  margin-bottom: 40px;
+  width: 527px; /* Ancho de la imagen */
+  background-position: center center; /* Posición de fondo centrada */
+  background-size: cover; /* Ajusta el tamaño del fondo */
+  background-repeat: no-repeat; /* No se repite */
+  margin-bottom: 40px; /* Margen inferior */
 }
 
+/* Botón de registro */
 .register-button {
-  cursor: pointer;
-  width: 335px;
-  height: 48px;
-  border: 0;
-  border-radius: 100px;
-  background-color: rgb(189, 224, 246);
-  color: #000000;
-  font-size: 16px;
-  font-family: "Inter";
-  font-weight: 700;
-  outline: none;
-  margin: 20px auto 0; /* Centrar horizontalmente con espacio superior */
+  cursor: pointer; /* Cursor apuntador */
+  width: 335px; /* Ancho del botón */
+  height: 48px; /* Altura del botón */
+  border: 0; /* Sin borde */
+  border-radius: 100px; /* Radio de borde para esquinas redondeadas */
+  background-color: rgb(189, 224, 246); /* Color de fondo */
+  color: #000000; /* Color del texto */
+  font-size: 16px; /* Tamaño de la fuente */
+  font-family: "Inter"; /* Familia de fuentes */
+  font-weight: 700; /* Grosor de la fuente */
+  outline: none; /* Sin contorno al enfocar */
+  margin-top: 20px; /* Margen superior */
 }
 
+/* Estilos al pasar el mouse sobre el botón de registro */
 .register-button:hover {
-  opacity: 0.8;
+  opacity: 0.8; /* Opacidad reducida */
 }
 
+/* Mensaje de registro */
 .register-signup {
-  font-size: 14px;
-  color: #848484;
+  font-size: 14px; /* Tamaño de la fuente */
+  color: #848484; /* Color del texto */
 }
 
+/* Enlace de registro */
 .register-link {
-  text-decoration: none;
-  color: #5d5d5d;
-  font-weight: bold;
-  font-size: 14px;
+  text-decoration: none; /* Sin subrayado */
+  color: #5d5d5d; /* Color del texto */
+  font-weight: bold; /* Grosor de la fuente */
+  font-size: 14px; /* Tamaño de la fuente */
 }
 
+/* Contenedor de entrada de registro */
 .register-input-container {
-  position: relative; /* Cambio a posición relativa */
+  position: relative; /* Posición relativa */
+  width: 100%; /* Ancho completo */
+  margin: 5px; /* Margen */
 }
 
+/* Estilos para la entrada de registro */
 .register-input-container input {
-  padding: 8px 100px 8px 10px; /* Ajuste del padding */
-  margin: 5px;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  box-sizing: border-box;
-  font-size: 16px;
-  font-family: 'Roboto serif';
+  width: 60%; /* Ancho ajustado por el padding y el icono */
+  padding: 8px 40px 8px 10px; /* Ajuste del padding */
+  margin: 5px; /* Margen */
+  border: 1px solid #ccc; /* Borde sólido */
+  border-radius: 10px; /* Radio de borde para esquinas redondeadas */
+  box-sizing: border-box; /* Incluye el padding y el borde en el ancho total */
+  font-size: 16px; /* Tamaño de la fuente */
+  font-family: 'Roboto serif'; /* Familia de fuentes */
+  align-items: center; /* Centrar verticalmente */
+  justify-content: center; /* Centrar horizontalmente */
 }
 
+/* Estilos para los iconos de entrada de registro */
+.register-input-container .register-input-icon,
 .register-input-container .register-icon {
-  position: relative;
-  top: 50%;
-  cursor: pointer;
-  color: #ccc;
+  position: absolute; /* Posición absoluta */
+  top: 50%; /* Posiciona desde la mitad superior */
+  transform: translateY(-50%); /* Centra verticalmente */
+  cursor: pointer; /* Cursor apuntador */
 }
 
+/* Estilos para el icono de entrada de registro */
+.register-input-container .register-input-icon {
+  left: 16%; /* Alineación a la izquierda */
+  color: #1db4bb; /* Color del icono */
+}
+
+/* Estilos para el icono de registro */
+.register-input-container .register-icon {
+  right: 16%; /* Alineación a la derecha */
+  color: #333; /* Color del icono */
+  opacity: 0.5; /* Opacidad inicial */
+}
+
+/* Estilos al pasar el mouse sobre el icono de registro */
 .register-input-container .register-icon:hover {
-  color: #333;
-  opacity: 0.8;
+  color: #333; /* Color del icono al pasar el mouse */
+  opacity: 1; /* Opacidad aumentada */
 }

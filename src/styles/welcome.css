@@ -1,83 +1,94 @@
 /* welcome.css */
+
+/* Estilos para el cuerpo de la página de bienvenida */
 .welcome-body {
-  background-color: rgb(189, 224, 246);
-  font-family: 'Roboto Serif', serif;
-  font-weight: bold;
-  text-align: center;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  justify-content: center; /* Centrar horizontalmente */
-  align-items: center; /* Centrar verticalmente */
-  height: 100vh;
+  background-color: rgb(189, 224, 246); /* Color de fondo */
+  font-family: 'Roboto Serif', serif; /* Familia de fuentes */
+  font-weight: bold; /* Grosor de la fuente */
+  text-align: center; /* Alineación del texto */
+  margin: 0; /* Elimina el margen predeterminado */
+  padding: 0; /* Elimina el padding predeterminado */
+  display: flex; /* Usa flexbox para el diseño */
+  justify-content: center; /* Centra horizontalmente los elementos */
+  align-items: center; /* Centra verticalmente los elementos */
+  height: 100vh; /* Toma el 100% de la altura de la ventana */
 }
 
+/* Contenedor principal de la página de bienvenida */
 .welcome-container {
-  width: 600px;
-  height: 550px;
-  background-color: #ffffff;
-  border-radius: 24px;
-  display: flex;
-  justify-content: center; /* Centrar horizontalmente */
-  align-items: center; /* Centrar verticalmente */
+  width: 600px; /* Ancho del contenedor */
+  height: 550px; /* Altura del contenedor */
+  background-color: #ffffff; /* Color de fondo */
+  border-radius: 24px; /* Radio de borde para esquinas redondeadas */
+  display: flex; /* Usa flexbox para el diseño */
+  justify-content: center; /* Centra horizontalmente los elementos */
+  align-items: center; /* Centra verticalmente los elementos */
 }
 
+/* Contenido dentro del contenedor de la página de bienvenida */
 .welcome-content {
   width: 100%; /* Ancho máximo */
   max-width: 600px; /* Ancho máximo */
 }
 
+/* Imagen dentro del contenido de la página de bienvenida */
 .welcome-image {
-  width: 527px;
-  background-position: center center;
-  background-size: cover;
-  background-repeat: no-repeat;
+  width: 527px; /* Ancho de la imagen */
+  background-position: center center; /* Posición de fondo centrada */
+  background-size: cover; /* Ajusta el tamaño del fondo */
+  background-repeat: no-repeat; /* No se repite */
 }
 
+/* Título h2 de la página de bienvenida */
 .welcome-h2 {
-  color: #080a0b;
-  font-size: 48px;
-  font-family: "Inter";
-  letter-spacing: -1px;
-  text-align: center;
+  color: #080a0b; /* Color del texto */
+  font-size: 48px; /* Tamaño de la fuente */
+  font-family: "Inter"; /* Familia de fuentes */
+  letter-spacing: -1px; /* Espaciado entre letras */
+  text-align: center; /* Alineación del texto */
   margin-bottom: 0; /* Reducir el espacio inferior del h2 */
 }
 
+/* Subtítulo h3 de la página de bienvenida */
 .welcome-h3 {
-  color: #080a0b;
-  font-size: 40px;
-  font-family: "Inter";
-  letter-spacing: -1px;
-  text-align: center;
+  color: #080a0b; /* Color del texto */
+  font-size: 40px; /* Tamaño de la fuente */
+  font-family: "Inter"; /* Familia de fuentes */
+  letter-spacing: -1px; /* Espaciado entre letras */
+  text-align: center; /* Alineación del texto */
   margin-top: 0; /* Reducir el espacio superior del h3 */
 }
 
+/* Botón de la página de bienvenida */
 .welcome-button {
-  cursor: pointer;
-  width: 335px;
-  height: 48px;
-  border: 0;
-  border-radius: 100px;
-  background-color: rgb(189, 224, 246);
-  color: #000000;
-  font-size: 16px;
-  font-family: "Inter";
-  font-weight: 700;
-  outline: none;
+  cursor: pointer; /* Cursor apuntador */
+  width: 335px; /* Ancho del botón */
+  height: 48px; /* Altura del botón */
+  border: 0; /* Sin borde */
+  border-radius: 100px; /* Radio de borde para esquinas redondeadas */
+  background-color: rgb(189, 224, 246); /* Color de fondo */
+  color: #000000; /* Color del texto */
+  font-size: 16px; /* Tamaño de la fuente */
+  font-family: "Inter"; /* Familia de fuentes */
+  font-weight: 700; /* Grosor de la fuente */
+  outline: none; /* Sin contorno al enfocar */
 }
 
+/* Estilos al pasar el mouse sobre el botón de la página de bienvenida */
 .welcome-button:hover {
-  opacity: 0.8;
+  opacity: 0.8; /* Opacidad reducida */
 }
 
+/* Mensaje de registro en la página de bienvenida */
 .welcome-signup {
-  font-size: 14px;
-  color: #848484;
+  font-size: 14px; /* Tamaño de la fuente */
+  color: #848484; /* Color del texto */
 }
 
+/* Enlace de registro en la página de bienvenida */
 .welcome-link {
-  text-decoration: none;
-  color: #5d5d5d;
-  font-weight: bold;
-  font-size: 14px;
+  text-decoration: none; /* Sin subrayado */
+  color: #5d5d5d; /* Color del texto */
+  font-weight: bold; /* Grosor de la fuente */
+  font-size: 14px; /* Tamaño de la fuente */
 }
