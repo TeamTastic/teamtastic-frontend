@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from '../axiosConfig';
 import { useNavigate, Link } from 'react-router-dom';
 import '../styles/register.css'; // Se mantiene el estilo del registro, se puede modificar si es necesario
 import portada from '../assets/portada.png'; // Se mantiene la imagen de portada, se puede cambiar si es necesario
@@ -18,9 +19,17 @@ function Login() { // Define el componente funcional Login
     event.preventDefault(); // Evitar envío del formulario
 
     // Lógica de autenticación
-
-    // Redireccionar a la página principal después del inicio de sesión
-    navigate('/');
+    try {
+      await axios.post('/user/login', {
+        email,
+        password,
+      });     
+      // Redireccionar a la página principal después del inicio de sesión 
+      navigate('/privateRoute');
+    } catch (error) {
+      console.error("Error al registrar usuario:", error);
+      setError('Error al iniciar sesión. Por favor, inténtelo de nuevo.');
+    }
   };
 
   // Función para mostrar/ocultar la contraseña
