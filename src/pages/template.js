@@ -1,32 +1,50 @@
-import React from 'react'; // Importa la librería React
-import { useNavigate, Link } from 'react-router-dom'; // Importa los hooks useNavigate y Link de react-router-dom
-import '../styles/welcome.css'; // Importa los estilos CSS
-import portada from '../assets/portada.png'; // Importa la imagen de la portada
+import React, { useEffect, useState } from 'react';
+import * as XLSX from 'xlsx';
+import { saveAs } from 'file-saver';
+import { FileUploader } from "react-drag-drop-files";
 
-function Template() { // Define el componente funcional Welcome
-  const navigate = useNavigate(); // Obtiene la función navigate del hook useNavigate
+function Template() {
+  const fileTypes = ["XLSX"];
+  const [files, setFiles] = useState(null);
 
-  const handleRegisterClick = () => { // Define la función handleRegisterClick
-    navigate('/register'); // Navega hacia la ruta /register al hacer clic en el botón de registro
+  useEffect(() => {
+      if (files) {
+          const reader = new FileReader();
+          reader.onload=()=> {
+              const data = reader.result;
+              let workbook = XLSX.read(data, {type: 'binary'});
+              const sheetName = workbook.SheetNames[0];
+              const csvfile = XLSX.utils.sheet_to_csv(workbook.Sheets[sheetName])
+              console.log(typeof(csvfile))
+          }
+          reader.readAsBinaryString(files)
+      }
+
+}, [files]);
+
+  async function handleDownload() {
+    try {
+      const response = await fetch('./res/TEMPLATE.xlsx');
+      const blob = await response.blob();
+      saveAs(blob, 'template.xlsx');
+    } catch (error) {
+      console.error('Error downloading file:', error);
+    }
+  }
+
+  const handleChange = (file) => {
+    setFiles(file);
   };
 
-  return ( // Retorna el JSX del componente Welcome
-    <div className="welcome-container"> {/* Contenedor principal con clase welcome-container */}
-      <div className="welcome-content"> {/* Contenido con clase welcome-content */}
-        <img src={portada} alt="Portada Teamtastic" className="welcome-image" /> {/* Imagen de portada con clase welcome-image */}
-        <h2 className="welcome-h2">¡Bienvenida!</h2> {/* Título h2 con clase welcome-h2 */}
-        <h3 className="welcome-h3">Meteme aca el template</h3> {/* Subtítulo h3 con clase welcome-h3 */}
-        <div className="input-container"></div> {/* Contenedor de entrada de datos */}
-        <button className="welcome-button" onClick={handleRegisterClick}> {/* Botón de registro con clase welcome-button y evento onClick */}
-          Registrarse {/* Texto del botón */}
-        </button>
-        <p className="welcome-signup"> {/* Párrafo de registro con clase welcome-signup */}
-          ¿Ya tienes una cuenta? {' '} {/* Texto de pregunta */}
-          <Link to="/login" className="welcome-link">Inicia sesión</Link> {/* Enlace de inicio de sesión con clase welcome-link */}
-        </p>
+  return (
+      <div className="App">
+        <h1> Descarga y carga Template </h1>
+        <button className='dowloadbtn' onClick={handleDownload}> Descargar Template</button>
+        <div className='fileUploader'>
+          <FileUploader handleChange={handleChange} name="file" label='Suba su planilla de datos completa' types={fileTypes} multiple={false}/>
+        </div>
       </div>
-    </div>
   );
 }
 
-export default Template; // Exporta el componente Welcome por defecto
+export default Template;
