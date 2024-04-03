@@ -15,7 +15,7 @@ function Template() {
               let workbook = XLSX.read(data, {type: 'binary'});
               const sheetName = workbook.SheetNames[0];
               const csvfile = XLSX.utils.sheet_to_csv(workbook.Sheets[sheetName])
-              console.log(typeof(csvfile))
+              console.log(csvfile)
           }
           reader.readAsBinaryString(files)
       }
