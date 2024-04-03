@@ -7,6 +7,16 @@ function Template() {
   const fileTypes = ["XLSX"];
   const [files, setFiles] = useState(null);
 
+  const data = [{
+          NOMBRE: '',
+          DEFENSA: '',
+          VELOCIDAD:'',
+          CONTROL:'',
+          RESISTENCIA:'',
+          PUNTERIA:	'',
+          EXCLUIR:''
+      }];
+
   useEffect(() => {
       if (files) {
           const reader = new FileReader();
@@ -24,9 +34,13 @@ function Template() {
 
   async function handleDownload() {
     try {
-      const response = await fetch('./res/TEMPLATE.xlsx');
-      const blob = await response.blob();
-      saveAs(blob, 'template.xlsx');
+      const worksheet = XLSX.utils.json_to_sheet(data);
+      const workbook = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
+      const excelBuffer = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+      const blob = new Blob([excelBuffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8' });
+
+      saveAs(blob, "template.xlsx");
     } catch (error) {
       console.error('Error downloading file:', error);
     }
