@@ -51,12 +51,20 @@ function Template() {
   };
 
   return (
-      <div className="App">
-        <h1> Descarga y carga Template </h1>
-        <button className='dowloadbtn' onClick={handleDownload}> Descargar Template</button>
-        <div className='fileUploader'>
-          <FileUploader handleChange={handleChange} name="file" label='Suba su planilla de datos completa' types={fileTypes} multiple={false}/>
-        </div>
+      <div className="template-container">
+          <div className='load-template'>
+              <h1> Descarga y carga Template </h1>
+              <button className='dowloadbtn' onClick={handleDownload}> Descargar Template</button>
+              <div className='fileUploader'>
+                  <FileUploader handleChange={handleChange} name="file" label='Suba su planilla de datos completa'
+                                types={fileTypes} multiple={false}/>
+              </div>
+          </div>
+          <div className='load-abilities'>
+              <label> Ingrese hasta 5 habilidades </label>
+              <input />
+          </div>
+
       </div>
   );
 }
