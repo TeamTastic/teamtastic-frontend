@@ -1,0 +1,58 @@
+/* Estilos para el contenedor principal del icono SVG */
+.file-uploader-svg-container {
+    width: 100px; /* Ajusta el ancho según tu preferencia */
+    height: 100px; /* Ajusta la altura según tu preferencia */
+    margin: 0 auto; /* Centra horizontalmente el contenedor */
+    transition: background-color 0.3s ease; /* Agrega una transición suave */
+  }
+  
+  /* Estilos para el icono SVG dentro del contenedor */
+  .file-uploader-svg-container svg {
+    width: 100%; /* Ajusta el tamaño del icono SVG al 100% del contenedor */
+    height: 100%; /* Ajusta el tamaño del icono SVG al 100% del contenedor */
+  }
+  
+  /* Estilos para el mensaje debajo del icono SVG */
+  .file-uploader-message {
+    margin-top: 10px; /* Espacio superior para separar el mensaje del icono */
+    font-weight: 700; /* Misma fuente en negrita */
+    font-size: 24px; /* Mismo tamaño de fuente */
+    letter-spacing: 2px; /* Mismo espaciado entre letras */
+    color: #1DB4BB; /* Mismo color de texto */
+    text-align: center; /* Centra horizontalmente el texto */
+  }
+  
+  .background-overlay span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+  }
+  
+  /* Estilos para el mensaje de tipos de archivo */
+  .file-types {
+    display: none;
+  }
+  
+  /* Otros estilos según sea necesario */
+  .fileUploader {
+    border: 2px dashed #1DB4BB;
+    padding: 20px;
+    text-align: center;
+    outline: none; /* Agregar esta línea para eliminar el borde azul predeterminado */
+  }
+  
+  .fileUploader:hover {
+    background-color: #fff; /* Cambia el color de fondo al pasar el cursor */
+    border-color: #999;
+    transition: background-color 0.7s ease; /* Agrega una transición suave */
+  }
+  
+  .fileUploader input[type="file"] {
+    display: none;
+  }
+  
+  .fileUploader label {
+    cursor: pointer;
+  }
+  
