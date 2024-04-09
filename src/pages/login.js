@@ -23,7 +23,8 @@ function Login() { // Define el componente funcional Login
       await axios.post('/user/login', {
         email,
         password,
-      });     
+      });
+      console.log(error)
       // Redireccionar a la página principal después del inicio de sesión 
       navigate('/privateRoute');
     } catch (error) {
