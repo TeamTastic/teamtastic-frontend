@@ -24,8 +24,26 @@ function Login() { // Define el componente funcional Login
         email,
         password,
       });
-      console.log(error)
-      // Redireccionar a la página principal después del inicio de sesión 
+
+      const cookies = document.cookie.split('; ').reduce((acc, cookie) => {
+        const [name, value] = cookie.split('=');
+        acc[name] = value;
+        return acc;
+      }, {});
+
+      const authToken = cookies['authToken']; // Replace 'authToken' with your actual cookie name
+
+      if (authToken) {
+        // Store the authorization token in localStorage or session storage for future use
+        localStorage.setItem('authToken', authToken);
+
+      }else{
+        console.log('No se encontró el token de autenticación')
+      }
+
+      // Redireccionar a la página principal después del inicio de sesión
+
+
       navigate('/privateRoute');
     } catch (error) {
       console.error("Error al registrar usuario:", error);

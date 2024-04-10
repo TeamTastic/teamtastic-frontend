@@ -1,15 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import axios from '../axiosConfig';
 
+
 function PrivateRoute() {
   const [message, setMessage] = useState('');
 
   useEffect(() => {
+
     // Realizar la solicitud a la ruta privada al cargar el componente
-    axios.get('/private_route')
+    axios.get('/private_route'
+        )
       .then(response => {
         // Si la solicitud es exitosa, mostrar el mensaje de la ruta privada
         setMessage(response.data);
+        console.log(response)
       })
       .catch(error => {
         // Si hay un error, mostrar el mensaje de error
