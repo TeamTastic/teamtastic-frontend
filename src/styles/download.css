@@ -1,0 +1,104 @@
+.download-container {
+  width: 50vw; /* Ancho del contenedor */
+  min-width: 320px;
+  max-height: 90vh;
+  overflow-y: scroll;
+  background-color: #ffffff; /* Color de fondo */
+  border-radius: 24px; /* Radio de borde para esquinas redondeadas */
+  display: flex; /* Usa flexbox para el diseño */
+  flex-wrap: wrap;
+  justify-content: center; /* Centra horizontalmente los elementos */
+}
+
+.download-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 20px 0; /* Espacio arriba y abajo */
+}
+
+.download-header h1 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400; /* Misma fuente en negrita */
+  font-size: 50px; /* Mismo tamaño de fuente */
+  letter-spacing: 2px; /* Mismo espaciado entre letras */
+  color: #1DB4BB; /* Mismo color de texto */
+  text-align: center; /* Centra horizontalmente el texto */
+  margin-bottom: 0;
+}
+
+/* Estilos para la caja de entrada de habilidades */
+.addBox {
+  display: flex; /* Usa flexbox para alinear elementos horizontalmente */
+  align-items: center; /* Centra verticalmente los elementos */
+  margin: 5%;
+  width: 70%;
+  min-height: 50px; /* Establecer una altura mínima */
+  justify-content: space-between;
+  background: #ccfcff;
+  border-radius: 20px;
+  position: relative;
+  border: none;
+}
+
+/* Estilos para el campo de entrada de texto */
+.textInput {
+  border: none;
+  width: 50%;
+  display: flex;
+  background: none;
+  color: black;
+  font-size: 20px;
+  padding: 5% 30% 5% 5%;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Estilos para el botón de añadir habilidad */
+.addButton {
+  color: white;
+  position: absolute;
+  right: 8px;
+  height: 80%;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  background: var(--gradient-2, linear-gradient(90deg, #2AF598 0%, #009EFD 100%));
+  border: 0;
+  display: inline-block;
+  transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+}
+
+/* Efecto de hover del botón */
+button:hover {
+  color: #fff;
+  background-color: #1A1A1A;
+  box-shadow: rgba(0, 0, 0, 0.5) 0 10px 20px;
+  transform: translateY(-3px);
+}
+
+/* Efecto de presión del botón */
+button:active {
+  box-shadow: none;
+  transform: translateY(0);
+}
+
+
+.skills-added-list {
+  list-style-type: none; /* Elimina los marcadores de viñeta */
+  padding: 0; /* Elimina el relleno predeterminado */
+}
+
+.skills-added-list li {
+  margin-bottom: 10px; /* Espacio entre elementos de la lista */
+  font-size: 24px; /* Tamaño de fuente */
+  color: #333; /* Color del texto */
+  font-family: 'Inter', sans-serif;
+  font-weight: 200;
+}
+
+.skills-list h2 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400; /* Peso de la fuente */
+  font-size: 18px; /* Tamaño de la fuente */
+  color: #1DB4BB; /* Color del texto */
+}

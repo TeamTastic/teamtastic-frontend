@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import * as XLSX from 'xlsx';
 import { saveAs } from 'file-saver';
-import FileUploader from "../components/upload-template"
+import FileUploader from "../components/file-uploader"
 import DownloadTemplateButton from "../components/download-template-button";
-import "../styles/template.css"
 
 function Template() {
   const fileTypes = ["XLSX"];

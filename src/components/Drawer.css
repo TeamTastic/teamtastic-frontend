@@ -1,0 +1,30 @@
+.drawer {
+    position: fixed;
+    top: 0;
+    left: -250px; /* Drawer inicialmente oculto */
+    width: 250px;
+    height: 100%;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: left 0.3s ease; /* Transición suave al abrir y cerrar el drawer */
+  }
+  
+  .drawer.open {
+    left: 0; /* Muestra el drawer cuando está abierto */
+  }
+  
+  .drawer-toggle {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    cursor: pointer;
+  }
+  
+  .drawer-content {
+    padding: 20px;
+  }
+  
+  .toggle-icon {
+    font-size: 24px;
+  }
+  

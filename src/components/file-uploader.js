@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import './upload-template.css';
-import CloudIcon from '../assets/cloud.svg'; // Importa tu SVG desde la carpeta de activos
+import './fileUploader.css';
+import ExcelFile from '../assets/excel-file.svg'; // Importa tu SVG desde la carpeta de activos
 
 function FileUploader({
   name,
@@ -153,7 +153,7 @@ function FileUploader({
 
   return (
     <label
-      className={`${classes || ''} ${disabled ? 'is-disabled' : ''}`}
+      className={`file-uploader ${classes || ''} ${disabled ? 'is-disabled' : ''}`} // Agrega la clase file-uploader aquí
       htmlFor={name}
       onClick={(e) => {
         e.preventDefault();
@@ -180,7 +180,7 @@ function FileUploader({
       {!fileOrFiles && (
         <>
           <div className="file-uploader-svg-container"> {/* Cambio de clase para el contenedor del icono SVG */}
-            <img src={CloudIcon} alt="Cloud Icon" />
+            <img src={ExcelFile} alt="Excel Icon" />
           </div>
           {renderInfoText()}
         </>
