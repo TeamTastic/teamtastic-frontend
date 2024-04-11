@@ -1,0 +1,56 @@
+/* teams.css */
+.teams {
+    text-align: center;
+}
+
+.teams-list-header h1 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400; /* Misma fuente en negrita */
+    font-size: 50px; /* Mismo tamaño de fuente */
+    letter-spacing: 2px; /* Mismo espaciado entre letras */
+    color: #1DB4BB; /* Mismo color de texto */
+    text-align: center; /* Centra horizontalmente el texto */
+}
+
+.teams-list {
+    display: flex;
+    flex-wrap: wrap; /* Hace que los equipos se envuelvan en pantallas pequeñas */
+    justify-content: space-around;
+}
+
+.listed-team {
+    width: 200px; /* Ancho del contenedor */
+    background-color: #ffffff; /* Color de fondo */
+    border-radius: 24px; /* Radio de borde para esquinas redondeadas */
+    margin: 10px;  
+}
+
+.team-name-container {
+    background-color: #E3E3E3; /* Color de fondo gris */
+    margin: 10%;
+    border-radius: 10px; /* Radio de borde para esquinas redondeadas */
+    padding-top: 1px; /* Espacio interno superior */
+    padding-bottom: 1px; /* Espacio interno inferior */
+}
+
+.listed-team h2 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 500; /* Misma fuente en negrita */
+    font-size: 25px; /* Tamaño de fuente fijo */
+    color: black; /* Mismo color de texto */
+    text-align: center; /* Centra horizontalmente el texto */
+}
+
+.listed-team ul {
+    list-style-type: none;
+    padding-left: 0; /* Elimina el relleno predeterminado de la lista */
+}
+
+.listed-team li {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400; /* Misma fuente en negrita */
+    font-size: 20px; /* Tamaño de fuente */
+    color: black; /* Mismo color de texto */
+    text-align: center; /* Centra horizontalmente el texto */
+    margin-bottom: 5px; /* Espacio entre elementos de la lista */
+}
