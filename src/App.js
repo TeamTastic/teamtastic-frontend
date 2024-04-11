@@ -3,7 +3,6 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 import Welcome from './pages/welcome';
-import Home from './pages/home';
 import Register from './pages/register';
 import Login from './pages/login';
 import PrivateRoute from './pages/privateRoute';
@@ -17,7 +16,6 @@ const App = () => {
       <div>
         <Routes>
             <Route path="/" element={<Welcome />} />
-            <Route path="/home" element={<Home />} />
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
             <Route path="/privateRoute" element={<PrivateRoute />} />
