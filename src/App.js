@@ -7,6 +7,7 @@ import Register from './pages/register';
 import Login from './pages/login';
 import PrivateRoute from './pages/privateRoute';
 import Template from './pages/template';
+import AfterLogin from './pages/AfterLogin';
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
             <Route path="/login" element={<Login />} />
             <Route path="/privateRoute" element={<PrivateRoute />} />
             <Route path="/template" element={<Template />} />
+            <Route path="/afterlogin" element={<AfterLogin />} />
           </Routes>
       </div>
     </Router>
