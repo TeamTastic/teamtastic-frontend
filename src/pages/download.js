@@ -32,19 +32,19 @@ function Download() {
 
   function handleAddSkill() {
     if (skills.length > 5) {
-      toast.error('Ya has ingresado 5 habilidades');
+      toast.error('Ya has ingresado 5 atributos');
       return;
     }
 
     const trimmedSkill = inputValue.trim().toLowerCase();
 
     if (!trimmedSkill) {
-      toast.error('Por favor, ingresa una habilidad');
+      toast.error('Por favor, ingresa un atributo');
       return;
     }
 
     if (skills.map(skill => skill.toLowerCase()).includes(trimmedSkill)) {
-      toast.error('Esta habilidad ya ha sido ingresada');
+      toast.error('Este atributo ya ha sido ingresada');
       return;
     }
     
@@ -62,14 +62,14 @@ function Download() {
     <div className="download-container">
       <ToastContainer />
       <div className='download-header'>
-        <h1> &#9312; Ingrese hasta 5 nuevas habilidades</h1>
+        <h1> &#9312; Ingrese hasta 5 nuevos atributos</h1>
       </div>
       <div className="addBox">
         <input
           className="textInput"
           type="text"
           name=""
-          placeholder="Nueva habilidad"
+          placeholder="Nuevo atributo"
           value={inputValue}
           onChange={handleInputChange}
           onKeyPress={handleKeyPress}
