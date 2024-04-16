@@ -39,7 +39,7 @@
   background: #ccfcff;
   border-radius: 20px;
   position: relative;
-  border: none;
+  border:none;
 }
 
 /* Estilos para el campo de entrada de texto */
@@ -53,6 +53,12 @@
   padding: 5% 30% 5% 5%;
   font-family: 'Inter', sans-serif;
 }
+
+.textInput:focus {
+  outline: none;
+  box-shadow: none;
+}
+
 
 /* Estilos para el botón de añadir habilidad */
 .addButton {

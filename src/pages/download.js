@@ -9,26 +9,19 @@ import { saveAs } from 'file-saver';
 
 function Download() {
   const [inputValue, setInputValue] = useState('');
-  const [skills, setSkills] = useState(['Nombre']); // Establecer 'Nombre' como habilidad predeterminada
+  const [skills, setSkills] = useState(['Nombre']);
 
   async function handleDownload() {
     try {
-      // Organizar los datos con las habilidades separadas por coma
       skills.join(', ')
-      // Crear la hoja de cálculo
       const worksheet = XLSX.utils.json_to_sheet([skills], { skipHeader: true });
-  
-      // Crear el libro de trabajo y adjuntar la hoja de cálculo
       const workbook = XLSX.utils.book_new();
       XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
-  
-      // Convertir el libro de trabajo a un buffer Excel y guardarlo como archivo
       const excelBuffer = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
       const blob = new Blob([excelBuffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8' });
       saveAs(blob, "template.xlsx");
     } catch (error) {
       console.error('Error downloading file:', error);
-      // Mostrar notificación de error
       toast.error('Error al descargar el archivo');
     }
   }  
@@ -39,18 +32,30 @@ function Download() {
 
   function handleAddSkill() {
     if (skills.length > 5) {
-      // Mostrar notificación cuando ya hay 5 habilidades ingresadas
       toast.error('Ya has ingresado 5 habilidades');
       return;
     }
 
-    if (skills.includes(inputValue.trim())) {
-      // Mostrar notificación si la habilidad ya está ingresada previamente
+    const trimmedSkill = inputValue.trim().toLowerCase();
+
+    if (!trimmedSkill) {
+      toast.error('Por favor, ingresa una habilidad');
+      return;
+    }
+
+    if (skills.map(skill => skill.toLowerCase()).includes(trimmedSkill)) {
       toast.error('Esta habilidad ya ha sido ingresada');
       return;
     }
+    
     setSkills([...skills, inputValue.trim()]);
     setInputValue('');
+  }
+
+  function handleKeyPress(event) {
+    if (event.key === 'Enter') {
+      handleAddSkill();
+    }
   }
 
   return (
@@ -67,6 +72,7 @@ function Download() {
           placeholder="Nueva habilidad"
           value={inputValue}
           onChange={handleInputChange}
+          onKeyPress={handleKeyPress}
         />
         <button className="addButton" onClick={handleAddSkill}>
           <div className="add-hability-svg-container">
