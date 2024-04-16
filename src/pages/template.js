@@ -1,36 +1,36 @@
 import React, { useEffect, useState } from 'react';
 import * as XLSX from 'xlsx';
 import { saveAs } from 'file-saver';
-import { FileUploader } from "react-drag-drop-files";
+import FileUploader from "../components/file-uploader"
+import DownloadTemplateButton from "../components/download-template-button";
 
 function Template() {
   const fileTypes = ["XLSX"];
   const [files, setFiles] = useState(null);
 
   const data = [{
-          NOMBRE: '',
-          DEFENSA: '',
-          VELOCIDAD:'',
-          CONTROL:'',
-          RESISTENCIA:'',
-          PUNTERIA:	'',
-          EXCLUIR:''
-      }];
+    NOMBRE: '',
+    DEFENSA: '',
+    VELOCIDAD:'',
+    CONTROL:'',
+    RESISTENCIA:'',
+    PUNTERIA: '',
+    EXCLUIR:''
+  }];
 
   useEffect(() => {
-      if (files) {
-          const reader = new FileReader();
-          reader.onload=()=> {
-              const data = reader.result;
-              let workbook = XLSX.read(data, {type: 'binary'});
-              const sheetName = workbook.SheetNames[0];
-              const csvfile = XLSX.utils.sheet_to_csv(workbook.Sheets[sheetName])
-              console.log(csvfile)
-          }
-          reader.readAsBinaryString(files)
-      }
-
-}, [files]);
+    if (files) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        const data = reader.result;
+        let workbook = XLSX.read(data, { type: 'binary' });
+        const sheetName = workbook.SheetNames[0];
+        const csvfile = XLSX.utils.sheet_to_csv(workbook.Sheets[sheetName]);
+        console.log(csvfile);
+      };
+      reader.readAsBinaryString(files);
+    }
+  }, [files]);
 
   async function handleDownload() {
     try {
@@ -51,21 +51,19 @@ function Template() {
   };
 
   return (
-      <div className="template-container">
-          <div className='load-template'>
-              <h1> Descarga y carga Template </h1>
-              <button className='dowloadbtn' onClick={handleDownload}> Descargar Template</button>
-              <div className='fileUploader'>
-                  <FileUploader handleChange={handleChange} name="file" label='Suba su planilla de datos completa'
-                                types={fileTypes} multiple={false}/>
-              </div>
-          </div>
-          <div className='load-abilities'>
-              <label> Ingrese hasta 5 habilidades </label>
-              <input />
-          </div>
-
+    <div className="App">
+      <DownloadTemplateButton onClick={handleDownload}>Descargar Template</DownloadTemplateButton>
+      <div className='fileUploader'>
+        <FileUploader
+          handleChange={handleChange}
+          name="file"
+          label='Suba su planilla de datos completa'
+          types={fileTypes}
+          multiple={false}
+          message="Arrastre y suelte el archivo aquí o haga clic para seleccionar" // Mensaje para mostrar debajo del icono SVG
+        />
       </div>
+    </div>
   );
 }
 
