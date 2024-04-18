@@ -44,7 +44,7 @@ function Login() { // Define el componente funcional Login
       // Redireccionar a la página principal después del inicio de sesión
 
 
-      navigate('/privateRoute');
+      navigate('/AfterLogin');
     } catch (error) {
       console.error("Error al registrar usuario:", error);
       setError('Error al iniciar sesión. Por favor, inténtelo de nuevo.');

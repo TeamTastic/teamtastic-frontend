@@ -10,6 +10,7 @@ import Template from './pages/template';
 import Upload from './pages/upload';
 import Download from './pages/download';
 import Teams from './pages/teams';
+import AfterLogin from './pages/AfterLogin';
 
 const App = () => {
   return (
@@ -25,6 +26,7 @@ const App = () => {
           <Route path="/upload" element={<Upload />} />
           <Route path="/download" element={<Download />} />
           <Route path="/teams" element={<Teams />} />
+            <Route path="/afterlogin" element={<AfterLogin />} />
         </Routes>
       </div>
     </Router>
