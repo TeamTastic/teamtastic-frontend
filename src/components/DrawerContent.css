@@ -1,0 +1,31 @@
+.drawer-content {
+  position: fixed;
+  top: 0;
+  left: -250px; /* Oculta el contenido del Drawer por defecto */
+  width: 250px;
+  height: 100%;
+  background-color: #fff;
+  transition: left 0.3s ease-in-out;
+}
+
+.drawer-content.open {
+  left: 0; /* Muestra el contenido del Drawer cuando está abierto */
+}
+
+.drawer-content ul {
+  list-style: none;
+  padding: 0;
+}
+
+.drawer-content ul li {
+  padding: 10px;
+}
+
+.drawer-content ul li a {
+  text-decoration: none;
+  color: #000;
+}
+
+.drawer-content ul li a:hover {
+  color: #888;
+}
