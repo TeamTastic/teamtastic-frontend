@@ -190,6 +190,7 @@ button:active {
   display: flex;
   flex-wrap: nowrap;
   justify-content: center;
+  margin-bottom: 10px;
 }
 
 .additionalInput p {
