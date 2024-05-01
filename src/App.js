@@ -9,8 +9,8 @@ import Template from './pages/template';
 import Upload from './pages/upload';
 import Download from './pages/download';
 import Teams from './pages/teams';
-import AfterLogin from './pages/afterLogin';
-import ExcelPage from './pages/panic';
+// import AfterLogin from './pages/afterLogin';
+// import ExcelPage from './pages/panic';
 
 const App = () => {
   return (
@@ -26,8 +26,8 @@ const App = () => {
           <Route path="/upload" element={<Upload />} />
           <Route path="/download" element={<Download />} />
           <Route path="/teams" element={<Teams />} />
-          <Route path="/afterlogin" element={<AfterLogin />} />
-          <Route path="/panic" element={<ExcelPage />} />
+          {/*<Route path="/afterlogin" element={<AfterLogin />} />*/}
+          {/*<Route path="/panic" element={<ExcelPage />} />*/}
         </Routes>
       </div>
     </Router>

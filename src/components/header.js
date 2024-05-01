@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import DrawerButton from './drawerButton';
 import DrawerContent from './drawerContent';
-import './Header.css'; // Importa los estilos del encabezado
+import './header.css'; // Importa los estilos del encabezado
 
 const Header = () => {
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -12,12 +12,16 @@ const Header = () => {
 
     return (
         <header>
+            <div className='drawer-button'>
+                <DrawerButton isOpen={isDrawerOpen} onClick={toggleDrawer} />
+            </div>
+
             <nav>
                 <ul className="nav-menu">
                     {/* Otros elementos del menú */}
                 </ul>
             </nav>
-            <DrawerButton isOpen={isDrawerOpen} onClick={toggleDrawer} />
+
             <DrawerContent isOpen={isDrawerOpen} />
         </header>
     );
