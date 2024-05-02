@@ -8,6 +8,7 @@ import * as XLSX from 'xlsx';
 import FileUploader from "../components/file-uploader"
 import infoIcon from "../assets/info-icons/Info.svg";
 import starIcon from "../assets/info-icons/star-icon.svg";
+import MoreInfo from "../components/moreInfo";
 
 
 function Upload() {
@@ -72,11 +73,19 @@ function Upload() {
       <>
         <div className="upload-container">
 
-          <img className='icon-image'
-               onMouseLeave={actionmouseout}
-               onMouseOver={actionmouseover}
-               src={infoIcon}
-               alt="Info Icon"/>
+          <MoreInfo>
+            <div className='info-container'>
+              <div className='info-header'>
+                <img src={starIcon} alt="Star Icon"/>
+                <h1>Subir Plantilla Llena</h1>
+              </div>
+              <ul>
+                <li>Una vez completada la planilla con las puntuaciones, vuelve a esta página.</li>
+                <li>Carga la planilla Excel llena utilizando el botón "Subir Planilla".</li>
+              </ul>
+            </div>
+          </MoreInfo>
+
           <ToastContainer/>
 
           <div className='upload-header'>
@@ -99,19 +108,6 @@ function Upload() {
             </div>
           </div>
 
-          <div className="overlay2">
-            <div className='info-container'>
-              <div className='info-header'>
-                <img src={starIcon} alt="Star Icon"/>
-                <h1>Información</h1>
-              </div>
-              <ul>
-                <li>Selecciona un máximo de 5 habilidades en las que basarás la formación de tus equipos.</li>
-                <li>Estas habilidades serán determinadas por ti y son esenciales para el rendimiento de los equipos.
-                </li>
-              </ul>
-            </div>
-          </div>
 
         </div>
 

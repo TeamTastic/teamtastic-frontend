@@ -8,6 +8,7 @@ import SwitchButton from '../components/switchButton';
 import generateTemplate from '../components/generateTemplate';
 import infoIcon from "../assets/info-icons/Info.svg";
 import starIcon from "../assets/info-icons/star-icon.svg";
+import MoreInfo from "../components/moreInfo";
 
 function Download() {
   const [inputValue, setInputValue] = useState('');
@@ -116,31 +117,30 @@ function Download() {
     }
   }
 
-  function actionmouseover() {
-    const overlay = document.querySelector('.overlay');
-    overlay.style.display = 'block';
-    overlay.style.visibility = 'visible';
-    overlay.style.opacity = '1';
-
-  }
-
-  function actionmouseout() {
-    console.log('hover');
-    const overlay = document.querySelector('.overlay');
-    overlay.style.opacity = '0';
-    overlay.style.display = 'none';
-    overlay.style.visibility = 'hidden';
-
-  }
-
-
   return (
       <div className="download-container">
-        <img className='icon-image'
-             onMouseLeave={actionmouseout}
-             onMouseOver={actionmouseover}
-             src={infoIcon}
-             alt="Info Icon"/>
+
+        <MoreInfo>
+          <div className='info-container'>
+            <div className='info-header'>
+              <img src={starIcon} alt="Star Icon"/>
+              <h1>Información</h1>
+            </div>
+            <ul>
+              <li>Selecciona un máximo de 5 habilidades en las que basarás la formación de tus equipos.</li>
+              <li>Estas habilidades serán determinadas por ti y son esenciales para el rendimiento de los equipos.</li>
+            </ul>
+            <div className='info-header'>
+              <img src={starIcon} alt="Star Icon"/>
+              <h1>Información</h1>
+            </div>
+            <ul>
+              <li>Haz clic en el botón "Descargar Planilla Excel" para obtener el formato necesario.</li>
+              <li>Llena la planilla con los datos de los participantes y sus puntuaciones para las habilidades seleccionadas.</li>
+              <li> Las puntuaciones deben estar en un rango del 1 al 99 para cada una de las habilidades seleccionadas</li>
+            </ul>
+          </div>
+        </MoreInfo>
 
         <ToastContainer/>
         <div className='download-header'>
@@ -238,19 +238,7 @@ function Download() {
         </div>
 
         <DownloadTemplateButton onClick={handleDownload}>Descargar Template</DownloadTemplateButton>
-        <div className="overlay">
-          <div className='info-container'>
-            <div className='info-header'>
-              <img src={starIcon} alt="Star Icon"/>
-              <h1>Información</h1>
-            </div>
-            <ul>
-              <li>Selecciona un máximo de 5 habilidades en las que basarás la formación de tus equipos.</li>
-              <li>Estas habilidades serán determinadas por ti y son esenciales para el rendimiento de los equipos.
-              </li>
-            </ul>
-          </div>
-        </div>
+
       </div>
   );
 }
