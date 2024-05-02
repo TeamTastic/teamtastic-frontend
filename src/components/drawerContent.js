@@ -26,7 +26,7 @@ const DrawerContent = ({ isOpen }) => {
 
                     <ul className='nested-list'>
                         <li>
-                            <Link to="/one">
+                            <Link to="/download">
                                 <div className='list-item'>
                                     <img src={oneIcon} alt="SVG"/>
                                     Ingreso de habilidades
@@ -35,7 +35,7 @@ const DrawerContent = ({ isOpen }) => {
                             </Link>
                         </li>
                         <li>
-                            <Link to="/two">
+                            <Link to="/upload">
                                 <div className='list-item'>
                                     <img src={twoIcon} alt="SVG"/>
                                     Carga de plantilla
@@ -44,7 +44,7 @@ const DrawerContent = ({ isOpen }) => {
 
                         </li>
                         <li>
-                            <Link to="/three">
+                            <Link to="/teams">
                                 <div className='list-item'>
                                     <img src={threeIcon} alt="SVG"/>
                                     Visualización de equipos
