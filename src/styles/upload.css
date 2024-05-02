@@ -28,3 +28,18 @@
   text-align: center; /* Centra horizontalmente el texto */
   margin-bottom: 0;
 }
+
+.overlay2 {
+  position: fixed;
+  align-self: center;
+  visibility: hidden;
+  width: 900px; /* Adjust the width as needed */
+  height: 700px; /* Adjust the height as needed */
+  opacity: 0; /* Initially hidden */
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+  transition: opacity 0.3s ease;
+  justify-content: center; /* Centers horizontally */
+  align-items: center; /* Centers vertically */
+  z-index: 100;
+}
+

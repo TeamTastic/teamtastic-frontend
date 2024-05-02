@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import DrawerButton from './drawerButton';
 import DrawerContent from './drawerContent';
-import './Header.css'; // Importa los estilos del encabezado
+import './header.css'; // Importa los estilos del encabezado
 
 const Header = () => {
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);

@@ -6,6 +6,8 @@ import Add from '../assets/add.svg';
 import DownloadTemplateButton from '../components/download-template-button';
 import SwitchButton from '../components/switchButton';
 import generateTemplate from '../components/generateTemplate';
+import infoIcon from "../assets/info-icons/Info.svg";
+import starIcon from "../assets/info-icons/star-icon.svg";
 
 function Download() {
   const [inputValue, setInputValue] = useState('');
@@ -114,103 +116,142 @@ function Download() {
     }
   }
 
+  function actionmouseover() {
+    const overlay = document.querySelector('.overlay');
+    overlay.style.display = 'block';
+    overlay.style.visibility = 'visible';
+    overlay.style.opacity = '1';
+
+  }
+
+  function actionmouseout() {
+    console.log('hover');
+    const overlay = document.querySelector('.overlay');
+    overlay.style.opacity = '0';
+    overlay.style.display = 'none';
+    overlay.style.visibility = 'hidden';
+
+  }
+
+
   return (
-    <div className="download-container">
-      <ToastContainer />
-      <div className='download-header'>
-        <h1> &#9312; Ingrese hasta 5 nuevos atributos</h1>
-      </div>
-      <div className="addBox">
-        <div className="inputBox">
-          <input
-            className="textInput"
-            type="text"
-            name=""
-            placeholder="Nuevo atributo"
-            value={inputValue}
-            onChange={handleInputChange}
-            onKeyPress={handleKeyPress}
-          />
+      <div className="download-container">
+        <img className='icon-image'
+             onMouseLeave={actionmouseout}
+             onMouseOver={actionmouseover}
+             src={infoIcon}
+             alt="Info Icon"/>
 
-          <div className="additionalInput">
-            <p className={`toggleOption ${selectedOption === 'Lista de Opciones' ? 'active' : ''}`} onClick={() => setSelectedOption('Lista de Opciones')}>
-              Lista de Opciones
-            </p>
-            <SwitchButton
-              value={selectedOption}
-              onChange={(newValue) => {
-                setSelectedOption(newValue);
-                // Limpiar las opciones si la opción seleccionada cambia
-                setOptions([]);
-              }}
-              options={['Lista de Opciones', 'Rango numérico']}
+        <ToastContainer/>
+        <div className='download-header'>
+          <h1> &#9312; Ingrese hasta 5 nuevos atributos</h1>
+        </div>
+        <div className="addBox">
+          <div className="inputBox">
+            <input
+                className="textInput"
+                type="text"
+                name=""
+                placeholder="Nuevo atributo"
+                value={inputValue}
+                onChange={handleInputChange}
+                onKeyPress={handleKeyPress}
             />
-            <p className={`toggleOption ${selectedOption === 'Rango numérico' ? 'active' : ''}`} onClick={() => setSelectedOption('Rango numérico')}>
-              Rango numérico
-            </p>
-          </div>
 
-          <div className='optionsBox'>
-            {showOptionsInput && (
-              <React.Fragment>
-                <input
-                  className="optionsInput"
-                  type="text"
-                  name=""
-                  placeholder="Agregue nueva opción"
-                  value={additionalInputValue}
-                  onChange={handleAdditionalInputChange}
-                  onKeyPress={handleKeyPress}
-                />
-                <button
-                  className="addOptionButton"
-                  onClick={handleAddOption}
-                  onMouseEnter={() => setIsHovered(true)}
-                  onMouseLeave={() => setIsHovered(false)}
-                >
-                  <p>Agregar</p>
-                  <svg> Add </svg>
-                </button>
-              </React.Fragment>
+            <div className="additionalInput">
+              <p className={`toggleOption ${selectedOption === 'Lista de Opciones' ? 'active' : ''}`}
+                 onClick={() => setSelectedOption('Lista de Opciones')}>
+                Lista de Opciones
+              </p>
+              <SwitchButton
+                  value={selectedOption}
+                  onChange={(newValue) => {
+                    setSelectedOption(newValue);
+                    // Limpiar las opciones si la opción seleccionada cambia
+                    setOptions([]);
+                  }}
+                  options={['Lista de Opciones', 'Rango numérico']}
+              />
+              <p className={`toggleOption ${selectedOption === 'Rango numérico' ? 'active' : ''}`}
+                 onClick={() => setSelectedOption('Rango numérico')}>
+                Rango numérico
+              </p>
+            </div>
+
+            <div className='optionsBox'>
+              {showOptionsInput && (
+                  <React.Fragment>
+                    <input
+                        className="optionsInput"
+                        type="text"
+                        name=""
+                        placeholder="Agregue nueva opción"
+                        value={additionalInputValue}
+                        onChange={handleAdditionalInputChange}
+                        onKeyPress={handleKeyPress}
+                    />
+                    <button
+                        className="addOptionButton"
+                        onClick={handleAddOption}
+                        onMouseEnter={() => setIsHovered(true)}
+                        onMouseLeave={() => setIsHovered(false)}
+                    >
+                      <p>Agregar</p>
+                      <svg> Add</svg>
+                    </button>
+                  </React.Fragment>
+              )}
+            </div>
+
+            {selectedOption === 'Lista de Opciones' && options.length > 0 && (
+                <div className="options-list">
+                  <h2>Opciones ingresadas:</h2>
+                  <ul className="options-added-list">
+                    {options.map((option, index) => (
+                        <li key={index}>{option}</li>
+                    ))}
+                  </ul>
+                </div>
             )}
           </div>
 
-          {selectedOption === 'Lista de Opciones' && options.length > 0 && (
-            <div className="options-list">
-              <h2>Opciones ingresadas:</h2>
-              <ul className="options-added-list">
-                {options.map((option, index) => (
-                  <li key={index}>{option}</li>
-                ))}
-              </ul>
+          <button
+              className="addButton"
+              onClick={handleAddSkill}
+              onMouseEnter={() => setIsHovered(true)}
+              onMouseLeave={() => setIsHovered(false)}>
+            <div className="add-hability-svg-container">
+              <img src={Add} alt="Add Icon"/>
             </div>
-          )}
+          </button>
         </div>
 
-        <button
-          className="addButton"
-          onClick={handleAddSkill}
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}>
-          <div className="add-hability-svg-container">
-            <img src={Add} alt="Add Icon" />
+        <div className="skills-list">
+          <h2>Atributos ingresados:</h2>
+          <ul className="skills-added-list">
+            {skills.map((skill, index) => (
+                <li key={index}>
+                  <p>{skill.header}</p>
+                </li>
+            ))}
+          </ul>
+        </div>
+
+        <DownloadTemplateButton onClick={handleDownload}>Descargar Template</DownloadTemplateButton>
+        <div className="overlay">
+          <div className='info-container'>
+            <div className='info-header'>
+              <img src={starIcon} alt="Star Icon"/>
+              <h1>Información</h1>
+            </div>
+            <ul>
+              <li>Selecciona un máximo de 5 habilidades en las que basarás la formación de tus equipos.</li>
+              <li>Estas habilidades serán determinadas por ti y son esenciales para el rendimiento de los equipos.
+              </li>
+            </ul>
           </div>
-        </button>
+        </div>
       </div>
-
-      <div className="skills-list">
-        <h2>Atributos ingresados:</h2>
-        <ul className="skills-added-list">
-          {skills.map((skill, index) => (
-            <li key={index}>
-              <p>{skill.header}</p>
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      <DownloadTemplateButton onClick={handleDownload}>Descargar Template</DownloadTemplateButton>
-    </div>
   );
 }
 
