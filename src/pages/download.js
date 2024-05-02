@@ -21,9 +21,12 @@ function Download() {
 
   useEffect(() => {
     // Limpiar las opciones cuando se cambie la opción seleccionada
-    setOptions([]);
-    // Mostrar u ocultar el input de opciones basado en la opción seleccionada
-    setShowOptionsInput(selectedOption === 'Lista de Opciones');
+    if(selectedOption){
+      setOptions([]);
+      // Mostrar u ocultar el input de opciones basado en la opción seleccionada
+      setShowOptionsInput(selectedOption === 'Lista de Opciones');
+    }
+
   }, [selectedOption]);
 
   function handleDownload() {

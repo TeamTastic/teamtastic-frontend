@@ -30,11 +30,14 @@ function Upload() {
   }, [files]);
 
   const handleChange = (file) => {
-    if (validateFileType(file)) {
-      setFiles(file);
-    } else {
-      toast.error('Archivo no compatible');
+    if (file){
+      if (validateFileType(file)) {
+        setFiles(file);
+      } else {
+        toast.error('Archivo no compatible');
+      }
     }
+
   };
 
   const validateFileType = (file) => {
@@ -50,23 +53,6 @@ function Upload() {
     toast.error(`Error al subir el archivo: ${error}`);
   };
 
-
-  function actionmouseover() {
-    const overlay = document.querySelector('.overlay2');
-    overlay.style.display = 'block';
-    overlay.style.visibility = 'visible';
-    overlay.style.opacity = '1';
-
-  }
-
-  function actionmouseout() {
-    console.log('hover');
-    const overlay = document.querySelector('.overlay2');
-    overlay.style.opacity = '0';
-    overlay.style.display = 'none';
-    overlay.style.visibility = 'hidden';
-
-  }
 
 
   return (
