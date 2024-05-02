@@ -18,7 +18,7 @@ const generateTemplate = async (columnas) => {
     
         if (Array.isArray(columna.opciones)) {
             // Configurar lista desplegable si hay opciones disponibles
-            ws.getCell(cellAddress).value = `Selecciona un(a) ${columna.header}:`;
+            ws.getCell(cellAddress).value = `Selecciona un valor:`;
         }
     });
 
