@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import './fileUploader.css';
+import './FileUploader.css';
 import ExcelFile from '../assets/excel-file.svg'; // Importa tu SVG desde la carpeta de activos
 
 function FileUploader({
