@@ -10,7 +10,7 @@ function ExcelPage() {
     const columnas = [
       {header: 'Nombre'},
       { header: 'Apodo', opciones: ['Juan', 'María', 'Pedro'] },
-      { header: 'Edad', opciones: Array.from({ length: 51 }, (_, index) => index + 50)},
+      { header: 'Edad', opciones: Array.from({ length: 20 }, (_, index) => index + 1)},
       { header: 'Género', opciones: ['Masculino', 'Femenino', 'Otro'] },
     ];
 

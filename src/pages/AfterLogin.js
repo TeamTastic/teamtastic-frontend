@@ -2,7 +2,7 @@ import React from 'react';
 import flecha from '../assets/flecha.png';
 import { useNavigate } from 'react-router-dom';
 import equipo from '../assets/equipo.webp';
-import "../styles/AfterLogin.css"
+import "../styles/afterLogin.css"
 
 function AfterLogin() {
   const navigate = useNavigate();

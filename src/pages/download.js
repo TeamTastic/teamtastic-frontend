@@ -8,9 +8,8 @@ import SwitchButton from '../components/switchButton';
 import generateTemplate from '../components/generateTemplate';
 
 function Download() {
-  const [numbers] = Array.from({ length: 100 }, (_, index) => (index + 1));
   const [inputValue, setInputValue] = useState('');
-  const [skills, setSkills] = useState([]);
+  const [skills, setSkills] = useState([{ header: 'Nombre' }]);
   const [selectedOption, setSelectedOption] = useState('Lista de Opciones');
   const [additionalInputValue, setAdditionalInputValue] = useState('');
   const [options, setOptions] = useState([]);
@@ -66,6 +65,11 @@ function Download() {
       return;
     }
   
+    if (selectedOption === 'Lista de Opciones' && options.length < 3) {
+      toast.error('Se requiere un mínimo de 3 opciones para "Lista de Opciones"');
+      return;
+    }
+
     let newSkill;
   
     if (selectedOption === 'Lista de Opciones') {
@@ -74,7 +78,7 @@ function Download() {
         opciones: options
       };
     } else if (selectedOption === 'Rango numérico') {
-      const numericOptions = Array.from({ length: 100 }, (_, index) => index + 1);
+      const numericOptions = Array.from({ length: 20 }, (_, index) => index + 1);
       newSkill = {
         header: inputValue.trim(),
         opciones: numericOptions
@@ -84,7 +88,6 @@ function Download() {
     setSkills([...skills, newSkill]);
     setInputValue('');
     setOptions([]); // Reiniciar opciones después de agregar una habilidad
-    setSelectedOption(''); // Reiniciar la opción seleccionada
   }
   
 
@@ -195,26 +198,16 @@ function Download() {
         </button>
       </div>
 
-        <div className="skills-list">
-          <h2>Habilidades ingresadas:</h2>
-          <ul className="skills-added-list">
-            {skills.map((skill, index) => (
-              <li key={index}>
-                <strong>{skill.header}:</strong>
-                <ul>
-                  {Array.isArray(skill.opciones) ? (
-                    skill.opciones.map((opcion, opcionIndex) => (
-                      <li key={opcionIndex}>{opcion}</li>
-                    ))
-                  ) : (
-                    <li>Opciones no es un array</li>
-                  )}
-                </ul>
-              </li>
-            ))}
-          </ul>
-        </div>
-
+      <div className="skills-list">
+        <h2>Habilidades ingresadas:</h2>
+        <ul className="skills-added-list">
+          {skills.map((skill, index) => (
+            <li key={index}>
+              <p>{skill.header}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
 
       <DownloadTemplateButton onClick={handleDownload}>Descargar Template</DownloadTemplateButton>
     </div>
