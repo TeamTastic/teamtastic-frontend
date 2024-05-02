@@ -199,7 +199,7 @@ function Download() {
       </div>
 
       <div className="skills-list">
-        <h2>Habilidades ingresadas:</h2>
+        <h2>Atributos ingresados:</h2>
         <ul className="skills-added-list">
           {skills.map((skill, index) => (
             <li key={index}>
