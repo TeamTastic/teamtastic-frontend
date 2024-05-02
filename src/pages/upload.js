@@ -1,9 +1,14 @@
+
 import React, { useEffect, useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import '../styles/upload.css';
+import "../styles/download.css";
 import * as XLSX from 'xlsx';
 import FileUploader from "../components/file-uploader"
-import "../styles/upload.css"
+import infoIcon from "../assets/info-icons/Info.svg";
+import starIcon from "../assets/info-icons/star-icon.svg";
+
 
 function Upload() {
   const fileTypes = ["XLSX"];
@@ -44,28 +49,72 @@ function Upload() {
     toast.error(`Error al subir el archivo: ${error}`);
   };
 
+
+  function actionmouseover() {
+    const overlay = document.querySelector('.overlay2');
+    overlay.style.display = 'block';
+    overlay.style.visibility = 'visible';
+    overlay.style.opacity = '1';
+
+  }
+
+  function actionmouseout() {
+    console.log('hover');
+    const overlay = document.querySelector('.overlay2');
+    overlay.style.opacity = '0';
+    overlay.style.display = 'none';
+    overlay.style.visibility = 'hidden';
+
+  }
+
+
   return (
-    <div className="upload-container">
-      <ToastContainer />
-      <div className='upload-header'>
-        <h1> &#9313; Suba su plantilla de datos completa</h1>
-      </div>
-      <div className='fileUploader'>
-        <div className="file-uploader-container"> {/* Nuevo contenedor para FileUploader */}
-          <FileUploader
-            handleChange={handleChange}
-            name="file"
-            label=''
-            types={fileTypes}
-            multiple={false}
-            message="Arrastre y suelte el archivo aquí o haga clic para seleccionar" // Mensaje para mostrar debajo del icono SVG
-            onDrop={handleUploadSuccess}
-            onSizeError={(error) => handleUploadError(error)}
-            onTypeError={(error) => handleUploadError(error)}
-          />
+      <>
+        <div className="upload-container">
+
+          <img className='icon-image'
+               onMouseLeave={actionmouseout}
+               onMouseOver={actionmouseover}
+               src={infoIcon}
+               alt="Info Icon"/>
+          <ToastContainer/>
+
+          <div className='upload-header'>
+            <h1> &#9313; Suba su plantilla de datos completa</h1>
+          </div>
+
+          <div className='fileUploader'>
+            <div className="file-uploader-container"> {/* Nuevo contenedor para FileUploader */}
+              <FileUploader
+                  handleChange={handleChange}
+                  name="file"
+                  label=''
+                  types={fileTypes}
+                  multiple={false}
+                  message="Arrastre y suelte el archivo aquí o haga clic para seleccionar" // Mensaje para mostrar debajo del icono SVG
+                  onDrop={handleUploadSuccess}
+                  onSizeError={(error) => handleUploadError(error)}
+                  onTypeError={(error) => handleUploadError(error)}
+              />
+            </div>
+          </div>
+
+          <div className="overlay2">
+            <div className='info-container'>
+              <div className='info-header'>
+                <img src={starIcon} alt="Star Icon"/>
+                <h1>Información</h1>
+              </div>
+              <ul>
+                <li>Selecciona un máximo de 5 habilidades en las que basarás la formación de tus equipos.</li>
+                <li>Estas habilidades serán determinadas por ti y son esenciales para el rendimiento de los equipos.
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
+
+      </>
   );
 }
 
