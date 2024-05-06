@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import '../styles/components/drawerContent.css'; // Importa los estilos del contenido del Drawer
 import userIcon from '../assets/drawer/user-icon.svg';
 import homeIcon from '../assets/drawer/home-icon.svg';
@@ -9,14 +9,32 @@ import threeIcon from '../assets/drawer/three-icon.svg';
 import configIcon from '../assets/drawer/config-icon.svg';
 import logoutIcon from '../assets/drawer/logout-icon.svg';
 const DrawerContent = ({ isOpen, user }) => {
+    const navigate = useNavigate();
 
+
+    function gotologin() {
+        isOpen = false;
+        navigate('/login');
+    }
 
     return (
         <div className={`drawer-content ${isOpen ? 'open' : ''}`} >
-            <div className='user-block'>
-                <img className='user-img' src={userIcon} alt="SVG"/>
-                <p> {user} </p>
-            </div>
+            {user ? (
+                <div className='user-block'>
+                    <img className='user-img' src={userIcon} alt="SVG"/>
+                    <p> {user} </p>
+                </div>
+            ) : (
+                <div className='user-block'>
+                    <div className='gotologin'
+                    onClick={gotologin}>
+                        <h2> Iniciar Sesión </h2>
+                    </div>
+
+                </div>
+
+            )}
+
             <ul>
                 <li>
                     <Link to="/">
@@ -73,12 +91,6 @@ const DrawerContent = ({ isOpen, user }) => {
                         </div>
                     </Link>
                 </li>
-                {/*<li><Link to="/register">Registro</Link></li>*/}
-                {/*<li><Link to="/login">Iniciar sesión</Link></li>*/}
-                {/*<li><Link to="/template">Template</Link></li>*/}
-                {/*<li><Link to="/upload">Subir</Link></li>*/}
-                {/*<li><Link to="/download">Descargar</Link></li>*/}
-                {/*<li><Link to="/teams">Equipos</Link></li>*/}
             </ul>
         </div>
     );

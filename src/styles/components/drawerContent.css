@@ -65,6 +65,18 @@
   font-size: x-large;
 }
 
+.user-block .gotologin {
+  background-color: inherit;
+  border: none;
+  height: 100%;
+  width: 100%;
+
+}
+
+.user-block .gotologin:hover {
+    background-color: #6B908A;
+}
+
 .nested-list {
   margin-left: 20px;
 }

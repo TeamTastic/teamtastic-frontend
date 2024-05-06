@@ -7,7 +7,7 @@ import axios from "../axiosConfig";
 const Header = () => {
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
     const [isAuthenticated, setIsAuthenticated] = useState(false);
-    const [user, setUser] = useState('Iniciar Sesión');
+    const [user, setUser] = useState(null);
     const toggleDrawer = () => {
         setIsDrawerOpen(!isDrawerOpen);
     };
