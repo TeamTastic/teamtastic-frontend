@@ -1,6 +1,6 @@
 import React from 'react'; // Importa la librería React
 import { useNavigate, Link } from 'react-router-dom'; // Importa los hooks useNavigate y Link de react-router-dom
-import '../styles/welcome.css'; // Importa los estilos CSS
+import '../styles/pages/welcome.css'; // Importa los estilos CSS
 import portada from '../assets/portada.png'; // Importa la imagen de la portada
 
 function Welcome() { // Define el componente funcional Welcome

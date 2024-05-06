@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './DrawerContent.css'; // Importa los estilos del contenido del Drawer
+import '../styles/components/drawerContent.css'; // Importa los estilos del contenido del Drawer
 import userIcon from '../assets/drawer/user-icon.svg';
 import homeIcon from '../assets/drawer/home-icon.svg';
 import oneIcon from '../assets/drawer/one-icon.svg';
@@ -8,12 +8,14 @@ import twoIcon  from '../assets/drawer/two-icon.svg';
 import threeIcon from '../assets/drawer/three-icon.svg';
 import configIcon from '../assets/drawer/config-icon.svg';
 import logoutIcon from '../assets/drawer/logout-icon.svg';
-const DrawerContent = ({ isOpen }) => {
+const DrawerContent = ({ isOpen, user }) => {
+
+
     return (
-        <div className={`drawer-content ${isOpen ? 'open' : ''}`}>
+        <div className={`drawer-content ${isOpen ? 'open' : ''}`} >
             <div className='user-block'>
                 <img className='user-img' src={userIcon} alt="SVG"/>
-                <p> Juan Perez </p>
+                <p> {user} </p>
             </div>
             <ul>
                 <li>

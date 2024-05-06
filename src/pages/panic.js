@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import 'react-toastify/dist/ReactToastify.css';
-import "../styles/download.css";
+import "../styles/pages/download.css";
 import DownloadTemplateButton from '../components/download-template-button';
 import generateTemplate from '../components/generateTemplate'; // Importar la función generateTemplate
 

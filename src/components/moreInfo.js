@@ -1,5 +1,5 @@
 import React from "react";
-import "../styles/moreInfo.css";
+import "../styles/components/moreInfo.css";
 import infoIcon from "../assets/info-icons/Info.svg";
 
 
@@ -14,23 +14,22 @@ function MoreInfo({children}) {
 
     function actionmouseout() {
         const overlay = document.querySelector('.overlay');
-        overlay.style.opacity = '0';
         overlay.style.display = 'none';
         overlay.style.visibility = 'hidden';
+        overlay.style.opacity = '0';
 
     }
 
     return (
-        <>
+        <div className={'info-container'} onMouseLeave={actionmouseout}>
             <img className='icon-image'
-                 onMouseLeave={actionmouseout}
                  onMouseOver={actionmouseover}
                  src={infoIcon}
                  alt="Info Icon"/>
             <div className='overlay'>
                 {children}
             </div>
-        </>
+        </div>
     )
 }
 

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from '../axiosConfig';
 import { useNavigate, Link } from 'react-router-dom';
-import '../styles/register.css';
+import '../styles/pages/register.css';
 import portada from '../assets/portada.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash, faLock, faEnvelope, faUser } from '@fortawesome/free-solid-svg-icons';

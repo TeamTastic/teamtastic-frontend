@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import './fileUploader.css';
+import '../styles/components/fileUploader.css';
 import ExcelFile from '../assets/excel-file.svg'; // Importa tu SVG desde la carpeta de activos
 
 function FileUploader({
@@ -19,8 +19,8 @@ function FileUploader({
   disabled,
   multiple,
   required,
-  onDraggingStateChange,
-  dropMessageStyle,
+  // onDraggingStateChange,
+  // dropMessageStyle,
   message // Nueva prop para la frase
 }) {
   const labelRef = useRef(null);

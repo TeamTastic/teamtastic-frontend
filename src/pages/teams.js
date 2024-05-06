@@ -1,5 +1,5 @@
 import React from 'react';
-import "../styles/teams.css"
+import "../styles/pages/teams.css"
 
 function Teams() {
     const Frontend = ['David', 'Belen P', 'Sofia'];

@@ -1,9 +1,10 @@
 import React from 'react';
-import './SwitchButton.css';
+import '../styles/components/switchButton.css';
 
 function SwitchButton({ value, onChange, label }) {
   const handleChange = (event) => {
-    onChange(event.target.checked ? "Rango numérico" : "Lista de Opciones");
+      if(event)
+        onChange(event.target.checked ? "Rango numérico" : "Lista de Opciones");
   };
 
   return (

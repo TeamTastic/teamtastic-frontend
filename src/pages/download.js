@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import "../styles/download.css";
+import "../styles/pages/download.css";
 import Add from '../assets/add.svg';
 import DownloadTemplateButton from '../components/download-template-button';
 import SwitchButton from '../components/switchButton';
 import generateTemplate from '../components/generateTemplate';
-import infoIcon from "../assets/info-icons/Info.svg";
 import starIcon from "../assets/info-icons/star-icon.svg";
 import MoreInfo from "../components/moreInfo";
 

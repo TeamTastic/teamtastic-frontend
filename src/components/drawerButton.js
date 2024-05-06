@@ -1,5 +1,5 @@
 import React from 'react';
-import './drawerButton.css';
+import '../styles/components/drawerButton.css';
 
 const DrawerButton = ({ isOpen, onClick }) => {
     return (

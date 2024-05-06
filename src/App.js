@@ -15,7 +15,7 @@ import Teams from './pages/teams';
 const App = () => {
   return (
     <Router>
-      <div>
+      <>
         <Header />
         <Routes>
           <Route path="/" element={<Welcome />} />
@@ -26,10 +26,11 @@ const App = () => {
           <Route path="/upload" element={<Upload />} />
           <Route path="/download" element={<Download />} />
           <Route path="/teams" element={<Teams />} />
+
           {/*<Route path="/afterlogin" element={<AfterLogin />} />*/}
           {/*<Route path="/panic" element={<ExcelPage />} />*/}
         </Routes>
-      </div>
+      </>
     </Router>
   );
 };
