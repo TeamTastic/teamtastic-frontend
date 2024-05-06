@@ -1,0 +1,82 @@
+.drawer-content {
+  position: fixed;
+  top: 0;
+  left: -300px; /* Oculta el contenido del Drawer por defecto */
+  width: 300px;
+  height: 100%;
+
+  background-color: #E3E3E3;
+  transition: left 0.3s ease-in-out;
+  z-index: 10;
+}
+
+.drawer-content.open {
+  left: 0; /* Muestra el contenido del Drawer cuando está abierto */
+}
+
+.drawer-content ul {
+  list-style: none;
+  padding: 0;
+}
+
+.drawer-content ul li {
+  padding: 10px;
+}
+
+.drawer-content .list-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: large;
+}
+
+.drawer-content .list-item img{
+  width: 13%;
+  height: 13%;
+  margin-right: 10px;
+}
+
+
+
+.drawer-content ul li a {
+  text-decoration: none;
+  color: #000;
+}
+
+.drawer-content ul li a:hover {
+  color: #888;
+}
+
+.user-block {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+  margin-left: 55px;
+}
+
+.user-block img {
+  width: 25%;
+  height: 25%;
+  margin-right: 10px;
+}
+
+.user-block p {
+  font-size: x-large;
+}
+
+.user-block .gotologin {
+  background-color: inherit;
+  border: none;
+  height: 100%;
+  width: 100%;
+
+}
+
+.user-block .gotologin:hover {
+    background-color: #6B908A;
+}
+
+.nested-list {
+  margin-left: 20px;
+}

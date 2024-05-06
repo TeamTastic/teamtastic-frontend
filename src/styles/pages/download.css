@@ -7,15 +7,18 @@
   border-radius: 24px; /* Radio de borde para esquinas redondeadas */
   display: flex; /* Usa flexbox para el diseño */
   flex-wrap: wrap;
+  align-content: center;
   justify-content: center; /* Centra horizontalmente los elementos */
+  position: relative;
 }
 
 .download-header {
   display: flex;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
   width: 100%;
-  padding: 20px 0; /* Espacio arriba y abajo */
+
 }
 
 .download-header h1 {
@@ -42,15 +45,21 @@
   border:none;
 }
 
+.formInput{
+  display: flex; /* Usa flexbox para el diseño */
+  flex-wrap: wrap;
+  justify-content: center; /* Centra horizontalmente los elementos */
+}
+
 /* Estilos para el campo de entrada de texto */
 .textInput {
   border: none;
-  width: 50%;
+  width: 100%;
   display: flex;
   background: none;
   color: black;
   font-size: 20px;
-  padding: 5% 30% 5% 5%;
+  padding: 5% 0% 5% 5%;
   font-family: 'Inter', sans-serif;
 }
 
@@ -66,6 +75,7 @@
   position: absolute;
   right: 8px;
   height: 80%;
+  max-height: 50px ;
   aspect-ratio: 1/1;
   border-radius: 50%;
   background: var(--gradient-2, linear-gradient(90deg, #2AF598 0%, #009EFD 100%));
@@ -77,7 +87,6 @@
 /* Efecto de hover del botón */
 button:hover {
   color: #fff;
-  background-color: #1A1A1A;
   box-shadow: rgba(0, 0, 0, 0.5) 0 10px 20px;
   transform: translateY(-3px);
 }
@@ -108,3 +117,118 @@ button:active {
   font-size: 18px; /* Tamaño de la fuente */
   color: #1DB4BB; /* Color del texto */
 }
+
+
+.addOptionButton {
+  padding: 0;
+  margin: 0;
+  border: 1px solid #ccc; /* Agrega un borde sólido de 1px de color gris claro */
+  background: none;
+  cursor: pointer;
+  border-radius: 4px; /* Agrega bordes redondeados */
+}
+
+.addOptionButton {
+  --primary-color: #111;
+  --hovered-color: #1DB4BB;
+  position:relative;
+  display: flex;
+  font-weight: 400;
+  font-size: 16px;
+  gap: 0.5rem;
+  align-items: center;
+  border:#515151aa;
+}
+
+.addOptionButton p {
+  margin: 5%;
+  position: relative;
+  font-size: 16px;
+  color: var(--primary-color);
+}
+
+.addOptionButton::after {
+  position: absolute;
+  content: "";
+  width: 0;
+  left: 0;
+  bottom: -7px;
+  background: var(--hovered-color);
+  height: 2px;
+  transition: 0.3s ease-out;
+}
+
+.addOptionButton p::before {
+  position: absolute;
+  content: "Agregar";
+  width: 0%;
+  inset: 0;
+  color: var(--hovered-color);
+  overflow: hidden;
+  transition: 0.3s ease-out;
+}
+
+.addOptionButton:hover::after {
+  width: 100%;
+}
+
+.addOptionButton:hover p::before {
+  width: 100%;
+}
+
+.addOptionButton:hover svg {
+  transform: translateX(4px);
+  color: var(--hovered-color);
+}
+
+.addOptionButton svg {
+  color: var(--primary-color);
+  transition: 0.2s;
+  position: relative;
+  width: 15px;
+  transition-delay: 0.2s;
+}
+
+.additionalInput {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.additionalInput p {
+  font-size: 18px;
+  font-weight: 300;
+  display: flex;
+  align-items: center; /* Centra verticalmente el texto */
+  margin: 5px; /* Espacio entre los elementos */
+}
+
+.inputBox{
+  width: 80%;
+  justify-content: center; /* Centra horizontalmente los elementos */
+}
+
+.optionsInput {
+  border: none;
+  width: 80%;
+  display: flex;
+  background: none;
+  color: black;
+  font-size: 16px;
+  padding: 5% 0% 5% 5%;
+  font-family: 'Inter', sans-serif;
+}
+
+.optionsInput:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.optionsBox{
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+}
+
+

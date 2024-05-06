@@ -10,6 +10,7 @@ function PrivateRoute() {
     // Realizar la solicitud a la ruta privada al cargar el componente
     axios.get('/private_route')
       .then(response => {
+
         // Si la solicitud es exitosa, mostrar el mensaje de la ruta privada
         toast.success('Esto indica que esta bien iniciada la sesión');
         setMessage(response.data);

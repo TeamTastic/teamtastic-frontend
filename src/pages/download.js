@@ -1,95 +1,247 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import "../styles/download.css"
-import Add from '../assets/add.svg'
+import "../styles/pages/download.css";
+import Add from '../assets/add.svg';
 import DownloadTemplateButton from '../components/download-template-button';
-import * as XLSX from 'xlsx';
-import { saveAs } from 'file-saver';
+import SwitchButton from '../components/switchButton';
+import generateTemplate from '../components/generateTemplate';
+import starIcon from "../assets/info-icons/star-icon.svg";
+import MoreInfo from "../components/moreInfo";
 
 function Download() {
   const [inputValue, setInputValue] = useState('');
-  const [skills, setSkills] = useState(['Nombre']);
+  const [skills, setSkills] = useState([{ header: 'Nombre' }]);
+  const [selectedOption, setSelectedOption] = useState('Lista de Opciones');
+  const [additionalInputValue, setAdditionalInputValue] = useState('');
+  const [options, setOptions] = useState([]);
+  const [isHovered, setIsHovered] = useState(false); // Define el estado isHovered
+  const [showOptionsInput, setShowOptionsInput] = useState(true); // Nuevo estado para controlar la visibilidad del input de opciones
 
-  async function handleDownload() {
+  useEffect(() => {
+    // Limpiar las opciones cuando se cambie la opción seleccionada
+    if(selectedOption){
+      setOptions([]);
+      // Mostrar u ocultar el input de opciones basado en la opción seleccionada
+      setShowOptionsInput(selectedOption === 'Lista de Opciones');
+    }
+
+  }, [selectedOption]);
+
+  function handleDownload() {
     try {
-      skills.join(', ')
-      const worksheet = XLSX.utils.json_to_sheet([skills], { skipHeader: true });
-      const workbook = XLSX.utils.book_new();
-      XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
-      const excelBuffer = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
-      const blob = new Blob([excelBuffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8' });
-      saveAs(blob, "template.xlsx");
+      const formattedSkills = skills.map(skill => {
+        if (skill.opciones && skill.opciones.length > 0) {
+          return { header: skill.header, opciones: skill.opciones };
+        } else {
+          return { header: skill.header };
+        }
+      });
+      generateTemplate(formattedSkills);
     } catch (error) {
       console.error('Error downloading file:', error);
       toast.error('Error al descargar el archivo');
     }
-  }  
+  }
 
   function handleInputChange(event) {
     setInputValue(event.target.value);
   }
 
+  function handleAdditionalInputChange(event) {
+    setAdditionalInputValue(event.target.value);
+  }
+
   function handleAddSkill() {
-    if (skills.length > 5) {
-      toast.error('Ya has ingresado 5 atributos');
+    if (skills.length >= 6) {
+      toast.error('Ya has ingresado 5 nuevos atributos');
       return;
     }
-
+  
     const trimmedSkill = inputValue.trim().toLowerCase();
-
+  
     if (!trimmedSkill) {
       toast.error('Por favor, ingresa un atributo');
       return;
     }
-
-    if (skills.map(skill => skill.toLowerCase()).includes(trimmedSkill)) {
-      toast.error('Este atributo ya ha sido ingresada');
+  
+    if (skills.map(skill => skill.header.toLowerCase()).includes(trimmedSkill)) {
+      toast.error('Este atributo ya ha sido ingresado');
       return;
     }
-    
-    setSkills([...skills, inputValue.trim()]);
+  
+    if (selectedOption === 'Lista de Opciones' && options.length < 3) {
+      toast.error('Se requiere un mínimo de 3 opciones para "Lista de Opciones"');
+      return;
+    }
+
+    let newSkill;
+  
+    if (selectedOption === 'Lista de Opciones') {
+      newSkill = {
+        header: inputValue.trim(),
+        opciones: options
+      };
+    } else if (selectedOption === 'Rango numérico') {
+      const numericOptions = Array.from({ length: 20 }, (_, index) => index + 1);
+      newSkill = {
+        header: inputValue.trim(),
+        opciones: numericOptions
+      };
+    }
+  
+    setSkills([...skills, newSkill]);
     setInputValue('');
+    setOptions([]); // Reiniciar opciones después de agregar una habilidad
+  }
+  
+
+  function handleAddOption() {
+    const trimmedOption = additionalInputValue.trim().toLowerCase();
+  
+    if (!trimmedOption) {
+      toast.error('Por favor, ingresa una opción');
+      return;
+    }
+  
+    if (options.map(option => option.toLowerCase()).includes(trimmedOption)) {
+      toast.error('Esta opción ya ha sido ingresada');
+      return;
+    }
+  
+    setOptions([...options, trimmedOption]); // Agregar la nueva opción a las opciones existentes
+    setAdditionalInputValue(''); // Limpiar el valor del input
   }
 
   function handleKeyPress(event) {
-    if (event.key === 'Enter') {
-      handleAddSkill();
+    if (event.key === 'Enter' && selectedOption === 'Lista de Opciones') {
+      handleAddOption();
     }
   }
 
   return (
-    <div className="download-container">
-      <ToastContainer />
-      <div className='download-header'>
-        <h1> &#9312; Ingrese hasta 5 nuevos atributos</h1>
-      </div>
-      <div className="addBox">
-        <input
-          className="textInput"
-          type="text"
-          name=""
-          placeholder="Nuevo atributo"
-          value={inputValue}
-          onChange={handleInputChange}
-          onKeyPress={handleKeyPress}
-        />
-        <button className="addButton" onClick={handleAddSkill}>
-          <div className="add-hability-svg-container">
-            <img src={Add} alt="Add Icon" />
+      <div className="download-container">
+
+        <MoreInfo>
+          <div className='info-container'>
+            <div className='info-header'>
+              <img src={starIcon} alt="Star Icon"/>
+              <h1>Información</h1>
+            </div>
+            <ul>
+              <li>Selecciona un máximo de 5 habilidades en las que basarás la formación de tus equipos.</li>
+              <li>Estas habilidades serán determinadas por ti y son esenciales para el rendimiento de los equipos.</li>
+            </ul>
+            <div className='info-header'>
+              <img src={starIcon} alt="Star Icon"/>
+              <h1>Información</h1>
+            </div>
+            <ul>
+              <li>Haz clic en el botón "Descargar Planilla Excel" para obtener el formato necesario.</li>
+              <li>Llena la planilla con los datos de los participantes y sus puntuaciones para las habilidades seleccionadas.</li>
+              <li> Las puntuaciones deben estar en un rango del 1 al 99 para cada una de las habilidades seleccionadas</li>
+            </ul>
           </div>
-        </button>
+        </MoreInfo>
+
+        <ToastContainer/>
+        <div className='download-header'>
+          <h1> &#9312; Ingrese hasta 5 nuevos atributos</h1>
+        </div>
+        <div className="addBox">
+          <div className="inputBox">
+            <input
+                className="textInput"
+                type="text"
+                name=""
+                placeholder="Nuevo atributo"
+                value={inputValue}
+                onChange={handleInputChange}
+                onKeyPress={handleKeyPress}
+            />
+
+            <div className="additionalInput">
+              <p className={`toggleOption ${selectedOption === 'Lista de Opciones' ? 'active' : ''}`}
+                 onClick={() => setSelectedOption('Lista de Opciones')}>
+                Lista de Opciones
+              </p>
+              <SwitchButton
+                  value={selectedOption}
+                  onChange={(newValue) => {
+                    setSelectedOption(newValue);
+                    // Limpiar las opciones si la opción seleccionada cambia
+                    setOptions([]);
+                  }}
+                  options={['Lista de Opciones', 'Rango numérico']}
+              />
+              <p className={`toggleOption ${selectedOption === 'Rango numérico' ? 'active' : ''}`}
+                 onClick={() => setSelectedOption('Rango numérico')}>
+                Rango numérico
+              </p>
+            </div>
+
+            <div className='optionsBox'>
+              {showOptionsInput && (
+                  <React.Fragment>
+                    <input
+                        className="optionsInput"
+                        type="text"
+                        name=""
+                        placeholder="Agregue nueva opción"
+                        value={additionalInputValue}
+                        onChange={handleAdditionalInputChange}
+                        onKeyPress={handleKeyPress}
+                    />
+                    <button
+                        className="addOptionButton"
+                        onClick={handleAddOption}
+                        onMouseEnter={() => setIsHovered(true)}
+                        onMouseLeave={() => setIsHovered(false)}
+                    >
+                      <p>Agregar</p>
+                      <svg> Add</svg>
+                    </button>
+                  </React.Fragment>
+              )}
+            </div>
+
+            {selectedOption === 'Lista de Opciones' && options.length > 0 && (
+                <div className="options-list">
+                  <h2>Opciones ingresadas:</h2>
+                  <ul className="options-added-list">
+                    {options.map((option, index) => (
+                        <li key={index}>{option}</li>
+                    ))}
+                  </ul>
+                </div>
+            )}
+          </div>
+
+          <button
+              className="addButton"
+              onClick={handleAddSkill}
+              onMouseEnter={() => setIsHovered(true)}
+              onMouseLeave={() => setIsHovered(false)}>
+            <div className="add-hability-svg-container">
+              <img src={Add} alt="Add Icon"/>
+            </div>
+          </button>
+        </div>
+
+        <div className="skills-list">
+          <h2>Atributos ingresados:</h2>
+          <ul className="skills-added-list">
+            {skills.map((skill, index) => (
+                <li key={index}>
+                  <p>{skill.header}</p>
+                </li>
+            ))}
+          </ul>
+        </div>
+
+        <DownloadTemplateButton onClick={handleDownload}>Descargar Template</DownloadTemplateButton>
+
       </div>
-      <div className="skills-list">
-        <h2>Habilidades ingresadas:</h2>
-        <ul className="skills-added-list">
-          {skills.map((skill, index) => (
-            <li key={index}>{skill}</li>
-          ))}
-        </ul>
-      </div>
-      <DownloadTemplateButton onClick={handleDownload}>Descargar Template</DownloadTemplateButton>
-    </div>
   );
 }
 

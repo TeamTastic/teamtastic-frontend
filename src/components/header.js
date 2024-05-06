@@ -1,37 +1,53 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import './header.css'; // Importamos el archivo CSS para los estilos del encabezado
+import React, {useEffect, useState} from 'react';
+import DrawerButton from './drawerButton';
+import DrawerContent from './drawerContent';
+import '../styles/components/header.css';
+import axios from "../axiosConfig";
 
 const Header = () => {
-  return (
-    <header>
-      <nav>
-        <ul className="nav-menu">
-          <li>
-            <Link to="/">Inicio</Link>
-          </li>
-          <li>
-            <Link to="/register">Registro</Link>
-          </li>
-          <li>
-            <Link to="/login">Iniciar sesión</Link>
-          </li>
-          <li>
-            <Link to="/template">Template</Link>
-          </li>
-          <li>
-            <Link to="/upload">Subir</Link>
-          </li>
-          <li>
-            <Link to="/download">Descargar</Link>
-          </li>
-          <li>
-            <Link to="/teams">Equipos</Link>
-          </li>
-        </ul>
-      </nav>
-    </header>
-  );
+    const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [user, setUser] = useState(null);
+    const toggleDrawer = () => {
+        setIsDrawerOpen(!isDrawerOpen);
+    };
+
+    useEffect(() => {
+        axios.get('/private_route')
+            .then(response => {
+                console.log(response.data);
+                const match = response.data.match(/Bienvenido (\w+),/);
+
+                if (match && match[1]) {
+                    setUser(match[1])
+                }
+
+            })
+            .catch(error => {
+                console.log('Error al acceder a la ruta privada');
+
+            })
+    }, []);
+
+    useEffect(() => {
+
+    }, [user]);
+
+    return (
+        <header onMouseLeave={toggleDrawer}>
+            <div className='drawer-button'>
+                <DrawerButton isOpen={isDrawerOpen} onClick={toggleDrawer} />
+            </div>
+
+            <nav>
+                <ul className="nav-menu">
+                    {/* Otros elementos del menú */}
+                </ul>
+            </nav>
+
+            <DrawerContent isOpen={isDrawerOpen} user={user} />
+        </header>
+    );
 };
 
 export default Header;

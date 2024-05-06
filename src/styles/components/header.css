@@ -3,6 +3,7 @@
     margin: 0;
     padding: 0;
     display: flex;
+    font-family: 'Inter', sans-serif;
   }
   
   .nav-menu li {

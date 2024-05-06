@@ -1,5 +1,5 @@
 import React from 'react';
-import './download-template-button.css'; // Importamos los estilos CSS
+import '../styles/components/download-template-button.css'; // Importamos los estilos CSS
 
 function DownloadTemplateButton({ onClick, children }) {
   return (

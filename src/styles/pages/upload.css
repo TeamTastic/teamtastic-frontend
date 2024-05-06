@@ -1,14 +1,15 @@
 .upload-container {
-  width: 50vw; /* Ancho del contenedor */
+  width: 50vw; /* Width of the container */
   min-width: 320px;
-  height: auto; /* Altura del contenedor */
-  background-color: #ffffff; /* Color de fondo */
-  border-radius: 24px; /* Radio de borde para esquinas redondeadas */
-  display: flex; /* Usa flexbox para el diseño */
-  flex-wrap: wrap;
-  justify-content: center; /* Centra horizontalmente los elementos */
-  align-items: center; /* Centra verticalmente los elementos */
+  height: auto; /* Height of the container */
+  background-color: #ffffff; /* Background color */
+  border-radius: 24px; /* Border radius for rounded corners */
+  display: flex; /* Use flexbox for layout */
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  position: relative; /* Center vertically */
   margin: 0 auto;
+  flex-direction: column; /* Stack child elements vertically */
 }
 
 .upload-header {
@@ -28,3 +29,6 @@
   text-align: center; /* Centra horizontalmente el texto */
   margin-bottom: 0;
 }
+
+
+

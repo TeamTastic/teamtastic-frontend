@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import './fileUploader.css';
+import '../styles/components/fileUploader.css';
 import ExcelFile from '../assets/excel-file.svg'; // Importa tu SVG desde la carpeta de activos
 
 function FileUploader({
@@ -19,8 +19,8 @@ function FileUploader({
   disabled,
   multiple,
   required,
-  onDraggingStateChange,
-  dropMessageStyle,
+  // onDraggingStateChange,
+  // dropMessageStyle,
   message // Nueva prop para la frase
 }) {
   const labelRef = useRef(null);
@@ -32,6 +32,7 @@ function FileUploader({
   let H = 0; // Definición de la variable H para el conteo de eventos de arrastre
 
   const handleChanges = useCallback(() => {
+
     inputRef.current.click();
   }, []);
 
@@ -52,35 +53,53 @@ function FileUploader({
   }, [handleChange, multiple, onDrop]);
 
   const handleDragEnter = useCallback((e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    H++;
-    setDragging(true);
+    if(e){
+      e.preventDefault();
+      e.stopPropagation();
+      H++;
+      setDragging(true);
+    }
+
+
   }, []);
 
   const handleDragLeave = useCallback((e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    if (--H === 0) setDragging(false);
+    if(e){
+      e.preventDefault();
+      e.stopPropagation();
+      if (--H === 0) setDragging(false);
+    }
+
+
+
   }, []);
 
   const handleDragOver = useCallback((e) => {
-    e.preventDefault();
-    e.stopPropagation();
+    if(e){
+      e.preventDefault();
+      e.stopPropagation();
+    }
+
   }, []);
 
   useEffect(() => {
-    labelRef.current.addEventListener('click', handleChanges);
-    labelRef.current.addEventListener('dragenter', handleDragEnter);
-    labelRef.current.addEventListener('dragleave', handleDragLeave);
-    labelRef.current.addEventListener('dragover', handleDragOver);
-    labelRef.current.addEventListener('drop', handleDrop);
+    if(labelRef.current){
+      labelRef.current.addEventListener('click', handleChanges);
+      labelRef.current.addEventListener('dragenter', handleDragEnter);
+      labelRef.current.addEventListener('dragleave', handleDragLeave);
+      labelRef.current.addEventListener('dragover', handleDragOver);
+      labelRef.current.addEventListener('drop', handleDrop);
+    }
+
     return () => {
-      labelRef.current.removeEventListener('click', handleChanges);
-      labelRef.current.removeEventListener('dragenter', handleDragEnter);
-      labelRef.current.removeEventListener('dragleave', handleDragLeave);
-      labelRef.current.removeEventListener('dragover', handleDragOver);
-      labelRef.current.removeEventListener('drop', handleDrop);
+      if(labelRef.current) {
+        labelRef.current.removeEventListener('click', handleChanges);
+        labelRef.current.removeEventListener('dragenter', handleDragEnter);
+        labelRef.current.removeEventListener('dragleave', handleDragLeave);
+        labelRef.current.removeEventListener('dragover', handleDragOver);
+        labelRef.current.removeEventListener('drop', handleDrop);
+      }
+
     };
   }, [handleChanges, handleDragEnter, handleDragLeave, handleDragOver, handleDrop]);
 
