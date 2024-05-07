@@ -10,6 +10,7 @@
   position: relative; /* Center vertically */
   margin: 0 auto;
   flex-direction: column; /* Stack child elements vertically */
+  overflow-y: scroll;
 }
 
 .upload-header {

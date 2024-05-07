@@ -6,12 +6,15 @@
 
 .overlay {
     position: fixed;
-    align-self: center;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     visibility: hidden;
     width: 900px; /* Adjust the width as needed */
     height: 700px; /* Adjust the height as needed */
     opacity: 0; /* Initially hidden */
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+
+    /*background-color: rgba(0, 0, 0, 0.5); !* Semi-transparent black *!*/
     transition: opacity 0.3s ease;
     justify-content: center; /* Centers horizontally */
     align-items: center; /* Centers vertically */
@@ -21,8 +24,8 @@
 .info-container{
     width: 100%;
     height: 100%;
-    background-color: rgba(204, 227, 222, 0.9);
-
+    /*background-color: rgba(204, 227, 222, 0.9);*/
+    background: linear-gradient(to bottom, #456268, #abc8c2);
     color:black;
     font-weight: 400;
     font-family: 'Inter', sans-serif;
@@ -44,8 +47,14 @@
 
 }
 
+.info-container ul {
+    margin: 20px;
+}
+
 .info-container ul li {
     margin-bottom: 30px;
+    text-align: left;
+
 }
 
 .icon-image{
@@ -56,3 +65,4 @@
     height: 50px;
 
 }
+

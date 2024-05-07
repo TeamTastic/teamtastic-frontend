@@ -1,7 +1,7 @@
 import React from "react";
 import "../styles/components/moreInfo.css";
 import infoIcon from "../assets/info-icons/Info.svg";
-
+import arrowIcon from "../assets/info-icons/next-icon.svg";
 
 function MoreInfo({children}) {
     function actionmouseover() {
@@ -29,8 +29,10 @@ function MoreInfo({children}) {
             <div className='overlay'>
                 {children}
             </div>
+
         </div>
     )
 }
 
 export default MoreInfo;
+

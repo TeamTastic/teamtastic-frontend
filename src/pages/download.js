@@ -94,7 +94,6 @@ function Download() {
     setInputValue('');
     setOptions([]); // Reiniciar opciones después de agregar una habilidad
   }
-  
 
   function handleAddOption() {
     const trimmedOption = additionalInputValue.trim().toLowerCase();
@@ -126,20 +125,12 @@ function Download() {
           <div className='info-container'>
             <div className='info-header'>
               <img src={starIcon} alt="Star Icon"/>
-              <h1>Información</h1>
+              <h1> ¿Cómo usar? </h1>
             </div>
             <ul>
-              <li>Selecciona un máximo de 5 habilidades en las que basarás la formación de tus equipos.</li>
-              <li>Estas habilidades serán determinadas por ti y son esenciales para el rendimiento de los equipos.</li>
-            </ul>
-            <div className='info-header'>
-              <img src={starIcon} alt="Star Icon"/>
-              <h1>Información</h1>
-            </div>
-            <ul>
-              <li>Haz clic en el botón "Descargar Planilla Excel" para obtener el formato necesario.</li>
-              <li>Llena la planilla con los datos de los participantes y sus puntuaciones para las habilidades seleccionadas.</li>
-              <li> Las puntuaciones deben estar en un rango del 1 al 99 para cada una de las habilidades seleccionadas</li>
+              <li>Selecciona Habilidades: Elige hasta 5 habilidades esenciales para tus equipos.</li>
+              <li>Descarga la Plantilla: Haz clic en "Descargar Template".</li>
+              <li>Completa la Plantilla: Llena con nombres de participantes y sus puntuaciones (1 a 99) para las habilidades elegidas.</li>
             </ul>
           </div>
         </MoreInfo>

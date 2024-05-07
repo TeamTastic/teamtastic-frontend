@@ -4,6 +4,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import * as XLSX from 'xlsx';
 import FileUploader from "../components/file-uploader"
 import "../styles/pages/upload.css"
+import MoreInfo from "../components/moreInfo";
+import starIcon from "../assets/info-icons/star-icon.svg";
 
 function Upload() {
   const fileTypes = ["XLSX"];
@@ -46,19 +48,31 @@ function Upload() {
 
   return (
     <div className="upload-container">
-      <ToastContainer />
+      <MoreInfo>
+        <div className='info-container'>
+          <div className='info-header'>
+            <img src={starIcon} alt="Star Icon"/>
+            <h1>Subir Plantilla Llena</h1>
+          </div>
+          <ul>
+            <li>Una vez completada la planilla con las puntuaciones, vuelve a esta página.</li>
+            <li>Carga la planilla Excel llena utilizando el botón "Subir Planilla".</li>
+          </ul>
+        </div>
+      </MoreInfo>
+      <ToastContainer/>
       <div className='upload-header'>
         <h1> &#9313; Suba su plantilla de datos completa</h1>
       </div>
       <div className='fileUploader'>
         <div className="file-uploader-container"> {/* Nuevo contenedor para FileUploader */}
           <FileUploader
-            handleChange={handleChange}
-            name="file"
-            label=''
-            types={fileTypes}
-            multiple={false}
-            message="Arrastre y suelte el archivo aquí o haga clic para seleccionar" // Mensaje para mostrar debajo del icono SVG
+              handleChange={handleChange}
+              name="file"
+              label=''
+              types={fileTypes}
+              multiple={false}
+              message="Arrastre y suelte el archivo aquí o haga clic para seleccionar" // Mensaje para mostrar debajo del icono SVG
             onDrop={handleUploadSuccess}
             onSizeError={(error) => handleUploadError(error)}
             onTypeError={(error) => handleUploadError(error)}
