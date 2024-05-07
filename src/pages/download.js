@@ -136,9 +136,11 @@ function Download() {
         </MoreInfo>
 
         <ToastContainer/>
+
         <div className='download-header'>
           <h1> &#9312; Ingrese hasta 5 nuevos atributos</h1>
         </div>
+
         <div className="addBox">
           <div className="inputBox">
             <input

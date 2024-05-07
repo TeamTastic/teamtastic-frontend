@@ -10,6 +10,8 @@ const Header = () => {
     const [user, setUser] = useState(null);
     const toggleDrawer = () => {
         setIsDrawerOpen(!isDrawerOpen);
+
+
     };
 
     useEffect(() => {
@@ -30,23 +32,28 @@ const Header = () => {
     }, []);
 
     useEffect(() => {
-
+        if (user) {
+            setIsAuthenticated(true);
+        }
     }, [user]);
 
     return (
-        <header onMouseLeave={toggleDrawer}>
-            <div className='drawer-button'>
-                <DrawerButton isOpen={isDrawerOpen} onClick={toggleDrawer} />
-            </div>
+        <>
+            {isAuthenticated? (
+                <header onMouseLeave={toggleDrawer}>
+                    <div className='drawer-button'>
+                        <DrawerButton isOpen={isDrawerOpen} onClick={toggleDrawer} isAuthenticated={isAuthenticated}/>
+                    </div>
+                    <nav>
+                        <ul className="nav-menu">
+                            {/* Otros elementos del menú */}
+                        </ul>
+                    </nav>
 
-            <nav>
-                <ul className="nav-menu">
-                    {/* Otros elementos del menú */}
-                </ul>
-            </nav>
-
-            <DrawerContent isOpen={isDrawerOpen} user={user} />
-        </header>
+                    <DrawerContent isOpen={isDrawerOpen} user={user}/>
+                </header>
+            ) :  null}
+        </>
     );
 };
 
