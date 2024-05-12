@@ -25,9 +25,8 @@ function Login() { // Define el componente funcional Login
         password,
       });
 
+
       // Redireccionar a la página principal después del inicio de sesión
-
-
       navigate('/privateRoute')
     } catch (error) {
       console.error("Error al registrar usuario:", error);
