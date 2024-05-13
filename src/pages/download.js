@@ -37,13 +37,14 @@ function Download() {
           return { header: skill.header };
         }
       });
+      formattedSkills.push({ header: 'No juega con' }); // Corrección aquí
       generateTemplate(formattedSkills);
     } catch (error) {
       console.error('Error downloading file:', error);
       toast.error('Error al descargar el archivo');
     }
   }
-
+  
   function handleInputChange(event) {
     setInputValue(event.target.value);
   }
@@ -224,10 +225,10 @@ function Download() {
         <div className="skills-list">
           <h2>Atributos ingresados:</h2>
           <ul className="skills-added-list">
-            {skills.map((skill, index) => (
-                <li key={index}>
-                  <p>{skill.header}</p>
-                </li>
+            {skills.slice(1).map((skill, index) => ( // Utiliza slice(1) para omitir la primera habilidad
+              <li key={index}>
+                <p>{skill.header}</p>
+              </li>
             ))}
           </ul>
         </div>

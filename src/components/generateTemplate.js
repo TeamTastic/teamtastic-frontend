@@ -8,9 +8,8 @@ const generateTemplate = async (columnas) => {
     const headers = columnas.map((columna) => columna.header);
     ws.addRow(headers);
     ws.getRow(1).font = { size: 22, bold: true, font: 'Cambria' };
-    ws.getRow(1).alignment = { vertical:'middle', horizontal: 'center' }; // Centrar los encabezados
+    ws.getRow(1).alignment = { vertical: 'middle', horizontal: 'center' }; // Centrar los encabezados
     
-
     // Configurar restricciones y opciones para cada columna
     columnas.forEach((columna, index) => {
         const columnaLetra = String.fromCharCode(65 + index); // Convertir índice en letra de columna (A, B, C, ...)
@@ -20,6 +19,15 @@ const generateTemplate = async (columnas) => {
             // Configurar lista desplegable si hay opciones disponibles
             ws.getCell(cellAddress).value = `Selecciona un valor:`;
         }
+        if ((columna.header) === 'No juega con') {
+            ws.getCell(cellAddress).value = `Ingresa si hay restricciones en los equipos`
+        }
+        if ((columna.header) === 'Nombre') {
+            ws.getCell(cellAddress).value = `Ingresa nombre, apellido y/o apodo identificatorio`
+        }
+
+        // Ajustar el texto para que aparezca en varias líneas dentro de la celda
+        ws.getCell(cellAddress).alignment = { wrapText: true };
     });
 
     // Asegurar que haya un total de 100 filas con listas desplegables
@@ -39,14 +47,13 @@ const generateTemplate = async (columnas) => {
     // Establecer el ancho de las columnas
     ws.columns.forEach((col) => (col.width = 30));
 
-    ws.eachRow((row, rowIndex) => {
-        if (rowIndex !== 1) {
-            row.font = { font: 'Arial', size: 14 }; // Ejemplo: quitar negrita
-            row.alignment = { vertical:'middle', horizontal: 'center' }; // Centrar los encabezados
-            // Aquí puedes aplicar otros estilos o acciones a cada fila
-        }
+    // Ajustar automáticamente el tamaño de las celdas al contenido
+    ws.columns.forEach((column, index) => {
+        ws.getColumn(index + 1).eachCell({ includeEmpty: true }, (cell) => {
+            cell.alignment = { wrapText: true };
+            column.width = Math.max(column.width, cell.value ? String(cell.value).length * 1.1 : 10);
+        });
     });
-
 
     // Escribir el archivo Excel y descargarlo
     const excelBlob = await workbook.xlsx.writeBuffer();
