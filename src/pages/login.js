@@ -34,15 +34,11 @@ function Login() { // Define el componente funcional Login
       const authToken = cookies['authToken']; // Replace 'authToken' with your actual cookie name
 
       if (authToken) {
-        // Store the authorization token in localStorage or session storage for future use
         localStorage.setItem('authToken', authToken);
 
       }else{
         console.log('No se encontró el token de autenticación')
       }
-
-      // Redireccionar a la página principal después del inicio de sesión
-
 
       navigate('/AfterLogin');
     } catch (error) {
@@ -51,7 +47,6 @@ function Login() { // Define el componente funcional Login
     }
   };
 
-  // Función para mostrar/ocultar la contraseña
   const toggleShowPassword = () => {
     setShowPassword(!showPassword); // Cambiar el estado de mostrar/ocultar contraseña
   };
