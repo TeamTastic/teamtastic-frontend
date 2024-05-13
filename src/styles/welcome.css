@@ -16,7 +16,8 @@
 
 /* Contenedor principal de la página de bienvenida */
 .welcome-container {
-  width: 600px; /* Ancho del contenedor */
+  width: 90%;
+  max-width: 600px; /* Ancho del contenedor */
   height: 550px; /* Altura del contenedor */
   background-color: #ffffff; /* Color de fondo */
   border-radius: 24px; /* Radio de borde para esquinas redondeadas */
@@ -33,7 +34,8 @@
 
 /* Imagen dentro del contenido de la página de bienvenida */
 .welcome-image {
-  width: 527px; /* Ancho de la imagen */
+  width: 100%;
+  max-width: 527px; /* Ancho de la imagen */
   background-position: center center; /* Posición de fondo centrada */
   background-size: cover; /* Ajusta el tamaño del fondo */
   background-repeat: no-repeat; /* No se repite */
@@ -62,7 +64,8 @@
 /* Botón de la página de bienvenida */
 .welcome-button {
   cursor: pointer; /* Cursor apuntador */
-  width: 335px; /* Ancho del botón */
+  width: 100%;
+  max-width: 335px; /* Ancho del botón */
   height: 48px; /* Altura del botón */
   border: 0; /* Sin borde */
   border-radius: 100px; /* Radio de borde para esquinas redondeadas */
