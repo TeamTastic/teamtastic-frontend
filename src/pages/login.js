@@ -31,7 +31,7 @@ function Login() { // Define el componente funcional Login
       navigate('/privateRoute')
     } catch (error) {
       console.error("Error al registrar usuario:", error);
-      toast.error('Error al iniciar sesión. Por favor, inténtelo de nuevo.');
+      toast.error('Error al iniciar sesión. Alguna de las credenciales no es correcta');
     }
   };
 
