@@ -1,0 +1,67 @@
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Asegúrate de que el overlay está por encima de otros elementos */
+  }
+  
+  .popup-content {
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+    width: 50%; /* O el ancho que desees */
+    max-width: 500px; /* O el máximo ancho que desees */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave para dar profundidad */
+  }
+  
+  /* Estilos para los textos dentro de .popup-content */
+  .popup-content h2 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600; /* Peso de la fuente para títulos */
+    font-size: 24px;
+    color: #333; /* Color de texto */
+    margin-bottom: 15px; /* Espacio debajo del título */
+  }
+  
+  .popup-content p {
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 300; /* Peso de la fuente para párrafos */
+    color: #333; /* Color de texto */
+    margin-bottom: 20px; /* Espacio debajo del párrafo */
+  }
+  
+  /* Estilos para el botón dentro de .popup-content */
+  .popup-button {
+    padding: 10px 20px;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    color: white;
+    background-color: #1DB4BB; /* Color de fondo del botón */
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    outline: none; /* Elimina el contorno al hacer foco */
+    transition: background-color 0.3s ease;
+    margin-top: 15px; /* Espacio arriba del botón */
+    margin-right: 10px; /* Espacio a la derecha del botón */
+    margin-bottom: 15px; /* Espacio abajo del botón */
+  }
+  
+  .popup-button:hover {
+    background-color: #17a2a9; /* Color al pasar el cursor */
+  }
+  
+  .popup-button:active {
+    background-color: #138c8f; /* Color al hacer clic */
+  }
+  
+  /* Agrega estilos adicionales si es necesario */
