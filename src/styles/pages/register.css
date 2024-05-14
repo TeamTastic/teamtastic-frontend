@@ -16,8 +16,9 @@ body {
 
 /* Contenedor principal de registro */
 .register-container {
-  width: 600px; /* Ancho del contenedor */
-  height: 600px; /* Altura del contenedor */
+  width: 50vw; /* Ancho del contenedor */
+  min-width: 320px;
+  height: 550px; /* Altura del contenedor */
   background-color: #ffffff; /* Color de fondo */
   border-radius: 24px; /* Radio de borde para esquinas redondeadas */
   display: flex; /* Usa flexbox para el diseño */
@@ -33,7 +34,8 @@ body {
 
 /* Imagen dentro del formulario de registro */
 .register-image {
-  width: 527px; /* Ancho de la imagen */
+  width: 100%;
+  max-width: 527px; /* Ancho de la imagen */
   background-position: center center; /* Posición de fondo centrada */
   background-size: cover; /* Ajusta el tamaño del fondo */
   background-repeat: no-repeat; /* No se repite */
@@ -43,7 +45,8 @@ body {
 /* Botón de registro */
 .register-button {
   cursor: pointer; /* Cursor apuntador */
-  width: 335px; /* Ancho del botón */
+  width: 100%;
+  max-width: 335px; /* Ancho del botón */
   height: 48px; /* Altura del botón */
   border: 0; /* Sin borde */
   border-radius: 100px; /* Radio de borde para esquinas redondeadas */
