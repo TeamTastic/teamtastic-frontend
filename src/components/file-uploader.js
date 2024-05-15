@@ -161,6 +161,7 @@ function FileUploader({
       );
     }
     if (selectedFiles || dragging) {
+      console.log(selectedFiles)
       return (
         <span>Uploaded Successfully! Upload another?</span>
       );

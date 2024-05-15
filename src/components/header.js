@@ -3,13 +3,7 @@ import DrawerButton from './drawerButton';
 import DrawerContent from './drawerContent';
 import '../styles/components/header.css';
 import axios from "../axiosConfig";
-import {Link} from "react-router-dom";
-import homeIcon from "../assets/drawer/home-icon.svg";
-import oneIcon from "../assets/drawer/one-icon.svg";
-import twoIcon from "../assets/drawer/two-icon.svg";
-import threeIcon from "../assets/drawer/three-icon.svg";
-import configIcon from "../assets/drawer/config-icon.svg";
-import logoutIcon from "../assets/drawer/logout-icon.svg";
+
 
 const Header = () => {
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);

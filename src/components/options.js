@@ -59,7 +59,7 @@ function Options() {
 
                 </li>
                 <li>
-                    <Link to="/login">
+                    <Link to="/logout">
                         <div className='list-item'>
                             <img src={logoutIcon} alt="SVG"/>
                             Cerrar sesión

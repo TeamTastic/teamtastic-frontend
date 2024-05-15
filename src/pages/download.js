@@ -8,9 +8,6 @@ import SwitchButton from '../components/switchButton';
 import generateTemplate from '../components/generateTemplate';
 import starIcon from "../assets/info-icons/star-icon.svg";
 import MoreInfo from "../components/moreInfo";
-import { useNavigate } from 'react-router-dom';
-import PopUp from '../pages/PopUp'
-import upload from '../pages/upload'
 
 function Download() {
   const [inputValue, setInputValue] = useState('');
@@ -20,8 +17,6 @@ function Download() {
   const [options, setOptions] = useState([]);
   const [isHovered, setIsHovered] = useState(false); // Define el estado isHovered
   const [showOptionsInput, setShowOptionsInput] = useState(true); // Nuevo estado para controlar la visibilidad del input de opciones
-  const [showPopup, setShowPopup] = useState(false);
-  const navigate = useNavigate();
 
   useEffect(() => {
     // Limpiar las opciones cuando se cambie la opción seleccionada
@@ -44,7 +39,6 @@ function Download() {
       });
       formattedSkills.push({ header: 'No juega con' }); // Corrección aquí
       generateTemplate(formattedSkills);
-      setShowPopup(true);
     } catch (error) {
       console.error('Error downloading file:', error);
       toast.error('Error al descargar el archivo');
@@ -124,16 +118,6 @@ function Download() {
       handleAddOption();
     }
   }
-
-    // Función para cerrar el Pop Up
-    function handleClosePopup() {
-      setShowPopup(false);
-    }
-  
-    function handleContinue() {
-      navigate('/upload'); 
-      setShowPopup(false);
-    }
 
   return (
       <div className="download-container">
@@ -250,8 +234,6 @@ function Download() {
         </div>
 
         <DownloadTemplateButton onClick={handleDownload}>Descargar Template</DownloadTemplateButton>
-
-        {showPopup && <PopUp onClose={handleClosePopup} onContinue={handleContinue} />}
 
       </div>
   );

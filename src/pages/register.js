@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import axios from '../axiosConfig';
 import { useNavigate, Link } from 'react-router-dom';
 import '../styles/pages/register.css';
@@ -17,6 +17,15 @@ function Register() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isRegistering, setIsRegistering] = useState(false);
+
+  useEffect(() => {
+    axios.get('/private_route')
+        .then(() => {
+          navigate('/privateRoute')
+        })
+        .catch(error => {
+        })
+  }, [navigate]);
 
   const handleRegister = async (event) => {
     event.preventDefault();
@@ -74,7 +83,7 @@ function Register() {
         <img src={portada} alt="Portada Teamtastic" className="register-image" />
         <form onSubmit={handleRegister}>
           <div className="register-input-container">
-            <FontAwesomeIcon icon={faUser} className="register-input-icon" />
+            {/*<FontAwesomeIcon icon={faUser} className="register-input-icon" />*/}
             <input
               type="text"
               placeholder="Nombre de Usuario"
@@ -84,7 +93,7 @@ function Register() {
             />
           </div>
           <div className="register-input-container">
-            <FontAwesomeIcon icon={faEnvelope} className="register-input-icon" />
+            {/*<FontAwesomeIcon icon={faEnvelope} className="register-input-icon" />*/}
             <input
               type="email"
               placeholder="Correo electrónico"

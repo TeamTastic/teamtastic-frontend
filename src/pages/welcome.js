@@ -1,11 +1,22 @@
-import React from 'react'; // Importa la librería React
+import React, {useEffect} from 'react'; // Importa la librería React
 import { useNavigate, Link } from 'react-router-dom'; // Importa los hooks useNavigate y Link de react-router-dom
 import '../styles/pages/welcome.css'; // Importa los estilos CSS
-import portada from '../assets/portada.png'; // Importa la imagen de la portada
+import portada from '../assets/portada.png';
+import axios from "../axiosConfig"; // Importa la imagen de la portada
 
 function Welcome() { // Define el componente funcional Welcome
+
+
   const navigate = useNavigate(); // Obtiene la función navigate del hook useNavigate
 
+  useEffect(() => {
+    axios.get('/private_route')
+        .then(() => {
+          navigate('/privateRoute')
+        })
+        .catch(error => {
+        })
+  }, [navigate]);
   const handleRegisterClick = () => { // Define la función handleRegisterClick
     navigate('/register'); // Navega hacia la ruta /register al hacer clic en el botón de registro
   };

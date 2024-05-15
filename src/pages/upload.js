@@ -7,11 +7,15 @@ import FileUploader from "../components/file-uploader"
 import "../styles/pages/upload.css"
 import MoreInfo from "../components/moreInfo";
 import starIcon from "../assets/info-icons/star-icon.svg";
+import BlockRoutes from "../components/block-routes";
+import Header from "../components/header";
+import {useNavigate} from "react-router-dom";
 
 function Upload() {
   const fileTypes = ["XLSX"];
   const [files, setFiles] = useState(null);
   const [isUploading, setIsUploading] = useState(false);
+  const navigate = useNavigate();
 
   const sendDataToBackend = useCallback(async (jsonData) => {
     setIsUploading(true);
@@ -25,7 +29,11 @@ function Upload() {
     } finally {
       setIsUploading(false); // Indicar fin de la subida
     }
-  }, []);
+
+    if (!isUploading){
+      navigate('/teams');
+    }
+  }, [isUploading, navigate]);
   
   useEffect(() => {
     if (files) {
@@ -35,7 +43,7 @@ function Upload() {
         let workbook = XLSX.read(data, { type: 'binary' });
         const sheetName = workbook.SheetNames[0];
         const jsonData = XLSX.utils.sheet_to_json(workbook.Sheets[sheetName]);
-        sendDataToBackend(jsonData)
+        sendDataToBackend(jsonData).then(r => console.log(r))
         console.log(jsonData);
       };
       reader.readAsBinaryString(files);
@@ -65,6 +73,8 @@ function Upload() {
 
   return (
     <div className="upload-container">
+      <BlockRoutes />
+      <Header />
       <MoreInfo>
         <div className='info-container'>
           <div className='info-header'>
