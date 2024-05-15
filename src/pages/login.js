@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import axios from '../axiosConfig';
 import { useNavigate, Link } from 'react-router-dom';
 import '../styles/pages/register.css'; // Se mantiene el estilo del registro, se puede modificar si es necesario
 import portada from '../assets/portada.png'; // Se mantiene la imagen de portada, se puede cambiar si es necesario
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash, faLock, faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import {toast, ToastContainer} from "react-toastify";
 
 function Login() { // Define el componente funcional Login
   // Declaración de estados usando el hook useState
@@ -13,6 +14,16 @@ function Login() { // Define el componente funcional Login
   const [password, setPassword] = useState(''); // Estado para la contraseña
   const [showPassword, setShowPassword] = useState(false); // Estado para mostrar/ocultar la contraseña
   const [error, setError] = useState(''); // Estado para manejar errores
+
+
+  useEffect(() => {
+    axios.get('/private_route')
+        .then(() => {
+          navigate('/privateRoute')
+        })
+        .catch(error => {
+        })
+  }, [navigate]);
 
   // Función para manejar el inicio de sesión
   const handleLogin = async (event) => {
@@ -41,11 +52,13 @@ function Login() { // Define el componente funcional Login
 
   return (
     <div className="register-container"> {/* Contenedor principal con clase register-container */}
+      <ToastContainer/>
       <div className="register-content"> {/* Contenido con clase register-content */}
         <img src={portada} alt="Portada Teamtastic" className="register-image" /> {/* Imagen de portada con clase register-image */}
         <form onSubmit={handleLogin}> {/* Formulario de inicio de sesión con función onSubmit */}
           <div className="register-input-container"> {/* Contenedor de entrada de datos */}
-            <FontAwesomeIcon icon={faEnvelope} className="register-input-icon" /> {/* Icono de correo electrónico */}
+            {/*<FontAwesomeIcon icon={faEnvelope} className="register-input-icon" /> /!* Icono de correo electrónico *!/*/}
+            {/*fixme FontAwesomeIcon */}
             <input
               type="email"
               placeholder="Correo electrónico" 
@@ -55,7 +68,7 @@ function Login() { // Define el componente funcional Login
             /> {/* Input para el correo electrónico */}
           </div>
           <div className="register-input-container"> {/* Contenedor de entrada de datos */}
-            <FontAwesomeIcon icon={faLock} className="register-input-icon" /> {/* Icono de contraseña */}
+            {/*<FontAwesomeIcon icon={faLock} className="register-input-icon" /> /!* Icono de contraseña *!/*/}
             <input
               type={showPassword ? 'text' : 'password'}
               placeholder="Contraseña"
@@ -63,11 +76,11 @@ function Login() { // Define el componente funcional Login
               onChange={(e) => setPassword(e.target.value)}
               required
             /> {/* Input para la contraseña */}
-            <FontAwesomeIcon
-              icon={showPassword ? faEyeSlash : faEye}
-              className="register-icon"
-              onClick={toggleShowPassword}
-            /> {/* Icono para mostrar/ocultar contraseña */}
+            {/*<FontAwesomeIcon*/}
+            {/*  icon={showPassword ? faEyeSlash : faEye}*/}
+            {/*  className="register-icon"*/}
+            {/*  onClick={toggleShowPassword}*/}
+            {/*/> /!* Icono para mostrar/ocultar contraseña *!/*/}
           </div>
           {error && <span className="register-error-message">{error}</span>} {/* Mensaje de error si las credenciales son incorrectas */}
           <div className="register-input-container"> {/* Contenedor de entrada de datos */}

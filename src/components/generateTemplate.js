@@ -38,6 +38,10 @@ const generateTemplate = async (columnas) => {
                 ws.getCell(cellAddress).dataValidation = {
                     type: 'list',
                     allowBlank: false,
+                    errorStyle: 'stop',  // Estilo de error (stop para detener entrada de datos no válidos)
+                    errorTitle: 'Valor inválido',  // Título del mensaje de error
+                    error: 'El valor ingresado no está en la lista.',  // Mensaje de error
+                    showErrorMessage: true,  // Mostrar mensaje de error si el valor no es válido
                     formulae: [`"${columna.opciones.join(',')}"`],
                 };
             }

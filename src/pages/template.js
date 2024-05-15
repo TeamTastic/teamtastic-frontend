@@ -3,10 +3,13 @@ import * as XLSX from 'xlsx';
 import { saveAs } from 'file-saver';
 import FileUploader from "../components/file-uploader"
 import DownloadTemplateButton from "../components/download-template-button";
+import BlockRoutes from "../components/block-routes";
+import Header from "../components/header";
 
 function Template() {
   const fileTypes = ["XLSX"];
-  const [files, setFiles] = useState(null);
+  const [files, setFiles] = useState(null)
+
 
   const data = [{
     NOMBRE: '',
@@ -17,6 +20,8 @@ function Template() {
     PUNTERIA: '',
     EXCLUIR:''
   }];
+
+
 
   useEffect(() => {
     if (files) {
@@ -50,8 +55,11 @@ function Template() {
     setFiles(file);
   };
 
+
   return (
     <div className="App">
+      <BlockRoutes />
+      <Header />
       <DownloadTemplateButton onClick={handleDownload}>Descargar Template</DownloadTemplateButton>
       <div className='fileUploader'>
         <FileUploader

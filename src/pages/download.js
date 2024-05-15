@@ -8,6 +8,10 @@ import SwitchButton from '../components/switchButton';
 import generateTemplate from '../components/generateTemplate';
 import starIcon from "../assets/info-icons/star-icon.svg";
 import MoreInfo from "../components/moreInfo";
+import BlockRoutes from "../components/block-routes";
+import Header from "../components/header";
+import {useNavigate} from "react-router-dom";
+
 
 function Download() {
   const [inputValue, setInputValue] = useState('');
@@ -17,6 +21,7 @@ function Download() {
   const [options, setOptions] = useState([]);
   const [isHovered, setIsHovered] = useState(false); // Define el estado isHovered
   const [showOptionsInput, setShowOptionsInput] = useState(true); // Nuevo estado para controlar la visibilidad del input de opciones
+  const navigate = useNavigate();
 
   useEffect(() => {
     // Limpiar las opciones cuando se cambie la opción seleccionada
@@ -39,6 +44,7 @@ function Download() {
       });
       formattedSkills.push({ header: 'No juega con' }); // Corrección aquí
       generateTemplate(formattedSkills);
+      navigate('/upload')
     } catch (error) {
       console.error('Error downloading file:', error);
       toast.error('Error al descargar el archivo');
@@ -121,7 +127,8 @@ function Download() {
 
   return (
       <div className="download-container">
-
+        <BlockRoutes />
+        <Header />
         <MoreInfo>
           <div className='info-container'>
             <div className='info-header'>
