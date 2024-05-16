@@ -9,30 +9,33 @@ import Template from './pages/template';
 import Upload from './pages/upload';
 import Download from './pages/download';
 import Teams from './pages/teams';
-// import AfterLogin from './pages/afterLogin';
-// import ExcelPage from './pages/panic';
+import Home from './pages/home';
 
 const App = () => {
   return (
-    <Router>
-      <>
-        <Header />
-        <Routes>
-          <Route path="/" element={<Welcome />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/privateRoute" element={<PrivateRoute />} />
-          <Route path="/template" element={<Template />} />
-          <Route path="/upload" element={<Upload />} />
-          <Route path="/download" element={<Download />} />
-          <Route path="/teams" element={<Teams />} />
+    <div> {/* Aplica el fondo aquí */}
+      <Router>
+        <>
+          <Header />
+          <Routes>
+            <Route path="/" element={<Welcome />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/privateRoute" element={<PrivateRoute />} />
+            <Route path="/template" element={<Template />} />
+            <Route path="/upload" element={<Upload />} />
+            <Route path="/download" element={<Download />} />
+            <Route path="/teams" element={<Teams />} />
+            <Route path="/home" element={<Home />} />
 
-          {/*<Route path="/afterlogin" element={<AfterLogin />} />*/}
-          {/*<Route path="/panic" element={<ExcelPage />} />*/}
-        </Routes>
-      </>
-    </Router>
+            {/*<Route path="/afterlogin" element={<AfterLogin />} />*/}
+            {/*<Route path="/panic" element={<ExcelPage />} />*/}
+          </Routes>
+        </>
+      </Router>
+    </div>
   );
 };
 
 export default App;
+
