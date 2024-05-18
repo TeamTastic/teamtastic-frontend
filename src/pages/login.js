@@ -5,6 +5,7 @@ import '../styles/pages/register.css'; // Se mantiene el estilo del registro, se
 import portada from '../assets/portada.png'; // Se mantiene la imagen de portada, se puede cambiar si es necesario
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash, faLock, faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import { toast, ToastContainer } from 'react-toastify';
 
 function Login() { // Define el componente funcional Login
   // Declaración de estados usando el hook useState
@@ -31,6 +32,7 @@ function Login() { // Define el componente funcional Login
     } catch (error) {
       console.error("Error al registrar usuario:", error);
       setError('Error al iniciar sesión. Por favor, inténtelo de nuevo.');
+      toast.error('Error al iniciar sesión. Alguna de las credenciales no es correcta');
     }
   };
 
