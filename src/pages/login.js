@@ -5,7 +5,7 @@ import '../styles/pages/register.css'; // Se mantiene el estilo del registro, se
 import portada from '../assets/portada.png'; // Se mantiene la imagen de portada, se puede cambiar si es necesario
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash, faLock, faEnvelope } from '@fortawesome/free-solid-svg-icons';
-import { toast } from 'react-toastify';
+import {toast, ToastContainer} from 'react-toastify';
 
 function Login() { // Define el componente funcional Login
   // Declaración de estados usando el hook useState
@@ -83,6 +83,7 @@ function Login() { // Define el componente funcional Login
           <Link to="/register" className="register-link">Regístrate</Link> {/* Enlace de registro con clase register-link */}
         </p>
       </div>
+      <ToastContainer />
     </div>
   );
 }
