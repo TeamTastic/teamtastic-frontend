@@ -4,10 +4,10 @@
     outline: none;
     border: 1px solid #303030;
     background: #212121;
-    color: #00b07e;
+    color: #2561bd;
     text-transform: uppercase;
     letter-spacing: 2px;
-    font-size: 15px;
+    font-size: 18px;
     overflow: hidden;
     transition: 0.2s;
     border-radius: 20px;
@@ -57,7 +57,7 @@
     right: 0;
     width: 2px;
     height: 100%;
-    background: linear-gradient(180deg, transparent, #ae00ff);
+    background: linear-gradient(180deg, transparent, #008288);
    }
    
    .add-organization-button:hover span:nth-child(2) {
@@ -81,10 +81,10 @@
    }
    
    .add-organization-button:active {
-    background: #ae00af;
-    background: linear-gradient(to top right, #ae00af, #001eff);
+    background: #00b07e;
+    background: linear-gradient(to top right, #00b07e, #001eff);
     color: #bfbfbf;
-    box-shadow: 0 0 8px #ae00ff, 0 0 8px #001eff, 0 0 8px #ae00ff;
+    box-shadow: 0 0 8px #00b07e, 0 0 8px #001eff, 0 0 8px #00b07e;
     transition: 0.1s;
    }
    

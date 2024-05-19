@@ -1,11 +1,11 @@
-// src/pages/home.js
 import React, { useState, useEffect } from 'react';
-import { Modal, Box} from '@mui/material';
+import { Modal, Box } from '@mui/material';
 import RegisterOrganization from '../components/register-organization';
 import AddOrganization from '../components/add-organization';
 import '../styles/pages/home.css';
 import '../styles/components/add-organization-button.css';
 import '../styles/components/organization-button.css';
+import axios from 'axios';
 
 function Home() {
   const [showRegisterForm, setShowRegisterForm] = useState(false);
@@ -14,13 +14,22 @@ function Home() {
   const [organizations, setOrganizations] = useState([]);
 
   useEffect(() => {
-    const userOrganizations = checkUserOrganizations();
-    if (userOrganizations.length > 0) {
-      setIsRegisteredInOrg(true);
-      setOrganizations(userOrganizations);
-    } else {
-      setIsRegisteredInOrg(false);
-    }
+    const fetchOrganizations = async () => {
+      try {
+        const response = await axios.get('/api/user/organizations');
+        if (response.data && response.data.length > 0) {
+          setIsRegisteredInOrg(true);
+          setOrganizations(response.data);
+        } else {
+          setIsRegisteredInOrg(false);
+        }
+      } catch (error) {
+        console.error('Error fetching organizations:', error);
+        setIsRegisteredInOrg(false);
+      }
+    };
+
+    fetchOrganizations();
   }, []);
 
   const toggleRegisterForm = () => {
@@ -31,33 +40,45 @@ function Home() {
     setShowAddForm(!showAddForm);
   };
 
-  const handleSubmitRegister = (event) => {
+  const handleSubmitRegister = async (event) => {
     event.preventDefault();
-    // Enviar registro de Organización
-    setShowRegisterForm(false);
+    const formData = new FormData(event.target);
+    const orgName = formData.get('orgName');
+
+    try {
+      await axios.post('/api/organizations/register', { name: orgName });
+      setShowRegisterForm(false);
+      // Optionally fetch organizations again to update the list
+    } catch (error) {
+      console.error('Error registering organization:', error);
+    }
   };
 
-  const handleSubmitAdd = (event) => {
+  const handleSubmitAdd = async (event) => {
     event.preventDefault();
-    // Agregar Organización existente
-    setShowAddForm(false);
-  };
+    const formData = new FormData(event.target);
+    const orgCode = formData.get('orgCode');
 
-  const checkUserOrganizations = () => {
-    return ["Organización 1", "Organización 2"];
+    try {
+      await axios.post('/api/organizations/add', { code: orgCode });
+      setShowAddForm(false);
+      // Optionally fetch organizations again to update the list
+    } catch (error) {
+      console.error('Error adding organization:', error);
+    }
   };
 
   return (
-    <div className='home'>
-      <div className='welcome'>
+    <div className="home">
+      <div className="welcome">
         <h1>Bienvenido a TeamTastic</h1>
         {isRegisteredInOrg ? (
           <>
             <h2>Ingrese a una de sus organizaciones</h2>
             <div className="organization-list">
               {organizations.map((org, index) => (
-                <ul>
-                  <button key={index} className="organization-button">
+                <ul key={index}>
+                  <button className="organization-button">
                     <span className="circle" aria-hidden="true">
                       <span className="icon arrow"></span>
                     </span>
@@ -71,14 +92,14 @@ function Home() {
           <p>Vemos que aún no estás en ninguna organización... ¡únete a una!</p>
         )}
       </div>
-      <div className='line'></div>
-      <div className='actions'>
+      <div className="line"></div>
+      <div className="actions">
         {isRegisteredInOrg && <h2>O si lo prefiere</h2>}
-        <button className='add-organization-button' onClick={toggleRegisterForm}>
+        <button className="add-organization-button" onClick={toggleRegisterForm}>
           <span></span><span></span><span></span><span></span>
           Crear Organización
         </button>
-        <button className='add-organization-button' onClick={toggleAddForm}>
+        <button className="add-organization-button" onClick={toggleAddForm}>
           <span></span><span></span><span></span><span></span>
           Agregar Organización existente
         </button>

@@ -2,7 +2,8 @@
 
 /* Estilos para el cuerpo de la página */
 body {
-  background-color: rgb(189, 224, 246); /* Color de fondo */
+  /*background-color: rgb(189, 224, 246); /* Color de fondo claro*/
+  background-color: rgb(23, 59, 76); /* Color de fondo oscuro*/
   font-family: 'Roboto Serif', serif; /* Fuente */
   font-weight: bold; /* Grosor de la fuente */
   text-align: center; /* Alineación del texto */
