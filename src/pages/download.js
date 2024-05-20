@@ -208,7 +208,7 @@ function Download() {
                         onMouseLeave={() => setIsHovered(false)}
                     >
                       <p>Agregar</p>
-                      <svg> Add</svg>
+                      <svg className='download-template-button-svg'> Add</svg>
                     </button>
                   </React.Fragment>
               )}
