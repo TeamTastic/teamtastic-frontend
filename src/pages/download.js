@@ -63,7 +63,7 @@ function Download() {
     if (skills.length >= 6) {
       toast.error('Ya has ingresado 5 nuevos atributos');
       return;
-    }
+    } //control
   
     const trimmedSkill = inputValue.trim().toLowerCase();
   
