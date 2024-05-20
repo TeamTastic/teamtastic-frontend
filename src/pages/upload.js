@@ -1,5 +1,5 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import { ToastContainer, toast } from 'react-toastify';
+import React, {useCallback, useEffect, useState} from 'react';
+import {toast, ToastContainer} from 'react-toastify';
 import axios from '../axiosConfig';
 import 'react-toastify/dist/ReactToastify.css';
 import * as XLSX from 'xlsx';
@@ -10,12 +10,15 @@ import starIcon from "../assets/info-icons/star-icon.svg";
 import BlockRoutes from "../components/block-routes";
 import Header from "../components/header";
 import {useNavigate} from "react-router-dom";
+import anotherInstance from "../anotherInstance";
+
 
 function Upload() {
   const fileTypes = ["XLSX"];
   const [files, setFiles] = useState(null);
   const [isUploading, setIsUploading] = useState(false);
   const navigate = useNavigate();
+  const [publicUrl, setPublicUrl] = useState('');
 
   const sendDataToBackend = useCallback(async (jsonData) => {
     setIsUploading(true);
@@ -34,7 +37,27 @@ function Upload() {
       navigate('/teams');
     }
   }, [isUploading, navigate]);
-  
+
+  async function sendDataToBucket(file) {
+    const filename = encodeURI(file.name);
+    const contentType = file.type;
+
+    const response = await anotherInstance.get('http://127.0.0.1:5000/generate-signed-url', {params: {filename, contentType}})
+        .then(response => { return response})
+        .catch(e => console.log(e));
+
+    const { url } = response.data;
+
+    await anotherInstance.put(url, file, {
+      headers: {
+        'Content-Type': contentType,
+      },
+    }).then(response => console.log(response) ).catch(e => console.log(e));
+
+    setPublicUrl( `https://storage.googleapis.com/team_tastic_excels/${filename}`);
+
+  }
+
   useEffect(() => {
     if (files) {
       const reader = new FileReader();
@@ -42,9 +65,15 @@ function Upload() {
         const data = reader.result;
         let workbook = XLSX.read(data, { type: 'binary' });
         const sheetName = workbook.SheetNames[0];
-        const jsonData = XLSX.utils.sheet_to_json(workbook.Sheets[sheetName]);
-        sendDataToBackend(jsonData).then(r => console.log(r))
-        console.log(jsonData);
+        const excelFile = workbook.Sheets[sheetName];
+        sendDataToBucket(files).then(r => console.log(publicUrl));
+
+
+
+        // const jsonData = XLSX.utils.sheet_to_json(workbook.Sheets[sheetName]);
+
+        // sendDataToBackend(jsonData).then(r => console.log(r))
+        // console.log(jsonData);
       };
       reader.readAsBinaryString(files);
     }
@@ -70,6 +99,7 @@ function Upload() {
   const handleUploadError = (error) => {
     toast.error(`Error al subir el archivo: ${error}`);
   };
+
 
   return (
     <div className="upload-container">

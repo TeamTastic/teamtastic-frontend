@@ -1,5 +1,7 @@
 import axios from 'axios';
 
+
+
 const instance = axios.create({
   baseURL: 'https://teamtastic-back-z244p.ondigitalocean.app/',
   withCredentials: true,// Reemplaza con la URL base de tu backend
