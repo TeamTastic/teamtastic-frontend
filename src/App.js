@@ -10,6 +10,7 @@ import Upload from './pages/upload';
 import Download from './pages/download';
 import Teams from './pages/teams';
 import Home from './pages/home';
+import Record from './pages/record';
 
 const App = () => {
   return (
@@ -27,6 +28,7 @@ const App = () => {
             <Route path="/download" element={<Download />} />
             <Route path="/teams" element={<Teams />} />
             <Route path="/home" element={<Home />} />
+            <Route path="/record" element={<Record />} />
 
             {/*<Route path="/afterlogin" element={<AfterLogin />} />*/}
             {/*<Route path="/panic" element={<ExcelPage />} />*/}
