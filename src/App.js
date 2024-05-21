@@ -4,6 +4,7 @@ import Header from './components/header';
 import Welcome from './pages/welcome';
 import Register from './pages/register';
 import Login from './pages/login';
+import Logout from "./components/logout";
 import PrivateRoute from './pages/privateRoute';
 import Template from './pages/template';
 import Upload from './pages/upload';
@@ -22,6 +23,7 @@ const App = () => {
             <Route path="/" element={<Welcome />} />
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/logout" element={<Logout />} />
             <Route path="/privateRoute" element={<PrivateRoute />} />
             <Route path="/template" element={<Template />} />
             <Route path="/upload" element={<Upload />} />

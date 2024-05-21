@@ -3,13 +3,7 @@ import DrawerButton from './drawerButton';
 import DrawerContent from './drawerContent';
 import '../styles/components/header.css';
 import axios from "../axiosConfig";
-import {Link} from "react-router-dom";
-import homeIcon from "../assets/drawer/home-icon.svg";
-import oneIcon from "../assets/drawer/one-icon.svg";
-import twoIcon from "../assets/drawer/two-icon.svg";
-import threeIcon from "../assets/drawer/three-icon.svg";
-import configIcon from "../assets/drawer/config-icon.svg";
-import logoutIcon from "../assets/drawer/logout-icon.svg";
+
 
 const Header = () => {
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -18,7 +12,6 @@ const Header = () => {
     const toggleDrawer = () => {
         setIsDrawerOpen(!isDrawerOpen);
 
-
     };
 
     useEffect(() => {
@@ -26,7 +19,7 @@ const Header = () => {
             .then(response => {
                 console.log(response.data);
                 const match = response.data.match(/Bienvenido (\w+),/);
-
+                setIsAuthenticated(true)
                 if (match && match[1]) {
                     setUser(match[1])
                 }
@@ -39,9 +32,6 @@ const Header = () => {
     }, []);
 
     useEffect(() => {
-        if (user) {
-            setIsAuthenticated(true);
-        }
     }, [user]);
 
     return (
