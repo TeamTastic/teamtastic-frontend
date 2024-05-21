@@ -10,6 +10,7 @@ import Upload from './pages/upload';
 import Download from './pages/download';
 import Teams from './pages/teams';
 import Logout from "./components/logout";
+import {ToastContainer} from "react-toastify";
 // import AfterLogin from './pages/afterLogin';
 // import ExcelPage from './pages/panic';
 

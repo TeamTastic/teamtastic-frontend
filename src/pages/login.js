@@ -6,6 +6,7 @@ import portada from '../assets/portada.png'; // Se mantiene la imagen de portada
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash, faLock, faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import {toast, ToastContainer} from 'react-toastify';
+import withRedirectionIfAuthenticated from "../components/withRedirectionIfAuthenticated";
 
 function Login() { // Define el componente funcional Login
   // Declaración de estados usando el hook useState
@@ -83,9 +84,9 @@ function Login() { // Define el componente funcional Login
           <Link to="/register" className="register-link">Regístrate</Link> {/* Enlace de registro con clase register-link */}
         </p>
       </div>
-      <ToastContainer />
+
     </div>
   );
 }
 
-export default Login; // Exporta el componente Login por defecto
+export default withRedirectionIfAuthenticated(Login); // Exporta el componente Login por defecto
