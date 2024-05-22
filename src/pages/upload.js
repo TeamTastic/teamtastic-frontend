@@ -42,7 +42,7 @@ function Upload() {
     const filename = encodeURI(file.name);
     const contentType = file.type;
 
-    const response = await anotherInstance.get('http://127.0.0.1:5000/generate-signed-url', {params: {filename, contentType}})
+    const response = await axios.get('/generate-signed-url', {params: {filename, contentType}})
         .then(response => { return response})
         .catch(e => console.log(e));
 
@@ -55,6 +55,7 @@ function Upload() {
     }).then(response => console.log(response) ).catch(e => console.log(e));
 
     setPublicUrl( `https://storage.googleapis.com/team_tastic_excels/${filename}`);
+    await axios.post('/uploaded_data', { data: publicUrl }).then(r => console.log(r)).catch(e => console.log(e));
 
   }
 
