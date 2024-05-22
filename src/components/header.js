@@ -12,7 +12,6 @@ const Header = () => {
     const toggleDrawer = () => {
         setIsDrawerOpen(!isDrawerOpen);
 
-
     };
 
     useEffect(() => {
@@ -20,7 +19,7 @@ const Header = () => {
             .then(response => {
                 console.log(response.data);
                 const match = response.data.match(/Bienvenido (\w+),/);
-
+                setIsAuthenticated(true)
                 if (match && match[1]) {
                     setUser(match[1])
                 }
@@ -33,9 +32,6 @@ const Header = () => {
     }, []);
 
     useEffect(() => {
-        if (user) {
-            setIsAuthenticated(true);
-        }
     }, [user]);
 
     return (

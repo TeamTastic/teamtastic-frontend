@@ -10,6 +10,7 @@ import starIcon from "../assets/info-icons/star-icon.svg";
 import MoreInfo from "../components/moreInfo";
 import { useNavigate } from 'react-router-dom';
 import PopUp from '../pages/PopUp'
+import Header from "../components/header";
 
 function Download() {
   const [inputValue, setInputValue] = useState('');
@@ -89,7 +90,7 @@ function Download() {
         opciones: options
       };
     } else if (selectedOption === 'Rango numérico') {
-      const numericOptions = Array.from({ length: 20 }, (_, index) => index + 1);
+      const numericOptions = Array.from({ length: 50 }, (_, index) => index + 1);
       newSkill = {
         header: inputValue.trim(),
         opciones: numericOptions
@@ -150,6 +151,7 @@ function Download() {
             </ul>
           </div>
         </MoreInfo>
+        <Header/>
 
         <ToastContainer/>
 
@@ -208,7 +210,7 @@ function Download() {
                         onMouseLeave={() => setIsHovered(false)}
                     >
                       <p>Agregar</p>
-                      <svg> Add</svg>
+                      <svg className='download-template-button-svg'> Add</svg>
                     </button>
                   </React.Fragment>
               )}
