@@ -20,44 +20,43 @@ function Upload() {
   const navigate = useNavigate();
   const [publicUrl, setPublicUrl] = useState('');
 
-  const sendDataToBackend = useCallback(async (jsonData) => {
-    setIsUploading(true);
+  const sendDataToBackend = useCallback(async (publicUrl) => {
     try {
-      await axios.post('/uploaded_data', { data: jsonData });
+      const response = await axios.post('/uploaded_data', { data: publicUrl });
+      console.log('Backend response:', response.data);
       toast.success('Datos subidos exitosamente!');
-
     } catch (error) {
       console.error("Error al subir datos:", error);
-      handleUploadError(error);
+      toast.error('Error al subir datos al backend');
     } finally {
-      setIsUploading(false); // Indicar fin de la subida
-    }
-
-    if (!isUploading){
+      setIsUploading(false);
       navigate('/teams');
     }
-  }, [isUploading, navigate]);
+  }, [navigate]);
 
-  async function sendDataToBucket(file) {
+  const sendDataToBucket = useCallback(async (file) => {
     const filename = encodeURI(file.name);
     const contentType = file.type;
+    try {
+      const response = await axios.get('/generate-signed-url', {params: {filename, contentType}})
+      const { url } = response.data;
 
-    const response = await axios.get('/generate-signed-url', {params: {filename, contentType}})
-        .then(response => { return response})
-        .catch(e => console.log(e));
+      await anotherInstance.put(url, file, {
+        headers: {
+          'Content-Type': contentType,
+        },
+      }).then(response => console.log(response) ).catch(e => console.log(e));
 
-    const { url } = response.data;
+      const publicUrl = `https://storage.googleapis.com/team_tastic_excels/${filename}`;
+      setPublicUrl(publicUrl);
+      //await axios.post('/uploaded_data', { data: publicUrl }).then(r => console.log(r)).catch(e => console.log(e));
 
-    await anotherInstance.put(url, file, {
-      headers: {
-        'Content-Type': contentType,
-      },
-    }).then(response => console.log(response) ).catch(e => console.log(e));
-
-    setPublicUrl( `https://storage.googleapis.com/team_tastic_excels/${filename}`);
-    await axios.post('/uploaded_data', { data: publicUrl }).then(r => console.log(r)).catch(e => console.log(e));
-
-  }
+      await sendDataToBackend(publicUrl);
+    } catch (error) {
+      console.error("Error during file upload:", error);
+      toast.error('Error al subir el archivo al bucket');
+    }
+  }, [sendDataToBackend]);
 
   useEffect(() => {
     if (files) {
