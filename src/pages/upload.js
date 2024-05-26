@@ -2,7 +2,6 @@ import React, {useCallback, useEffect, useState} from 'react';
 import {toast, ToastContainer} from 'react-toastify';
 import axios from '../axiosConfig';
 import 'react-toastify/dist/ReactToastify.css';
-import * as XLSX from 'xlsx';
 import FileUploader from "../components/file-uploader"
 import "../styles/pages/upload.css"
 import MoreInfo from "../components/moreInfo";
@@ -62,10 +61,6 @@ function Upload() {
     if (files) {
       const reader = new FileReader();
       reader.onload = () => {
-        const data = reader.result;
-        let workbook = XLSX.read(data, { type: 'binary' });
-        const sheetName = workbook.SheetNames[0];
-        const excelFile = workbook.Sheets[sheetName];
         sendDataToBucket(files).then(r => console.log(publicUrl));
 
 
