@@ -26,7 +26,6 @@ function PrivateRoute() {
 
   return (
     <div>
-      <Header />
       <h1>Ruta Privada</h1>
       <p>{message}</p>
       <ToastContainer />

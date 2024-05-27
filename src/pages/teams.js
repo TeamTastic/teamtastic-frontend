@@ -4,7 +4,7 @@ import starIcon from "../assets/info-icons/star-icon.svg";
 import MoreInfo from "../components/moreInfo";
 import BlockRoutes from "../components/block-routes";
 import Header from "../components/header";
-
+import withAuthorization from "../components/withAuthorization";
 function Teams() {
     const Frontend = ['David', 'Belen P', 'Sofia'];
     const Backend = ['Joaco', 'Baltasar', 'Valentin'];
@@ -18,7 +18,6 @@ function Teams() {
 
     return (
         <div className="teams">
-            <BlockRoutes />
             <Header />
 
             <MoreInfo>
@@ -53,4 +52,4 @@ function Teams() {
     );
 }
 
-export default Teams;
+export default withAuthorization(Teams);

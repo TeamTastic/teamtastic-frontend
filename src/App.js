@@ -14,13 +14,14 @@ import Information from './pages/Information';
 // import ExcelPage from './pages/panic';
 import Home from './pages/home';
 import Record from './pages/record';
+import {ToastContainer} from "react-toastify";
 
 const App = () => {
   return (
     <div> {/* Aplica el fondo aquí */}
+
       <Router>
         <>
-          <Header />
           <Routes>
             <Route path="/" element={<Welcome />} />
             <Route path="/register" element={<Register />} />

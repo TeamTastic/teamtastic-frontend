@@ -11,6 +11,7 @@ import MoreInfo from "../components/moreInfo";
 import { useNavigate } from 'react-router-dom';
 import PopUp from '../pages/PopUp'
 import Header from "../components/header";
+import withAuthorization from "../components/withAuthorization";
 
 function Download() {
   const [inputValue, setInputValue] = useState('');
@@ -137,7 +138,7 @@ function Download() {
 
   return (
       <div className="download-container">
-
+        <Header/>
         <MoreInfo>
           <div className='info-container'>
             <div className='info-header'>
@@ -151,7 +152,6 @@ function Download() {
             </ul>
           </div>
         </MoreInfo>
-        <Header/>
 
         <ToastContainer/>
 
@@ -256,4 +256,4 @@ function Download() {
   );
 }
 
-export default Download;
+export default withAuthorization(Download);

@@ -36,8 +36,8 @@ function Information() {
   };
 
   return (
-    <div className="information-body"> 
-    <Header />
+    <div className="information-body">
+      <Header/>
       <div className="information-main-container">
         <div className="information-left">
           <h1 className="information-h1">¡Bienvenido a<br/>nuestra plataforma de<br/>creación de equipos equitativos!</h1>

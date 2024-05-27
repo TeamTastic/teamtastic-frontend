@@ -10,7 +10,7 @@ import BlockRoutes from "../components/block-routes";
 import Header from "../components/header";
 import {useNavigate} from "react-router-dom";
 import anotherInstance from "../anotherInstance";
-
+import withAuthorization from "../components/withAuthorization";
 
 function Upload() {
   const fileTypes = ["XLSX"];
@@ -98,8 +98,7 @@ function Upload() {
 
   return (
     <div className="upload-container">
-      <BlockRoutes />
-      <Header />
+      <Header/>
       <MoreInfo>
         <div className='info-container'>
           <div className='info-header'>
@@ -136,4 +135,4 @@ function Upload() {
   );
 }
 
-export default Upload;
+export default withAuthorization(Upload);

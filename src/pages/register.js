@@ -7,6 +7,7 @@ import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import portada from '../assets/portada.png';
+import withRedirectionIfAuthenticated from "../components/withRedirectionIfAuthenticated";
 
 function Register() {
   const navigate = useNavigate();
@@ -152,4 +153,4 @@ function Register() {
   );
 }
 
-export default Register;
+export default withRedirectionIfAuthenticated(Register);
