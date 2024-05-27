@@ -32,6 +32,7 @@ const App = () => {
             <Route path="/teams" element={<Teams />} />
             <Route path="/home" element={<Home />} />
             <Route path="/record" element={<Record />} />
+            <Route path="/information" element={<Information />} />
             {/*<Route path="/afterlogin" element={<AfterLogin />} />*/}
             {/*<Route path="/panic" element={<ExcelPage />} />*/}
           </Routes>
