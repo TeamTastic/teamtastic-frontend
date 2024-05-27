@@ -10,6 +10,7 @@ import BlockRoutes from "../components/block-routes";
 import Header from "../components/header";
 import {useNavigate} from "react-router-dom";
 import anotherInstance from "../anotherInstance";
+import withAuthorization from "../components/withAuthorization";
 
 
 function Upload() {
@@ -136,4 +137,4 @@ function Upload() {
   );
 }
 
-export default Upload;
+export default withAuthorization(Upload);
