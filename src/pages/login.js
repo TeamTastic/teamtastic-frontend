@@ -83,7 +83,7 @@ function Login() { // Define el componente funcional Login
         </p>
       </div>
 
-    <div className="register-container">
+      <div className="register-container">
       <form className="register-form" onSubmit={handleLogin}>
         <img src={portada} alt="Portada Teamtastic" className="register-image" />
         <p className="register-title">Inicio de Sesión</p>
@@ -120,6 +120,7 @@ function Login() { // Define el componente funcional Login
         <ToastContainer />
       </form>
 
+    </div>
     </div>
   );
 }
