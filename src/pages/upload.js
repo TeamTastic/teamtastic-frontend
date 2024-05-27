@@ -6,6 +6,8 @@ import FileUploader from "../components/file-uploader"
 import "../styles/pages/upload.css"
 import MoreInfo from "../components/moreInfo";
 import starIcon from "../assets/info-icons/star-icon.svg";
+import BlockRoutes from "../components/block-routes";
+import Header from "../components/header";
 import {useNavigate} from "react-router-dom";
 import anotherInstance from "../anotherInstance";
 
@@ -60,7 +62,9 @@ function Upload() {
       const reader = new FileReader();
       reader.onload = () => {
         sendDataToBucket(files).then(r => console.log(publicUrl));
-        
+
+
+
         // const jsonData = XLSX.utils.sheet_to_json(workbook.Sheets[sheetName]);
 
         // sendDataToBackend(jsonData).then(r => console.log(r))
@@ -93,17 +97,19 @@ function Upload() {
 
 
   return (
-      <div className="upload-container">
-        <MoreInfo>
-          <div className='info-container'>
-            <div className='info-header'>
-              <img src={starIcon} alt="Star Icon"/>
-              <h1>Subir Plantilla Llena</h1>
-            </div>
-            <ul>
-              <li>Una vez completada la planilla con las puntuaciones, vuelve a esta página.</li>
-              <li>Carga la planilla Excel llena utilizando el botón "Subir Planilla".</li>
-            </ul>
+    <div className="upload-container">
+      <BlockRoutes />
+      <Header />
+      <MoreInfo>
+        <div className='info-container'>
+          <div className='info-header'>
+            <img src={starIcon} alt="Star Icon"/>
+            <h1>Subir Plantilla Llena</h1>
+          </div>
+          <ul>
+            <li>Una vez completada la planilla con las puntuaciones, vuelve a esta página.</li>
+            <li>Carga la planilla Excel llena utilizando el botón "Subir Planilla".</li>
+          </ul>
         </div>
       </MoreInfo>
       <ToastContainer/>
