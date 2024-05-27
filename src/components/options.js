@@ -50,6 +50,14 @@ function Options() {
                     </ul>
                 </li>
                 <li>
+                    <Link to="/information">
+                        <div className='list-item'>
+                            Información
+                        </div>
+                    </Link>
+
+                </li>
+                <li>
                     <Link to="/register">
                         <div className='list-item'>
                             <img src={configIcon} alt="SVG"/>
