@@ -7,8 +7,8 @@ import "../styles/pages/upload.css"
 import MoreInfo from "../components/moreInfo";
 import starIcon from "../assets/info-icons/star-icon.svg";
 import {useNavigate} from "react-router-dom";
-import withAuthorization from "../components/withAuthorization";
 import anotherInstance from "../anotherInstance";
+
 
 function Upload() {
   const fileTypes = ["XLSX"];
@@ -53,9 +53,7 @@ function Upload() {
       console.error("Error during file upload:", error);
       toast.error('Error al subir el archivo al bucket');
     }
-
-  }, [isUploading, navigate, sendDataToBackend]);
-
+  }, [sendDataToBackend]);
 
   useEffect(() => {
     if (files) {
@@ -106,30 +104,30 @@ function Upload() {
               <li>Una vez completada la planilla con las puntuaciones, vuelve a esta página.</li>
               <li>Carga la planilla Excel llena utilizando el botón "Subir Planilla".</li>
             </ul>
-          </div>
-        </MoreInfo>
-        <ToastContainer/>
-        {isUploading && <div className="uploading-indicator">Cargando...</div>}
-        <div className='upload-header'>
-          <h1> &#9313; Suba su plantilla de datos completa</h1>
         </div>
-        <div className='fileUploader'>
-          <div className="file-uploader-container">
-            <FileUploader
-                handleChange={handleChange}
-                name="file"
-                label=''
-                types={fileTypes}
-                multiple={false}
-                message="Arrastre y suelte el archivo aquí o haga clic para seleccionar"
-                onDrop={handleUploadSuccess}
-                onSizeError={(error) => handleUploadError(error)}
-                onTypeError={(error) => handleUploadError(error)}
-            />
-          </div>
+      </MoreInfo>
+      <ToastContainer/>
+        {isUploading && <div className="uploading-indicator">Cargando...</div>}
+      <div className='upload-header'>
+        <h1> &#9313; Suba su plantilla de datos completa</h1>
+      </div>
+      <div className='fileUploader'>
+        <div className="file-uploader-container"> {/* Nuevo contenedor para FileUploader */}
+          <FileUploader
+              handleChange={handleChange}
+              name="file"
+              label=''
+              types={fileTypes}
+              multiple={false}
+              message="Arrastre y suelte el archivo aquí o haga clic para seleccionar" // Mensaje para mostrar debajo del icono SVG
+            onDrop={handleUploadSuccess}
+            onSizeError={(error) => handleUploadError(error)}
+            onTypeError={(error) => handleUploadError(error)}
+          />
         </div>
       </div>
+    </div>
   );
 }
 
-export default withAuthorization(Upload);
+export default Upload;

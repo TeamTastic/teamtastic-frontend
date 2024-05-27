@@ -5,8 +5,7 @@ import '../styles/pages/register.css'; // Importa el nuevo archivo de estilos pa
 import portada from '../assets/portada.png'; // Se mantiene la imagen de portada, se puede cambiar si es necesario
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash, faLock, faEnvelope } from '@fortawesome/free-solid-svg-icons';
-import {toast, ToastContainer} from 'react-toastify';
-import withRedirectionIfAuthenticated from "../components/withRedirectionIfAuthenticated";
+import { toast, ToastContainer } from 'react-toastify';
 
 function Login() { // Define el componente funcional Login
   const navigate = useNavigate(); // Obtiene la función navigate del hook useNavigate
@@ -82,8 +81,6 @@ function Login() { // Define el componente funcional Login
           <Link to="/register" className="register-link">Regístrate</Link> {/* Enlace de registro con clase register-link */}
         </p>
       </div>
-
-      <div className="register-container">
       <form className="register-form" onSubmit={handleLogin}>
         <img src={portada} alt="Portada Teamtastic" className="register-image" />
         <p className="register-title">Inicio de Sesión</p>
@@ -119,11 +116,8 @@ function Login() { // Define el componente funcional Login
         <p className="register-signin">¿Aun no tienes una cuenta? <Link to="/register">Registrarse</Link></p>
         <ToastContainer />
       </form>
-
-    </div>
     </div>
   );
 }
 
-
-export default withRedirectionIfAuthenticated(Login); // Exporta el componente Login por defecto
+export default Login; // Exporta el componente Login por defecto

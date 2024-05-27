@@ -1,5 +1,5 @@
 import React from 'react';
-import "../styles/pages/teams.css";
+import "../styles/pages/teams.css"
 import starIcon from "../assets/info-icons/star-icon.svg";
 import MoreInfo from "../components/moreInfo";
 import withAuthorization from "../components/withAuthorization";
@@ -49,4 +49,4 @@ function Teams() {
     );
 }
 
-export default withAuthorization(Teams);
+export default Teams;
