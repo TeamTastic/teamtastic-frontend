@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import withRedirectionIfAuthenticated from "../components/withRedirectionIfAuthenticated";
 import portada from '../assets/portada.png';
 
 function Register() {
@@ -152,4 +153,4 @@ function Register() {
   );
 }
 
-export default Register;
+export default withRedirectionIfAuthenticated(Register);

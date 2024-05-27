@@ -9,6 +9,7 @@ import PrivateRoute from './pages/privateRoute';
 import Upload from './pages/upload';
 import Download from './pages/download';
 import Teams from './pages/teams';
+import {ToastContainer} from "react-toastify";
 import Information from './pages/Information';
 // import AfterLogin from './pages/afterLogin';
 // import ExcelPage from './pages/panic';
