@@ -62,7 +62,7 @@ function Upload() {
     if (files) {
       const reader = new FileReader();
       reader.onload = () => {
-        sendDataToBucket(files).then(r => console.log(publicUrl));
+        sendDataToBucket(files).then(() => console.log(publicUrl));
 
 
 
