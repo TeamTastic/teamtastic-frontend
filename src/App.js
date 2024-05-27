@@ -10,6 +10,7 @@ import Upload from './pages/upload';
 import Download from './pages/download';
 import Teams from './pages/teams';
 import Logout from "./components/logout";
+import Information from './pages/Information';
 // import AfterLogin from './pages/afterLogin';
 // import ExcelPage from './pages/panic';
 
@@ -28,6 +29,7 @@ const App = () => {
           <Route path="/download" element={<Download />} />
           <Route path="/teams" element={<Teams />} />
           <Route path="/logout" element={<Logout />} />
+          <Route path="/Information" element={<Information />} />
 
           {/*<Route path="/afterlogin" element={<AfterLogin />} />*/}
           {/*<Route path="/panic" element={<ExcelPage />} />*/}
