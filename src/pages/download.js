@@ -10,8 +10,6 @@ import starIcon from "../assets/info-icons/star-icon.svg";
 import MoreInfo from "../components/moreInfo";
 import { useNavigate } from 'react-router-dom';
 import PopUp from '../pages/PopUp';
-import Header from "../components/header";
-import BlockRoutes from "../components/block-routes";
 import withAuthorization from "../components/withAuthorization";
 
 function Download() {
@@ -148,7 +146,6 @@ function Download() {
             </ul>
           </div>
         </MoreInfo>
-        <Header/>
 
 
         <div className='download-header'>
@@ -246,6 +243,7 @@ function Download() {
 
         <DownloadTemplateButton onClick={handleDownload}>Descargar Template</DownloadTemplateButton>
         {showPopup && <PopUp onClose={handleClosePopup} onContinue={handleContinue} />}
+        <ToastContainer/>
       </div>
   );
 }

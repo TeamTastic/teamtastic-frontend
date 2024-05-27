@@ -6,8 +6,6 @@ import FileUploader from "../components/file-uploader"
 import "../styles/pages/upload.css"
 import MoreInfo from "../components/moreInfo";
 import starIcon from "../assets/info-icons/star-icon.svg";
-import BlockRoutes from "../components/block-routes";
-import Header from "../components/header";
 import {useNavigate} from "react-router-dom";
 import withAuthorization from "../components/withAuthorization";
 import anotherInstance from "../anotherInstance";
@@ -64,9 +62,7 @@ function Upload() {
       const reader = new FileReader();
       reader.onload = () => {
         sendDataToBucket(files).then(r => console.log(publicUrl));
-
-
-
+        
         // const jsonData = XLSX.utils.sheet_to_json(workbook.Sheets[sheetName]);
 
         // sendDataToBackend(jsonData).then(r => console.log(r))
@@ -100,7 +96,6 @@ function Upload() {
 
   return (
       <div className="upload-container">
-        <Header />
         <MoreInfo>
           <div className='info-container'>
             <div className='info-header'>

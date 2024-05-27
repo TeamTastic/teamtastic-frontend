@@ -2,10 +2,7 @@ import React from 'react';
 import "../styles/pages/teams.css";
 import starIcon from "../assets/info-icons/star-icon.svg";
 import MoreInfo from "../components/moreInfo";
-import BlockRoutes from "../components/block-routes";
-import Header from "../components/header";
 import withAuthorization from "../components/withAuthorization";
-import {ToastContainer} from "react-toastify";
 
 function Teams() {
     const Frontend = ['David', 'Belen P', 'Sofia'];
@@ -20,8 +17,6 @@ function Teams() {
 
     return (
         <div className="teams">
-            <Header />
-
             <MoreInfo>
                 <div className='info-container'>
                     <div className='info-header'>
