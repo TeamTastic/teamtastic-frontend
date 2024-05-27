@@ -1,16 +1,18 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from '../axiosConfig';
 import { useNavigate, Link } from 'react-router-dom';
 import '../styles/pages/register.css';
-import portada from '../assets/portada.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEye, faEyeSlash, faLock, faEnvelope, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import portada from '../assets/portada.png';
 
 function Register() {
   const navigate = useNavigate();
   const [name, setName] = useState('');
+  const [surname, setSurname] = useState('');
+  const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -20,11 +22,10 @@ function Register() {
 
   useEffect(() => {
     axios.get('/private_route')
-        .then(() => {
-          navigate('/privateRoute')
-        })
-        .catch(error => {
-        })
+      .then(() => {
+        navigate('/privateRoute');
+      })
+      .catch(error => { });
   }, [navigate]);
 
   const handleRegister = async (event) => {
@@ -38,28 +39,15 @@ function Register() {
     }
 
     try {
-      await axios.post('/user/signup', {
-        name,
-        email,
-        password,
-      });
+      await axios.post('/user/signup', { name, surname, username,  email, password });
       toast.success('Registro exitoso. Redirigiendo al inicio de sesión...');
       setTimeout(() => {
         navigate('/login');
       }, 3000);
     } catch (error) {
       console.error("Error al registrar usuario:", error);
-      if (error.response) {
-        // Error de respuesta del servidor con código de estado
-        const errorMessage = error.response.data.error || 'Error al registrar usuario';
-        toast.error(errorMessage);
-      } else if (error.request) {
-        // Error de solicitud sin respuesta del servidor
-        toast.error('Error de solicitud al registrar usuario');
-      } else {
-        // Error en la configuración de la solicitud
-        toast.error('Error al registrar usuario. Por favor, inténtelo de nuevo más tarde.');
-      }
+      const errorMessage = error.response?.data?.error || 'Error al registrar usuario';
+      toast.error(errorMessage);
     }
     setIsRegistering(false);
   };
@@ -72,78 +60,94 @@ function Register() {
     setShowConfirmPassword(!showConfirmPassword);
   };
 
-  const handleConfirmPasswordChange = (e) => {
-    const { value } = e.target;
-    setConfirmPassword(value);
-  };
-
   return (
     <div className="register-container">
-      <div className="register-content">
+      <form className="register-form" onSubmit={handleRegister}>
         <img src={portada} alt="Portada Teamtastic" className="register-image" />
-        <form onSubmit={handleRegister}>
-          <div className="register-input-container">
-            {/*<FontAwesomeIcon icon={faUser} className="register-input-icon" />*/}
+        <p className="register-title">Registro</p>
+        <p className="register-message">Registrate para obtener acceso completo a nuestro sitio web.</p>
+        <div className="register-flex">
+          <label>
             <input
+              required
+              placeholder=""
               type="text"
-              placeholder="Nombre de Usuario"
+              className="register-input"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              required
             />
-          </div>
-          <div className="register-input-container">
-            {/*<FontAwesomeIcon icon={faEnvelope} className="register-input-icon" />*/}
+            <span>Nombre</span>
+          </label>
+          <label>
             <input
-              type="email"
-              placeholder="Correo electrónico"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
               required
+              placeholder=""
+              type="text"
+              className="register-input"
+              value={surname}
+              onChange={(e) => setSurname(e.target.value)}
             />
-          </div>
-          <div className="register-input-container">
-            <FontAwesomeIcon icon={faLock} className="register-input-icon" />
-            <input
-              type={showPassword ? 'text' : 'password'}
-              placeholder="Contraseña"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-            <FontAwesomeIcon
-              icon={showPassword ? faEyeSlash : faEye}
-              className="register-icon"
-              onClick={toggleShowPassword}
-            />
-          </div>
-          <div className="register-input-container">
-            <FontAwesomeIcon icon={faLock} className="register-input-icon" />
-            <input
-              type={showConfirmPassword ? 'text' : 'password'}
-              placeholder="Repetir contraseña"
-              value={confirmPassword}
-              onChange={handleConfirmPasswordChange}
-              required
-            />
-            <FontAwesomeIcon
-              icon={showConfirmPassword ? faEyeSlash : faEye}
-              className="register-icon"
-              onClick={toggleShowConfirmPassword}
-            />
-          </div>
-          <div className="register-input-container">
-            <button className="register-button" type="submit" disabled={isRegistering}>
-              Registrarse
-            </button>
-          </div>
-        </form>
-        <p className="register-signup">
-          ¿Ya tienes una cuenta?{' '}
-          <Link to="/login" className="register-link">Inicia sesión</Link>
-        </p>
+            <span>Apellido</span>
+          </label>
+        </div>
+        <label>
+          <input
+            required
+            placeholder=""
+            type="text"
+            className="register-input"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+          <span>Nombre de Usuario</span>
+        </label>
+        <label>
+          <input
+            required
+            placeholder=""
+            type="email"
+            className="register-input"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <span>Email</span>
+        </label>
+        <label className="register-password-label">
+          <input
+            required
+            placeholder=""
+            type={showPassword ? 'text' : 'password'}
+            className="register-input"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <span>Contraseña</span>
+          <FontAwesomeIcon
+            icon={showPassword ? faEyeSlash : faEye}
+            className="register-icon"
+            onClick={toggleShowPassword}
+          />
+        </label>
+        <label className="register-password-label">
+          <input
+            required
+            placeholder=""
+            type={showConfirmPassword ? 'text' : 'password'}
+            className="register-input"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+          />
+          <span>Confirma contraseña</span>
+          <FontAwesomeIcon
+            icon={showConfirmPassword ? faEyeSlash : faEye}
+            className="register-icon"
+            onClick={toggleShowConfirmPassword}
+          />
+        </label>
+        <button className="register-submit" type="submit" disabled={isRegistering}>Enviar</button>
+        <p className="register-signin">¿Ya tienes una cuenta? <Link to="/login">Inicio de Sesión</Link></p>
         <ToastContainer />
-      </div>
+      </form>
     </div>
   );
 }

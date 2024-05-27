@@ -14,19 +14,19 @@ const renderWithRouter = (ui, { route = '/' } = {}) => {
 describe('Login Component', () => {
   test('shows error when email is not entered', async () => {
     renderWithRouter(<Login />);
-    fireEvent.change(screen.getByPlaceholderText(/contraseña/i), { target: { value: 'password123' } });
+    fireEvent.change(screen.getByLabelText(/contraseña/i), { target: { value: 'password123' } });
     fireEvent.click(screen.getByText(/iniciar sesión/i));
 
-    const emailInput = screen.getByPlaceholderText(/correo electrónico/i);
+    const emailInput = screen.getByLabelText(/email/i);
     expect(emailInput.validity.valueMissing).toBe(true);
   });
 
   test('shows error when password is not entered', async () => {
     renderWithRouter(<Login />);
-    fireEvent.change(screen.getByPlaceholderText(/correo electrónico/i), { target: { value: 'test@example.com' } });
+    fireEvent.change(screen.getByLabelText(/email/i), { target: { value: 'test@example.com' } });
     fireEvent.click(screen.getByText(/iniciar sesión/i));
 
-    const passwordInput = screen.getByPlaceholderText(/contraseña/i);
+    const passwordInput = screen.getByLabelText(/contraseña/i);
     expect(passwordInput.validity.valueMissing).toBe(true);
   });
 });
