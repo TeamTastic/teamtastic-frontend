@@ -46,7 +46,7 @@ function Home() {
     const orgName = formData.get('orgName');
 
     try {
-      await axios.post('/api/organizations/register', { name: orgName });
+      await axios.post('/org/create', { name: orgName });
       setShowRegisterForm(false);
       // Optionally fetch organizations again to update the list
     } catch (error) {
