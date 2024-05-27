@@ -9,10 +9,8 @@ import generateTemplate from '../components/generateTemplate';
 import starIcon from "../assets/info-icons/star-icon.svg";
 import MoreInfo from "../components/moreInfo";
 import { useNavigate } from 'react-router-dom';
-import PopUp from '../pages/PopUp';
+import PopUp from '../pages/PopUp'
 import Header from "../components/header";
-import BlockRoutes from "../components/block-routes";
-import withAuthorization from "../components/withAuthorization";
 
 function Download() {
   const [inputValue, setInputValue] = useState('');
@@ -20,16 +18,19 @@ function Download() {
   const [selectedOption, setSelectedOption] = useState('Lista de Opciones');
   const [additionalInputValue, setAdditionalInputValue] = useState('');
   const [options, setOptions] = useState([]);
-  const [isHovered, setIsHovered] = useState(false);
-  const [showOptionsInput, setShowOptionsInput] = useState(true);
+  const [isHovered, setIsHovered] = useState(false); // Define el estado isHovered
+  const [showOptionsInput, setShowOptionsInput] = useState(true); // Nuevo estado para controlar la visibilidad del input de opciones
   const [showPopup, setShowPopup] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (selectedOption) {
+    // Limpiar las opciones cuando se cambie la opción seleccionada
+    if(selectedOption){
       setOptions([]);
+      // Mostrar u ocultar el input de opciones basado en la opción seleccionada
       setShowOptionsInput(selectedOption === 'Lista de Opciones');
     }
+
   }, [selectedOption]);
 
   function handleDownload() {
@@ -41,7 +42,7 @@ function Download() {
           return { header: skill.header };
         }
       });
-      formattedSkills.push({ header: 'No juega con' });
+      formattedSkills.push({ header: 'No juega con' }); // Corrección aquí
       generateTemplate(formattedSkills);
       setShowPopup(true);
     } catch (error) {
@@ -49,7 +50,7 @@ function Download() {
       toast.error('Error al descargar el archivo');
     }
   }
-
+  
   function handleInputChange(event) {
     setInputValue(event.target.value);
   }
@@ -63,26 +64,26 @@ function Download() {
       toast.error('Ya has ingresado 5 nuevos atributos');
       return;
     }
-
+  
     const trimmedSkill = inputValue.trim().toLowerCase();
-
+  
     if (!trimmedSkill) {
       toast.error('Por favor, ingresa un atributo');
       return;
     }
-
+  
     if (skills.map(skill => skill.header.toLowerCase()).includes(trimmedSkill)) {
       toast.error('Este atributo ya ha sido ingresado');
       return;
     }
-
+  
     if (selectedOption === 'Lista de Opciones' && options.length < 3) {
       toast.error('Se requiere un mínimo de 3 opciones para "Lista de Opciones"');
       return;
     }
 
     let newSkill;
-
+  
     if (selectedOption === 'Lista de Opciones') {
       newSkill = {
         header: inputValue.trim(),
@@ -95,27 +96,27 @@ function Download() {
         opciones: numericOptions
       };
     }
-
+  
     setSkills([...skills, newSkill]);
     setInputValue('');
-    setOptions([]);
+    setOptions([]); // Reiniciar opciones después de agregar una habilidad
   }
 
   function handleAddOption() {
     const trimmedOption = additionalInputValue.trim().toLowerCase();
-
+  
     if (!trimmedOption) {
       toast.error('Por favor, ingresa una opción');
       return;
     }
-
+  
     if (options.map(option => option.toLowerCase()).includes(trimmedOption)) {
       toast.error('Esta opción ya ha sido ingresada');
       return;
     }
-
-    setOptions([...options, trimmedOption]);
-    setAdditionalInputValue('');
+  
+    setOptions([...options, trimmedOption]); // Agregar la nueva opción a las opciones existentes
+    setAdditionalInputValue(''); // Limpiar el valor del input
   }
 
   function handleKeyPress(event) {
@@ -124,6 +125,7 @@ function Download() {
     }
   }
 
+  // Función para cerrar el Pop Up
   function handleClosePopup() {
     setShowPopup(false);
   }
@@ -135,6 +137,7 @@ function Download() {
 
   return (
       <div className="download-container">
+
         <MoreInfo>
           <div className='info-container'>
             <div className='info-header'>
@@ -150,6 +153,7 @@ function Download() {
         </MoreInfo>
         <Header/>
 
+        <ToastContainer/>
 
         <div className='download-header'>
           <h1> &#9312; Ingrese hasta 5 nuevos atributos</h1>
@@ -160,6 +164,7 @@ function Download() {
             <input
                 className="textInput"
                 type="text"
+                name=""
                 placeholder="Nuevo atributo"
                 value={inputValue}
                 onChange={handleInputChange}
@@ -175,6 +180,7 @@ function Download() {
                   value={selectedOption}
                   onChange={(newValue) => {
                     setSelectedOption(newValue);
+                    // Limpiar las opciones si la opción seleccionada cambia
                     setOptions([]);
                   }}
                   options={['Lista de Opciones', 'Rango numérico']}
@@ -191,6 +197,7 @@ function Download() {
                     <input
                         className="optionsInput"
                         type="text"
+                        name=""
                         placeholder="Agregue nueva opción"
                         value={additionalInputValue}
                         onChange={handleAdditionalInputChange}
@@ -203,7 +210,6 @@ function Download() {
                         onMouseLeave={() => setIsHovered(false)}
                     >
                       <p>Agregar</p>
-                      <img src={Add} alt="Add Icon" />
                       <svg className='download-template-button-svg'> Add</svg>
                     </button>
                   </React.Fragment>
@@ -236,10 +242,10 @@ function Download() {
         <div className="skills-list">
           <h2>Atributos ingresados:</h2>
           <ul className="skills-added-list">
-            {skills.slice(1).map((skill, index) => (
-                <li key={index}>
-                  <p>{skill.header}</p>
-                </li>
+            {skills.slice(1).map((skill, index) => ( // Utiliza slice(1) para omitir la primera habilidad
+              <li key={index}>
+                <p>{skill.header}</p>
+              </li>
             ))}
           </ul>
         </div>
@@ -250,4 +256,4 @@ function Download() {
   );
 }
 
-export default withAuthorization(Download);
+export default Download;
