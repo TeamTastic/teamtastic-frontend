@@ -9,8 +9,8 @@ import generateTemplate from '../components/generateTemplate';
 import starIcon from "../assets/info-icons/star-icon.svg";
 import MoreInfo from "../components/moreInfo";
 import { useNavigate } from 'react-router-dom';
-import PopUp from '../pages/PopUp';
-import withAuthorization from "../components/withAuthorization";
+import PopUp from '../pages/PopUp'
+import Header from "../components/header";
 
 function Download() {
   const [inputValue, setInputValue] = useState('');
@@ -151,6 +151,7 @@ function Download() {
             </ul>
           </div>
         </MoreInfo>
+        <Header/>
 
         <ToastContainer/>
 
@@ -251,7 +252,6 @@ function Download() {
 
         <DownloadTemplateButton onClick={handleDownload}>Descargar Template</DownloadTemplateButton>
         {showPopup && <PopUp onClose={handleClosePopup} onContinue={handleContinue} />}
-        <ToastContainer/>
       </div>
   );
 }
