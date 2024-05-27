@@ -6,7 +6,6 @@ import Register from './pages/register';
 import Login from './pages/login';
 import Logout from "./components/logout";
 import PrivateRoute from './pages/privateRoute';
-import Template from './pages/template';
 import Upload from './pages/upload';
 import Download from './pages/download';
 import Teams from './pages/teams';
@@ -25,7 +24,6 @@ const App = () => {
             <Route path="/login" element={<Login />} />
             <Route path="/logout" element={<Logout />} />
             <Route path="/privateRoute" element={<PrivateRoute />} />
-            <Route path="/template" element={<Template />} />
             <Route path="/upload" element={<Upload />} />
             <Route path="/download" element={<Download />} />
             <Route path="/teams" element={<Teams />} />
