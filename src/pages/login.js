@@ -40,7 +40,47 @@ function Login() { // Define el componente funcional Login
   };
 
   return (
-    <div className="register-container">
+    <div className="register-container"> {/* Contenedor principal con clase register-container */}
+      <div className="register-content"> {/* Contenido con clase register-content */}
+        <img src={portada} alt="Portada Teamtastic" className="register-image" /> {/* Imagen de portada con clase register-image */}
+        <form onSubmit={handleLogin}> {/* Formulario de inicio de sesión con función onSubmit */}
+          <div className="register-input-container"> {/* Contenedor de entrada de datos */}
+            <FontAwesomeIcon icon={faEnvelope} className="register-input-icon" /> {/* Icono de correo electrónico */}
+            <input
+              type="email"
+              placeholder="Correo electrónico" 
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            /> {/* Input para el correo electrónico */}
+          </div>
+          <div className="register-input-container"> {/* Contenedor de entrada de datos */}
+            <FontAwesomeIcon icon={faLock} className="register-input-icon" /> {/* Icono de contraseña */}
+            <input
+              type={showPassword ? 'text' : 'password'}
+              placeholder="Contraseña"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            /> {/* Input para la contraseña */}
+            <FontAwesomeIcon
+              icon={showPassword ? faEyeSlash : faEye}
+              className="register-icon"
+              onClick={toggleShowPassword}
+            /> {/* Icono para mostrar/ocultar contraseña */}
+          </div>
+          {error && <span className="register-error-message">{error}</span>} {/* Mensaje de error si las credenciales son incorrectas */}
+          <div className="register-input-container"> {/* Contenedor de entrada de datos */}
+            <button className="register-button" type="submit">
+              Iniciar sesión
+            </button> {/* Botón para enviar el formulario de inicio de sesión */}
+          </div>
+        </form>
+        <p className="register-signup"> {/* Párrafo para el enlace de registro */}
+          ¿No tienes una cuenta?{' '} {/* Texto de pregunta */}
+          <Link to="/register" className="register-link">Regístrate</Link> {/* Enlace de registro con clase register-link */}
+        </p>
+      </div>
       <form className="register-form" onSubmit={handleLogin}>
         <img src={portada} alt="Portada Teamtastic" className="register-image" />
         <p className="register-title">Inicio de Sesión</p>
