@@ -1,6 +1,5 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Header from './components/header';
 import Welcome from './pages/welcome';
 import Register from './pages/register';
 import Login from './pages/login';
@@ -14,7 +13,6 @@ import Information from './pages/Information';
 // import ExcelPage from './pages/panic';
 import Home from './pages/home';
 import Record from './pages/record';
-import {ToastContainer} from "react-toastify";
 
 const App = () => {
   return (

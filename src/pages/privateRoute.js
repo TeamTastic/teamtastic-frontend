@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import axios from '../axiosConfig';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Header from "../components/header";
 
 function PrivateRoute() {
   const [message, setMessage] = useState('');

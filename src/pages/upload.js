@@ -6,7 +6,6 @@ import FileUploader from "../components/file-uploader"
 import "../styles/pages/upload.css"
 import MoreInfo from "../components/moreInfo";
 import starIcon from "../assets/info-icons/star-icon.svg";
-import BlockRoutes from "../components/block-routes";
 import Header from "../components/header";
 import {useNavigate} from "react-router-dom";
 import anotherInstance from "../anotherInstance";

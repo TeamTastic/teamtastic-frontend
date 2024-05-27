@@ -2,7 +2,6 @@ import React from 'react';
 import "../styles/pages/teams.css"
 import starIcon from "../assets/info-icons/star-icon.svg";
 import MoreInfo from "../components/moreInfo";
-import BlockRoutes from "../components/block-routes";
 import Header from "../components/header";
 import withAuthorization from "../components/withAuthorization";
 function Teams() {
