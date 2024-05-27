@@ -1,0 +1,128 @@
+.attribute-slider-container {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.splide__slide {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 24px;
+}
+
+.textInput {
+  border: none;
+  width: 80%;
+  background: none;
+  color: black;
+  font-size: 20px;
+  padding: 10px;
+  font-family: 'Inter', sans-serif;
+  border-bottom: 2px solid #ccc;
+  margin-bottom: 10px;
+}
+
+.textInput:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.addButton,
+.prevButton,
+.nextButton {
+  color: white;
+  background-color: #1DB4BB;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  margin-top: 10px;
+}
+
+.addButton:hover,
+.prevButton:hover,
+.nextButton:hover {
+  box-shadow: rgba(0, 0, 0, 0.5) 0 10px 20px;
+  transform: translateY(-3px);
+}
+
+.addButton:active,
+.prevButton:active,
+.nextButton:active {
+  box-shadow: none;
+  transform: translateY(0);
+}
+
+.additionalInput {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.optionsBox {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.optionsInput {
+  border: none;
+  width: 70%;
+  background: none;
+  color: black;
+  font-size: 16px;
+  padding: 10px;
+  font-family: 'Inter', sans-serif;
+  border-bottom: 2px solid #ccc;
+}
+
+.optionsInput:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.addOptionButton {
+  color: #1DB4BB;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 10px;
+}
+
+.addOptionButton:hover {
+  color: #139B9F;
+}
+
+.options-list {
+  margin-top: 10px;
+  width: 80%;
+}
+
+.options-added-list {
+  list-style: none;
+  padding: 0;
+}
+
+.toggleOption {
+  cursor: pointer;
+  margin: 0 10px;
+}
+
+.toggleOption.active {
+  font-weight: bold;
+}
+
+.buttons-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 20px;
+}

@@ -7,7 +7,7 @@
   border-radius: 24px; /* Radio de borde para esquinas redondeadas */
   display: flex; /* Usa flexbox para el diseño */
   flex-wrap: wrap;
-  align-content: center;
+  align-content: flex-start;
   justify-content: center; /* Centra horizontalmente los elementos */
   position: relative;
   padding: 10px;
@@ -19,7 +19,6 @@
   align-items: center;
   justify-content: center;
   width: 100%;
-
 }
 
 .download-header h1 {
@@ -32,36 +31,39 @@
   margin-bottom: 0;
 }
 
-/* Estilos para la caja de entrada de habilidades */
-.addBox {
-  display: flex; /* Usa flexbox para alinear elementos horizontalmente */
-  align-items: center; /* Centra verticalmente los elementos */
-  margin: 5%;
-  width: 70%;
-  min-height: 50px; /* Establecer una altura mínima */
-  justify-content: space-between;
-  background: #ccfcff;
-  border-radius: 20px;
-  position: relative;
-  border:none;
+.attribute-slider-container {
+  width: 100%;
+  margin-top: 20px;
 }
 
-.formInput{
-  display: flex; /* Usa flexbox para el diseño */
-  flex-wrap: wrap;
-  justify-content: center; /* Centra horizontalmente los elementos */
+.slide {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 24px;
 }
 
-/* Estilos para el campo de entrada de texto */
+.inputBox {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
 .textInput {
   border: none;
   width: 100%;
-  display: flex;
   background: none;
   color: black;
   font-size: 20px;
-  padding: 5% 0 5% 5%;
+  padding: 10px;
   font-family: 'Inter', sans-serif;
+  border-bottom: 2px solid #ccc;
+  margin-bottom: 10px;
 }
 
 .textInput:focus {
@@ -69,155 +71,22 @@
   box-shadow: none;
 }
 
-
-/* Estilos para el botón de añadir habilidad */
-.addButton {
-  color: white;
-  position: absolute;
-  right: 8px;
-  height: 80%;
-  max-height: 50px ;
-  aspect-ratio: 1/1;
-  border-radius: 50%;
-  border: 0;
-  display: inline-block;
-  transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
-}
-
-/* Efecto de hover del botón */
-button:hover {
-  color: #fff;
-  box-shadow: rgba(0, 0, 0, 0.5) 0 10px 20px;
-  transform: translateY(-3px);
-}
-
-/* Efecto de presión del botón */
-button:active {
-  box-shadow: none;
-  transform: translateY(0);
-}
-
-
-.skills-added-list {
-  list-style-type: none; /* Elimina los marcadores de viñeta */
-  padding: 0; /* Elimina el relleno predeterminado */
-}
-
-.skills-added-list li {
-  margin-bottom: 10px; /* Espacio entre elementos de la lista */
-  font-size: 24px; /* Tamaño de fuente */
-  color: #333; /* Color del texto */
-  font-family: 'Inter', sans-serif;
-  font-weight: 200;
-}
-
-.skills-list h2 {
-  font-family: 'Inter', sans-serif;
-  font-weight: 400; /* Peso de la fuente */
-  font-size: 18px; /* Tamaño de la fuente */
-  color: #1DB4BB; /* Color del texto */
-}
-
-
-.addOptionButton {
-  padding: 0;
-  margin: 0;
-  border: 1px solid #ccc; /* Agrega un borde sólido de 1px de color gris claro */
-  background: none;
-  cursor: pointer;
-  border-radius: 4px; /* Agrega bordes redondeados */
-}
-
-.addOptionButton {
-  --primary-color: #111;
-  --hovered-color: #1DB4BB;
-  position:relative;
-  display: flex;
-  font-weight: 400;
-  font-size: 16px;
-  gap: 0.5rem;
-  align-items: center;
-  border:#515151aa;
-}
-
-.addOptionButton p {
-  margin: 5%;
-  position: relative;
-  font-size: 16px;
-  color: var(--primary-color);
-}
-
-.addOptionButton::after {
-  position: absolute;
-  content: "";
-  width: 0;
-  left: 0;
-  bottom: -7px;
-  background: var(--hovered-color);
-  height: 2px;
-  transition: 0.3s ease-out;
-}
-
-.addOptionButton p::before {
-  position: absolute;
-  content: "Agregar";
-  width: 0;
-  inset: 0;
-  color: var(--hovered-color);
-  overflow: hidden;
-  transition: 0.3s ease-out;
-}
-
-.addOptionButton:hover::after {
-  width: 100%;
-}
-
-.addOptionButton:hover p::before {
-  width: 100%;
-}
-
-.addOptionButton:hover svg {
-  transform: translateX(4px);
-  color: var(--hovered-color);
-}
-
-.addOptionButton svg {
-  color: var(--primary-color);
-  transition: 0.2s;
-  position: relative;
-  width: 15px;
-  transition-delay: 0.2s;
-}
-
 .additionalInput {
   display: flex;
-  flex-wrap: nowrap;
-  justify-content: center;
+  width: 100%;
+  align-items: center;
   margin-bottom: 10px;
-}
-
-.additionalInput p {
-  font-size: 18px;
-  font-weight: 300;
-  display: flex;
-  align-items: center; /* Centra verticalmente el texto */
-  margin: 5px; /* Espacio entre los elementos */
-}
-
-.inputBox{
-  width: 80%;
-  justify-content: center; /* Centra horizontalmente los elementos */
 }
 
 .optionsInput {
   border: none;
   width: 80%;
-  display: flex;
   background: none;
   color: black;
   font-size: 16px;
-  padding: 5% 0 5% 5%;
+  padding: 10px;
   font-family: 'Inter', sans-serif;
+  border-bottom: 2px solid #ccc;
 }
 
 .optionsInput:focus {
@@ -225,10 +94,88 @@ button:active {
   box-shadow: none;
 }
 
-.optionsBox{
+.addOptionButton {
+  padding: 5px 10px;
+  margin-left: 10px;
+  border: 1px solid #ccc;
+  background: none;
+  cursor: pointer;
+  border-radius: 4px;
   display: flex;
-  flex-wrap: nowrap;
-  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease;
 }
 
+.addOptionButton p {
+  margin: 0;
+  font-size: 16px;
+  color: #111;
+}
 
+.addOptionButton:hover {
+  border-color: #1DB4BB;
+}
+
+.addOptionButton:hover p {
+  color: #1DB4BB;
+}
+
+.addOptionButton svg {
+  margin-left: 5px;
+  transition: transform 0.3s ease;
+}
+
+.addOptionButton:hover svg {
+  transform: translateX(4px);
+  color: #1DB4BB;
+}
+
+.skills-added-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.skills-added-list li {
+  margin-bottom: 10px;
+  font-size: 24px;
+  color: #333;
+  font-family: 'Inter', sans-serif;
+  font-weight: 200;
+}
+
+.skills-list {
+  width: 100%;
+  margin-top: 20px;
+  text-align: center;
+}
+
+.skills-list h2 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  color: #1DB4BB;
+}
+
+.addButton {
+  color: white;
+  background-color: #1DB4BB;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.addButton:hover {
+  box-shadow: rgba(0, 0, 0, 0.5) 0 10px 20px;
+  transform: translateY(-3px);
+}
+
+.addButton:active {
+  box-shadow: none;
+  transform: translateY(0);
+}
