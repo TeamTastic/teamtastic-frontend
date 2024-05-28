@@ -11,6 +11,7 @@ import MoreInfo from "../components/moreInfo";
 import { useNavigate } from 'react-router-dom';
 import PopUp from '../pages/PopUp'
 import Header from "../components/header";
+import withAuthorization from "../components/withAuthorization";
 
 function Download() {
   const [inputValue, setInputValue] = useState('');
@@ -256,4 +257,4 @@ function Download() {
   );
 }
 
-export default Download;
+export default withAuthorization(Download);
