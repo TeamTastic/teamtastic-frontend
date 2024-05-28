@@ -5,7 +5,7 @@ import AddOrganization from '../components/add-organization';
 import '../styles/pages/home.css';
 import '../styles/components/add-organization-button.css';
 import '../styles/components/organization-button.css';
-import axios from 'axios';
+import axios from '../axiosConfig';
 
 function Home() {
   const [showRegisterForm, setShowRegisterForm] = useState(false);
@@ -16,7 +16,7 @@ function Home() {
   useEffect(() => {
     const fetchOrganizations = async () => {
       try {
-        const response = await axios.get('/api/user/organizations');
+        const response = await axios.get('/user-organizations');
         if (response.data && response.data.length > 0) {
           setIsRegisteredInOrg(true);
           setOrganizations(response.data);
@@ -40,15 +40,11 @@ function Home() {
     setShowAddForm(!showAddForm);
   };
 
-  const handleSubmitRegister = async (event) => {
-    event.preventDefault();
-    const formData = new FormData(event.target);
-    const orgName = formData.get('orgName');
-
+  const handleSubmitRegister = async (orgName) => {
     try {
-      await axios.post('/org/create', { name: orgName });
+      await axios.post('/org/create', { org_name: orgName });
       setShowRegisterForm(false);
-      // Optionally fetch organizations again to update the list
+      // Opcionalmente, actualiza la lista de organizaciones
     } catch (error) {
       console.error('Error registering organization:', error);
     }
@@ -62,7 +58,7 @@ function Home() {
     try {
       await axios.post('/api/organizations/add', { code: orgCode });
       setShowAddForm(false);
-      // Optionally fetch organizations again to update the list
+      // Opcionalmente, actualiza la lista de organizaciones
     } catch (error) {
       console.error('Error adding organization:', error);
     }
