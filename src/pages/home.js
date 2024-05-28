@@ -6,6 +6,7 @@ import '../styles/pages/home.css';
 import '../styles/components/add-organization-button.css';
 import '../styles/components/organization-button.css';
 import axios from '../axiosConfig';
+import withAuthorization from "../components/withAuthorization";
 
 function Home() {
   const [showRegisterForm, setShowRegisterForm] = useState(false);
@@ -124,4 +125,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default withAuthorization(Home);

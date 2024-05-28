@@ -10,6 +10,7 @@ import Step1Image from '../assets/steps-icons/step1.png';
 import Step2Image from '../assets/steps-icons/step2.png';
 import Step3Image from '../assets/steps-icons/step3.png';
 import Step4Image from '../assets/steps-icons/step4.png';
+import withAuthorization from "../components/withAuthorization";
 
 function Information() { 
   const navigate = useNavigate(); 
@@ -90,4 +91,4 @@ function Information() {
   );
 }
 
-export default Information;
+export default withAuthorization(Information);

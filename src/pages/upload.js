@@ -6,10 +6,10 @@ import FileUploader from "../components/file-uploader"
 import "../styles/pages/upload.css"
 import MoreInfo from "../components/moreInfo";
 import starIcon from "../assets/info-icons/star-icon.svg";
-import BlockRoutes from "../components/block-routes";
 import Header from "../components/header";
 import {useNavigate} from "react-router-dom";
 import anotherInstance from "../anotherInstance";
+import withAuthorization from "../components/withAuthorization";
 
 
 function Upload() {
@@ -61,7 +61,7 @@ function Upload() {
     if (files) {
       const reader = new FileReader();
       reader.onload = () => {
-        sendDataToBucket(files).then(r => console.log(publicUrl));
+        sendDataToBucket(files).then(() => console.log(publicUrl));
 
 
 
@@ -98,7 +98,6 @@ function Upload() {
 
   return (
     <div className="upload-container">
-      <BlockRoutes />
       <Header />
       <MoreInfo>
         <div className='info-container'>
@@ -136,4 +135,4 @@ function Upload() {
   );
 }
 
-export default Upload;
+export default withAuthorization(Upload);
