@@ -43,7 +43,8 @@ function Home() {
 
   const handleSubmitRegister = async (orgName) => {
     try {
-      await axios.post('/org/create', { org_name: orgName });
+      const response = await axios.post('/org/create', { org_name: orgName });
+      console.log('Organization added:', response);
       setShowRegisterForm(false);
       // Opcionalmente, actualiza la lista de organizaciones
     } catch (error) {
