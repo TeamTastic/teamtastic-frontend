@@ -7,6 +7,8 @@ import '../styles/components/add-organization-button.css';
 import '../styles/components/organization-button.css';
 import axios from '../axiosConfig';
 import withAuthorization from "../components/withAuthorization";
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Home() {
   const [showRegisterForm, setShowRegisterForm] = useState(false);
@@ -27,6 +29,7 @@ function Home() {
       } catch (error) {
         console.error('Error fetching organizations:', error);
         setIsRegisteredInOrg(false);
+        toast.error('Error al cargar las organizaciones');
       }
     };
 
@@ -45,10 +48,14 @@ function Home() {
     try {
       const response = await axios.post('/org/create', { org_name: orgName });
       console.log('Organization added:', response);
+      toast.success('Organización creada exitosamente');
       setShowRegisterForm(false);
-      // Opcionalmente, actualiza la lista de organizaciones
+      setTimeout(() => {
+        window.location.reload();
+      }, 3000);
     } catch (error) {
       console.error('Error registering organization:', error);
+      toast.error('Error al crear la organización');
     }
   };
 
@@ -59,15 +66,20 @@ function Home() {
 
     try {
       await axios.post('/api/organizations/add', { code: orgCode });
+      toast.success('Organización agregada exitosamente');
       setShowAddForm(false);
-      // Opcionalmente, actualiza la lista de organizaciones
+      setTimeout(() => {
+        window.location.reload();
+      }, 3000);
     } catch (error) {
       console.error('Error adding organization:', error);
+      toast.error('Error al agregar la organización');
     }
   };
 
   return (
     <div className="home">
+      <ToastContainer />
       <div className="welcome">
         <h1>Bienvenido a TeamTastic</h1>
         {isRegisteredInOrg ? (
