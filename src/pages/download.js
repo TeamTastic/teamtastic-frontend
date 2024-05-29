@@ -138,7 +138,7 @@ function Download() {
 
   return (
       <div className="download-container">
-
+        <Header/>
         <MoreInfo>
           <div className='info-container'>
             <div className='info-header'>
@@ -152,7 +152,6 @@ function Download() {
             </ul>
           </div>
         </MoreInfo>
-        <Header/>
 
         <ToastContainer/>
 

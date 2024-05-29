@@ -20,7 +20,6 @@ const App = () => {
     <div> {/* Aplica el fondo aquí */}
       <Router>
         <>
-          <Header />
           <Routes>
             <Route path="/" element={<Welcome />} />
             <Route path="/register" element={<Register />} />

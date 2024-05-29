@@ -19,7 +19,6 @@ function Teams() {
     return (
         <div className="teams">
             <Header />
-
             <MoreInfo>
                 <div className='info-container'>
                     <div className='info-header'>
