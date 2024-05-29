@@ -16,6 +16,7 @@ function Welcome() { // Define el componente funcional Welcome
           navigate('/privateRoute')
         })
         .catch(error => {
+            console.error('Error fetching organizations:', error);
         })
   }, [navigate]);
   const handleRegisterClick = () => { // Define la función handleRegisterClick

@@ -18,6 +18,7 @@ function AfterLogin() {
           <img
           src={flecha}
           className='button'
+          alt={'button'}
           onClick={() => {
             navigate('/privateRoute');
           }}
