@@ -3,7 +3,6 @@ import { useNavigate, Link } from 'react-router-dom'; // Importa los hooks useNa
 import '../styles/pages/welcome.css'; // Importa los estilos CSS
 import portada from '../assets/portada.png';
 import axios from "../axiosConfig";
-import Header from "../components/header"; // Importa la imagen de la portada
 
 function Welcome() { // Define el componente funcional Welcome
 
@@ -25,7 +24,6 @@ function Welcome() { // Define el componente funcional Welcome
 
   return ( // Retorna el JSX del componente Welcome
     <div className='container'>
-      <Header/>
       <div className="welcome-container"> {/* Contenedor principal con clase welcome-container */}
         <div className="welcome-content"> {/* Contenido con clase welcome-content */}
           <img src={portada} alt="Portada Teamtastic" className="welcome-image" /> {/* Imagen de portada con clase welcome-image */}

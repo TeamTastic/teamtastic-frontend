@@ -4,7 +4,6 @@ import '../styles/components/add-organization-button.css';
 import '../styles/components/organization-button.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import Header from "../components/header";
 
 function Record() {
   const navigate = useNavigate();
@@ -33,7 +32,6 @@ function Record() {
 
   return (
     <div className="home">
-      <Header/>
       <div className="welcome">
         {isRegisteredInOrg ? (
           <>

@@ -13,11 +13,13 @@ import Information from './pages/Information';
 // import ExcelPage from './pages/panic';
 import Home from './pages/home';
 import Record from './pages/record';
+import Header from "./components/header";
 
 const App = () => {
   return (
     <div> {/* Aplica el fondo aquí */}
       <Router>
+        <Header/>
         <>
           <Routes>
             <Route path="/" element={<Welcome />} />

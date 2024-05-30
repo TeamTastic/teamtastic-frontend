@@ -10,7 +10,6 @@ import starIcon from "../assets/info-icons/star-icon.svg";
 import MoreInfo from "../components/moreInfo";
 import { useNavigate } from 'react-router-dom';
 import PopUp from '../pages/PopUp'
-import Header from "../components/header";
 import withAuthorization from "../components/withAuthorization";
 
 function Download() {
@@ -138,7 +137,6 @@ function Download() {
 
   return (
       <div className="download-container">
-        <Header/>
         <MoreInfo>
           <div className='info-container'>
             <div className='info-header'>

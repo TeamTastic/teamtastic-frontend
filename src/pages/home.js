@@ -7,7 +7,6 @@ import '../styles/components/add-organization-button.css';
 import '../styles/components/organization-button.css';
 import axios from '../axiosConfig';
 import withAuthorization from "../components/withAuthorization";
-import Header from "../components/header";
 
 function Home() {
   const [showRegisterForm, setShowRegisterForm] = useState(false);
@@ -69,7 +68,6 @@ function Home() {
 
   return (
     <div className="home">
-      <Header/>
       <div className="welcome">
         <h1>Bienvenido a TeamTastic</h1>
         {isRegisteredInOrg ? (

@@ -2,7 +2,6 @@ import React, {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import axios from "../axiosConfig";
 import {toast} from "react-toastify";
-import Header from "./header";
 
 function BlockRoutes() {
 

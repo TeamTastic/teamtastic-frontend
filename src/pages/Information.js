@@ -4,7 +4,6 @@ import '../styles/pages/Information.css';
 import './download';
 import './upload'
 import './teams'
-import Header from '../components/header';
 import Logo from '../assets/logo.png';
 import Step1Image from '../assets/steps-icons/step1.png';
 import Step2Image from '../assets/steps-icons/step2.png';
@@ -38,7 +37,6 @@ function Information() {
 
   return (
     <div className="information-body"> 
-    <Header />
       <div className="information-main-container">
         <div className="information-left">
           <h1 className="information-h1">¡Bienvenido a<br/>nuestra plataforma de<br/>creación de equipos equitativos!</h1>
