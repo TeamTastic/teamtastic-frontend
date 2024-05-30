@@ -5,7 +5,23 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /*background-color: rgb(189, 224, 246); /* Color de fondo claro*/
+  background-color: rgb(23, 59, 76); /* Color de fondo oscuro*/
+  font-family: 'Roboto Serif', serif; /* Fuente */
+  font-weight: bold; /* Grosor de la fuente */
+  text-align: center; /* Alineación del texto */
+  margin: 0; /* Elimina el margen predeterminado */
+  padding: 0; /* Elimina el padding predeterminado */
+  display: flex; /* Usa flexbox para el diseño */
+  justify-content: center; /* Centra horizontalmente los elementos */
+  align-items: center; /* Centra verticalmente los elementos */
+  height: 100vh; /* Toma el 100% de la altura de la ventana */
 }
+
+.body-teams {
+  align-items: baseline;
+}
+
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
