@@ -1,11 +1,11 @@
+/* drawerContent.css */
+
 .drawer-content {
   position: fixed;
   top: 0;
   left: -300px; /* Oculta el contenido del Drawer por defecto */
   width: 300px;
   height: 100%;
-
-  /*background-color: #E3E3E3;*/
   background-color: rgb(189, 224, 246);
   transition: left 0.3s ease-in-out;
   z-index: 10;
@@ -31,13 +31,11 @@
   font-size: large;
 }
 
-.drawer-content .list-item img{
+.drawer-content .list-item img {
   width: 13%;
   height: 13%;
   margin-right: 10px;
 }
-
-
 
 .drawer-content ul li a {
   text-decoration: none;
@@ -54,6 +52,7 @@
   padding: 10px;
   border-bottom: 1px solid #ccc;
   margin-left: 55px;
+  cursor: pointer;
 }
 
 .user-block img {
@@ -71,13 +70,50 @@
   border: none;
   height: 100%;
   width: 100%;
-
 }
 
 .user-block .gotologin:hover {
-    background-color: #6B908A;
+  background-color: #6B908A;
 }
 
 .nested-list {
   margin-left: 20px;
+}
+
+/* Estilos específicos para el modal del user-block */
+.user-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.75);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+}
+
+.user-modal {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 500px;
+  width: 90%;
+  position: relative;
+  outline: none;
+}
+
+.user-modal-close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.user-modal-close-button:hover {
+  color: red;
 }
