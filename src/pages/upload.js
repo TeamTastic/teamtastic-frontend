@@ -24,14 +24,15 @@ function Upload() {
     try {
       const response = await axios.post('/uploaded_data', { data: publicUrl, ligueName, teamsNumber });
       console.log('Backend response:', response.data);
-      toast.success('Datos subidos exitosamente!');
+      toast.success('¡Datos subidos correctamente!');
+      setIsUploading(false);
+      setTimeout(() => {
+        navigate('/teams');
+      }, 3000)
     } catch (error) {
       console.error("Error al subir datos:", error);
       toast.error('Error al subir datos al backend');
-    } finally {
-      setIsUploading(false);
-      navigate('/teams');
-    }
+    } 
   }, [navigate, ligueName, teamsNumber]);
 
   const sendDataToBucket = useCallback(async (file) => {

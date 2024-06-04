@@ -16,6 +16,7 @@ function AfterLogin() {
           <h1>Hola,</h1>
           <h2>Comienza a crear tus equipos</h2>
           <img
+          alt="button"
           src={flecha}
           className='button'
           alt={'button'}
