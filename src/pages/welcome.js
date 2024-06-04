@@ -2,7 +2,8 @@ import React, {useEffect} from 'react'; // Importa la librería React
 import { useNavigate, Link } from 'react-router-dom'; // Importa los hooks useNavigate y Link de react-router-dom
 import '../styles/pages/welcome.css'; // Importa los estilos CSS
 import portada from '../assets/portada.png';
-import axios from "../axiosConfig"; // Importa la imagen de la portada
+import axios from "../axiosConfig";
+import Header from "../components/header"; // Importa la imagen de la portada
 
 function Welcome() { // Define el componente funcional Welcome
 
@@ -15,6 +16,7 @@ function Welcome() { // Define el componente funcional Welcome
           navigate('/privateRoute')
         })
         .catch(error => {
+            console.error('Error fetching organizations:', error);
         })
   }, [navigate]);
   const handleRegisterClick = () => { // Define la función handleRegisterClick
@@ -22,19 +24,22 @@ function Welcome() { // Define el componente funcional Welcome
   };
 
   return ( // Retorna el JSX del componente Welcome
-    <div className="welcome-container"> {/* Contenedor principal con clase welcome-container */}
-      <div className="welcome-content"> {/* Contenido con clase welcome-content */}
-        <img src={portada} alt="Portada Teamtastic" className="welcome-image" /> {/* Imagen de portada con clase welcome-image */}
-        <h2 className="welcome-h2">¡Bienvenido!</h2> {/* Título h2 con clase welcome-h2 */}
-        <h3 className="welcome-h3">Arma tus equipos</h3> {/* Subtítulo h3 con clase welcome-h3 */}
-        <div className="input-container"></div> {/* Contenedor de entrada de datos */}
-        <button className="welcome-button" onClick={handleRegisterClick}> {/* Botón de registro con clase welcome-button y evento onClick */}
-          Registrarse {/* Texto del botón */}
-        </button>
-        <p className="welcome-signup"> {/* Párrafo de registro con clase welcome-signup */}
-          ¿Ya tienes una cuenta? {' '} {/* Texto de pregunta */}
-          <Link to="/login" className="welcome-link">Inicia sesión</Link> {/* Enlace de inicio de sesión con clase welcome-link */}
-        </p>
+    <div className='container'>
+      <Header/>
+      <div className="welcome-container"> {/* Contenedor principal con clase welcome-container */}
+        <div className="welcome-content"> {/* Contenido con clase welcome-content */}
+          <img src={portada} alt="Portada Teamtastic" className="welcome-image" /> {/* Imagen de portada con clase welcome-image */}
+          <h2 className="welcome-h2">¡Bienvenido!</h2> {/* Título h2 con clase welcome-h2 */}
+          <h3 className="welcome-h3">Arma tus equipos</h3> {/* Subtítulo h3 con clase welcome-h3 */}
+          <div className="input-container"></div> {/* Contenedor de entrada de datos */}
+          <button className="welcome-button" onClick={handleRegisterClick}> {/* Botón de registro con clase welcome-button y evento onClick */}
+            Registrarse {/* Texto del botón */}
+          </button>
+          <p className="welcome-signup"> {/* Párrafo de registro con clase welcome-signup */}
+            ¿Ya tienes una cuenta? {' '} {/* Texto de pregunta */}
+            <Link to="/login" className="welcome-link">Inicia sesión</Link> {/* Enlace de inicio de sesión con clase welcome-link */}
+          </p>
+        </div>
       </div>
     </div>
   );
