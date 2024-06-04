@@ -40,12 +40,7 @@ function Information() {
     <div className="information-body"> 
     <Header />
       <div className="information-main-container">
-        <div className="information-left">
-          <h1 className="information-h1">¡Bienvenido a<br/>nuestra plataforma de<br/>creación de equipos equitativos!</h1>
-        </div>
-        <div className="information-right">
-          <img src={Logo} alt="Logo" className="information-image"/>
-        </div>
+          <h1 className="information-h1">¡Bienvenido a nuestra plataforma de creación de equipos equitativos!</h1>
       </div>
 
       <div className="information-steps-container">
@@ -56,8 +51,8 @@ function Information() {
             <div className="information-step-title">1. Ingreso de Habilidades:</div>
             <p>Aquí podrás definir los atributos que deseas considerar para formar los equipos. Hay dos tipos de atributos:</p>
             <ul>
-              <li>Opciones predefinidas: Por ejemplo, la posición en el campo (Delantero, Arquero, etc.).</li>
-              <li>Rangos numéricos: Atributos medidos del 1 al 99, como la velocidad, la resistencia, etc.</li>
+              <li>Opciones predefinidas.</li>
+              <li>Rangos numéricos.</li>
             </ul>
           </div>
           <div className="information-step" onClick={() => handleStepClick(2)}>
