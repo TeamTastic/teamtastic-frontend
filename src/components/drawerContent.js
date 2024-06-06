@@ -7,9 +7,6 @@ import Options from "./options";
 const DrawerContent = ({ isOpen, user }) => {
     const navigate = useNavigate();
 
-
-
-
     return (
         <div className={`drawer-content ${isOpen ? 'open' : ''}`}>
             {user ? (
