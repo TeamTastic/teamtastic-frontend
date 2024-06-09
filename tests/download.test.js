@@ -14,14 +14,16 @@ jest.mock('react-router-dom', () => ({
   useNavigate: jest.fn(),
 }));
 
+jest.mock('axios');
+jest.mock('../src/components/withAuthorization', () => (component) => component);
 const mock = new MockAdapter(axios);
 //const navigate = useNavigate();
 
-beforeAll(() => {
+beforeEach(() => {
   mock.onGet('/private_route').reply(200);
   mock.onPost('/login').reply((config) => {
-    const { email, password } = JSON.parse(config.data);
-    if (email === 'test@example.com' && password === 'password123') {
+    const { username, password } = JSON.parse(config.data);
+    if (username === 'test' && password === 'password123') {
       return [200, { token: 'fakeToken' }];
     } else {
       return [401, { message: 'Invalid credentials' }];
@@ -62,6 +64,21 @@ jest.mock('../src/pages/PopUp', () => ({ onClose, onContinue }) => (
 
 
 describe('Download component', () => {
+
+  test('Mostrar contenido inicial', async () => {
+    render(
+      <Router>
+        <Download />
+      </Router>
+    );
+
+    await waitFor(() => {
+      expect(screen.getByText(/Ingrese hasta 5 nuevos atributos/i)).toBeInTheDocument();
+    });
+  
+    expect(screen.getByText(/Lista de Opciones/i)).toBeInTheDocument();
+    expect(screen.getByText(/Rango numérico/i)).toBeInTheDocument();
+  });
 
   test('Mostrar contenido inical', () => {
     render(<Router>
@@ -208,12 +225,54 @@ describe('Download component', () => {
     fireEvent.click(addAtributeButton);
   
     await waitFor(() => expect(screen.getByText(/Se requiere un mínimo de 3 opciones para "Lista de Opciones"/i)).toBeInTheDocument());
-  });
+  }); 
 
-  
+  test('debería iniciar la descarga del template', async () => {
+    render(
+      <Router>
+        <Download />
+        <ToastContainer />
+      </Router>
+    );
+
+    const sButton = screen.getByRole('checkbox', {name: 'SwitchButton' }); 
+    fireEvent.click(sButton);
+
+    const input = screen.getByPlaceholderText('Nuevo atributo');
+    const addButton = screen.getByRole('button', { name: /Add Icon/i });
+    fireEvent.change(input, { target: { value: 'Habilidad 1' } });
+    fireEvent.click(addButton);
+    fireEvent.change(input, { target: { value: 'Habilidad 2' } });
+    fireEvent.click(addButton);
+    fireEvent.change(input, { target: { value: 'Habilidad 3' } });
+    fireEvent.click(addButton);
+
+    await waitFor(() => expect(screen.getByText(/Habilidad 1/i)).toBeInTheDocument());
+
+    const downloadButton = screen.getByRole('button', { name: /Descargar Template/i });
+    fireEvent.click(downloadButton);
+
+    await waitFor(() => {
+      expect(generateTemplate).toHaveBeenCalledTimes(1);
+      expect(generateTemplate).toHaveBeenCalledWith([
+        { header: 'Nombre' },
+        {
+          header: 'Habilidad 1',
+          opciones: Array.from({ length: 50 }, (_, i) => i + 1)
+        },
+        {
+          header: 'Habilidad 2',
+          opciones: Array.from({ length: 50 }, (_, i) => i + 1)
+        },
+        {
+          header: 'Habilidad 3',
+          opciones: Array.from({ length: 50 }, (_, i) => i + 1)
+        },
+        { header: 'No juega con' }
+      ]);
+    });
+    
+  }); 
   
 
-  // - Downloading the template
-  // - Handling errors during download
-  // - Testing PopUp component behavior (if applicable)
 });
