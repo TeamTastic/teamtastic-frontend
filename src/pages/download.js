@@ -168,6 +168,7 @@ function Download() {
             </ul>
           </div>
         </MoreInfo>
+        <ToastContainer/>
         <div className='download-header'>
           <h1> &#9312; Ingrese hasta 5 habilidades</h1>
         </div>

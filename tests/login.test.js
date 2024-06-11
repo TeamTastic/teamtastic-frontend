@@ -17,13 +17,13 @@ describe('Login Component', () => {
     fireEvent.change(screen.getByLabelText(/contraseña/i), { target: { value: 'password123' } });
     fireEvent.click(screen.getByText(/iniciar sesión/i));
 
-    const emailInput = screen.getByLabelText(/email/i);
+    const emailInput = screen.getByLabelText(/nombre de usuario/i);
     expect(emailInput.validity.valueMissing).toBe(true);
   });
 
   test('shows error when password is not entered', async () => {
     renderWithRouter(<Login />);
-    fireEvent.change(screen.getByLabelText(/email/i), { target: { value: 'test@example.com' } });
+    fireEvent.change(screen.getByLabelText(/nombre de usuario/i), { target: { value: 'test@example.com' } });
     fireEvent.click(screen.getByText(/iniciar sesión/i));
 
     const passwordInput = screen.getByLabelText(/contraseña/i);

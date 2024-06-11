@@ -12,7 +12,7 @@ function Options() {
         <div className={'drawer-options'}>
             <ul>
                 <li>
-                    <Link to="/">
+                    <Link to="/home">
                         <div className='list-item'>
                             <img src={homeIcon} alt="SVG"/>
                             Inicio
@@ -39,7 +39,7 @@ function Options() {
 
                         </li>
                         <li>
-                            <Link to="/teams">
+                            <Link to="/record">
                                 <div className='list-item'>
                                     <img src={threeIcon} alt="SVG"/>
                                     Visualización de equipos
@@ -49,6 +49,7 @@ function Options() {
                         </li>
                     </ul>
                 </li>
+{/*
                 <li>
                     <Link to="/information">
                         <div className='list-item'>
@@ -64,9 +65,9 @@ function Options() {
                             Configuración
                         </div>
                     </Link>
-
                 </li>
-                <li>
+*/}                
+                <li className="logout">
                     <Link to="/logout">
                         <div className='list-item'>
                             <img src={logoutIcon} alt="SVG"/>

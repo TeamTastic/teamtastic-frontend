@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import '../styles/pages/home.css';
+import '../styles/pages/record.css';
 import '../styles/components/add-organization-button.css';
 import '../styles/components/organization-button.css';
 import axios from 'axios';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import Header from "../components/header";
 
 function Record() {
   const navigate = useNavigate();
@@ -31,11 +32,13 @@ function Record() {
 
 
   return (
-    <div className="home">
+
+    <div className="record">
+      <Header/>            
+      <h1> &#9314; Vea el historial de equipos armados</h1>
       <div className="welcome">
         {isRegisteredInOrg ? (
           <>
-            <h2>Vea el historial de equipos armados</h2>
             <div className="organization-list">
               {leagues.map((org, index) => (
                 <ul key={index}>
