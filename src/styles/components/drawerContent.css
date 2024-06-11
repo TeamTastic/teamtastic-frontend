@@ -81,3 +81,9 @@
 .nested-list {
   margin-left: 20px;
 }
+
+.logout {
+  position: absolute;
+  bottom: 10px;
+  width: 100%;
+}

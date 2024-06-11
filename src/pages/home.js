@@ -1,142 +1,87 @@
-import React, { useState, useEffect } from 'react';
-import { Modal, Box } from '@mui/material';
-import RegisterOrganization from '../components/register-organization';
-import AddOrganization from '../components/add-organization';
-import '../styles/pages/home.css';
-import '../styles/components/add-organization-button.css';
-import '../styles/components/organization-button.css';
-import axios from '../axiosConfig';
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import '../styles/pages/home.css'; 
+import './download';
+import './upload'
+import './teams'
+import Header from '../components/header';
+import Logo from '../assets/logo.png';
+import Step1Image from '../assets/steps-icons/step1.png';
+import Step2Image from '../assets/steps-icons/step2.png';
+import Step3Image from '../assets/steps-icons/step3.png';
+import Step4Image from '../assets/steps-icons/step4.png';
 import withAuthorization from "../components/withAuthorization";
-import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import Header from "../components/header";
 
+function Home() { 
+  const navigate = useNavigate(); 
 
-function Home() {
-  const [showRegisterForm, setShowRegisterForm] = useState(false);
-  const [showAddForm, setShowAddForm] = useState(false);
-  const [isRegisteredInOrg, setIsRegisteredInOrg] = useState(false);
-  const [organizations, setOrganizations] = useState([]);
-
-  useEffect(() => {
-    const fetchOrganizations = async () => {
-      try {
-        const response = await axios.get('/user-organizations');
-        if (response.data && response.data.length > 0) {
-          setIsRegisteredInOrg(true);
-          setOrganizations(response.data);
-        } else {
-          setIsRegisteredInOrg(false);
-        }
-      } catch (error) {
-        console.error('Error fetching organizations:', error);
-        setIsRegisteredInOrg(false);
-        toast.error('Error al cargar las organizaciones');
-      }
-    };
-
-    fetchOrganizations();
-  }, []);
-
-  const toggleRegisterForm = () => {
-    setShowRegisterForm(!showRegisterForm);
+  const handleStart = () => {
+    navigate('/download');
   };
 
-  const toggleAddForm = () => {
-    setShowAddForm(!showAddForm);
-  };
-
-  const handleSubmitRegister = async (orgName) => {
-    try {
-      const response = await axios.post('/org/create', { org_name: orgName });
-      console.log('Organization added:', response);
-      toast.success('Organización creada exitosamente');
-      setShowRegisterForm(false);
-      setTimeout(() => {
-        window.location.reload();
-      }, 3000);
-    } catch (error) {
-      console.error('Error registering organization:', error);
-      toast.error('Error al crear la organización');
-    }
-  };
-
-  const handleSubmitAdd = async (event) => {
-    event.preventDefault();
-    const formData = new FormData(event.target);
-    const orgCode = formData.get('orgCode');
-
-    try {
-      await axios.post('/api/organizations/add', { code: orgCode });
-      toast.success('Organización agregada exitosamente');
-      setShowAddForm(false);
-      setTimeout(() => {
-        window.location.reload();
-      }, 3000);
-    } catch (error) {
-      console.error('Error adding organization:', error);
-      toast.error('Error al agregar la organización');
+  const handleStepClick = (step) => {
+    switch(step) {
+      case 1:
+      case 2:
+        navigate('/download');
+        break;
+      case 3:
+        navigate('/upload');
+        break;
+      case 4:
+        navigate('/teams');
+        break;
+      default:
+        break;
     }
   };
 
   return (
-    <div className="home">
-      <ToastContainer />
-      <Header/>
-      <div className="welcome">
-        <h1>Bienvenido a TeamTastic</h1>
-        {isRegisteredInOrg ? (
-          <>
-            <h2>Ingrese a una de sus organizaciones</h2>
-            <div className="organization-list">
-              {organizations.map((org, index) => (
-                <ul key={index}>
-                  <button className="organization-button">
-                    <span className="circle" aria-hidden="true">
-                      <span className="icon arrow"></span>
-                    </span>
-                    <span className="button-text">{org}</span>
-                  </button>
-                </ul>
-              ))}
-            </div>
-          </>
-        ) : (
-          <p>Vemos que aún no estás en ninguna organización... ¡únete a una!</p>
-        )}
+    <div className="information-body"> 
+    <Header />
+      <div className="information-main-container">
+          <h1 className="information-h1">¡Bienvenido a nuestra plataforma de creación de equipos equitativos!</h1>
       </div>
-      <div className="line"></div>
-      <div className="actions">
-        {isRegisteredInOrg && <h2>O si lo prefiere</h2>}
-        <button className="add-organization-button" onClick={toggleRegisterForm}>
-          <span></span><span></span><span></span><span></span>
-          Crear Organización
-        </button>
-        <button className="add-organization-button" onClick={toggleAddForm}>
-          <span></span><span></span><span></span><span></span>
-          Agregar Organización existente
+
+      <div className="information-steps-container">
+        <h2 className="information-h2">Pasos para crear tus equipos</h2>
+        <div className="information-steps">
+          <div className="information-step" onClick={() => handleStepClick(1)}>
+            <img src={Step1Image} alt="Paso 1" className="information-step-image"/>
+            <div className="information-step-title">1. Ingreso de Habilidades:</div>
+            <p>Aquí podrás definir los atributos que deseas considerar para formar los equipos. Hay dos tipos de atributos:</p>
+            <ul>
+              <li>Opciones predefinidas.</li>
+              <li>Rangos numéricos.</li>
+            </ul>
+          </div>
+          <div className="information-step" onClick={() => handleStepClick(2)}>
+          <img src={Step2Image} alt="Paso 2" className="information-step-image"/>
+            <div className="information-step-title">2. Descargar Template:</div>
+            <p>Haz clic en el botón 'Descargar Template'. Esto descargará un archivo Excel que contiene todo lo necesario para ingresar los datos de los jugadores.</p>
+          </div>
+          <div className="information-step" onClick={() => handleStepClick(3)}>
+          <img src={Step3Image} alt="Paso 3" className="information-step-image"/>
+            <div className="information-step-title">3. Carga de Datos:</div>
+            <p>Con el archivo Excel completo, regresa a la plataforma y dirígete a la pantalla de 'Carga de Datos'. Aquí, solo tienes que subir el archivo con la información de los jugadores.</p>
+          </div>
+          <div className="information-step" onClick={() => handleStepClick(4)}>
+          <img src={Step4Image} alt="Paso 4" className="information-step-image"/>
+            <div className="information-step-title">4. Visualización de Equipos:</div>
+            <p>Finalmente, serás dirigido a la pantalla de 'Visualización de Equipos'. Aquí podrás ver cómo se han generado los equipos de forma equitativa, basados en los atributos que ingresaste.</p>
+          </div>
+        </div>
+      </div>
+
+      <div className="information-final-text">
+        <p>¡Y eso es todo! Nuestro sistema se encarga del resto para asegurarse de que tus equipos estén equilibrados según las habilidades de cada jugador.</p>
+      </div>
+
+      <div className="button-container">
+        <button className="information-button" onClick={handleStart}> 
+          Comenzar
         </button>
       </div>
-      <Modal
-        open={showRegisterForm}
-        onClose={toggleRegisterForm}
-        aria-labelledby="modal-register-title"
-        aria-describedby="modal-register-description"
-      >
-        <Box>
-          <RegisterOrganization handleSubmit={handleSubmitRegister} handleClose={toggleRegisterForm} />
-        </Box>
-      </Modal>
-      <Modal
-        open={showAddForm}
-        onClose={toggleAddForm}
-        aria-labelledby="modal-add-title"
-        aria-describedby="modal-add-description"
-      >
-        <Box>
-          <AddOrganization handleSubmit={handleSubmitAdd} handleClose={toggleAddForm} />
-        </Box>
-      </Modal>
     </div>
   );
 }

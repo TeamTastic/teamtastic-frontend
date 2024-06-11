@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import '../styles/pages/home.css';
+import '../styles/pages/record.css';
 import '../styles/components/add-organization-button.css';
 import '../styles/components/organization-button.css';
 import axios from 'axios';
@@ -32,12 +32,13 @@ function Record() {
 
 
   return (
-    <div className="home">
-      <Header/>
+
+    <div className="record">
+      <Header/>            
+      <h1> &#9314; Vea el historial de equipos armados</h1>
       <div className="welcome">
         {isRegisteredInOrg ? (
           <>
-            <h2>Vea el historial de equipos armados</h2>
             <div className="organization-list">
               {leagues.map((org, index) => (
                 <ul key={index}>

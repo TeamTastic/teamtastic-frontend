@@ -26,7 +26,7 @@ function Login() { // Define el componente funcional Login
       });
 
       // Redireccionar a la página principal después del inicio de sesión
-      navigate('/home');
+      navigate('/organizations');
     } catch (error) {
       console.error("Error al iniciar sesión:", error);
       setError('Error al iniciar sesión. Por favor, inténtelo de nuevo.');
