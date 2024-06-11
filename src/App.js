@@ -14,7 +14,7 @@ import Record from './pages/record';
 
 const App = () => {
   return (
-    <div> {/* Aplica el fondo aquí */}
+    <div>
       <Router>
         <>
           <Routes>
@@ -29,8 +29,6 @@ const App = () => {
             <Route path="/home" element={<Home />} />
             <Route path="/record" element={<Record />} />
             <Route path="/organizations" element={<Organizations />} />
-            {/*<Route path="/afterlogin" element={<AfterLogin />} />*/}
-            {/*<Route path="/panic" element={<ExcelPage />} />*/}
           </Routes>
         </>
       </Router>

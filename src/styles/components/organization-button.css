@@ -10,8 +10,9 @@
     padding: 0;
     font-size: inherit;
     font-family: inherit;
-    width: 12rem;
-    height: auto;
+    min-width: 12rem;
+    width: 20rem;
+    height: fit-content;
    }
    
    .organization-button .circle {

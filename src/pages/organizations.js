@@ -22,9 +22,9 @@ function Organizations() {
     const fetchOrganizations = async () => {
       try {
         const response = await axios.get('/user-organizations');
-        if (response.data && response.data.length > 0) {
+        if (response.data && response.data.organizations && response.data.organizations.length > 0) {
           setIsRegisteredInOrg(true);
-          setOrganizations(response.data);
+          setOrganizations(response.data.organizations);
         } else {
           setIsRegisteredInOrg(false);
         }
@@ -80,11 +80,10 @@ function Organizations() {
   };
 
   return (
-    <div className="home">
+    <div className="organization">
       <ToastContainer />
       <Header/>
       <div className="welcome">
-        <h1>Bienvenido a TeamTastic</h1>
         {isRegisteredInOrg ? (
           <>
             <h2>Ingrese a una de sus organizaciones</h2>

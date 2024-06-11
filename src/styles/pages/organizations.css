@@ -1,4 +1,4 @@
-.home {
+.organization {
   color: aliceblue;
   display: flex;
   flex-direction: column; /* Por defecto, columna */
@@ -8,7 +8,7 @@
 }
 
 @media (min-width: 768px) {
-  .home {
+  .organization {
       flex-direction: row; /* En pantallas anchas, cambia a fila */
   }
 }
@@ -64,7 +64,7 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
-.home h1 {
+.organization h1 {
   font-family: 'Inter', sans-serif;
   font-weight: 400; /* Misma fuente en negrita */
   font-size: 50px; /* Mismo tamaño de fuente */
@@ -74,7 +74,7 @@
   margin-bottom: 0;
 }
 
-.home p {
+.organization p {
   font-family: 'Inter', sans-serif;
   font-weight: 200; /* Misma fuente en negrita */
   font-size: 25px; /* Mismo tamaño de fuente */
