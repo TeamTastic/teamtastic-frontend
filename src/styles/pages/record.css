@@ -13,6 +13,7 @@
   flex-direction: column; /* Por defecto, columna */
   align-items: center; /* Centra verticalmente los elementos */
   justify-content: center;
+  flex-wrap: wrap;
 }
 
 @media (min-width: 768px) {
