@@ -10,10 +10,9 @@
 .welcome {
   color: aliceblue;
   display: flex;
-  flex-direction: column; /* Por defecto, columna */
+  flex-wrap: nowrap;
   align-items: center; /* Centra verticalmente los elementos */
   justify-content: center;
-  flex-wrap: wrap;
 }
 
 @media (min-width: 768px) {

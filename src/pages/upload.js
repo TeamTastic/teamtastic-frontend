@@ -119,13 +119,13 @@ function Upload() {
       <div className='upload-header'>
         <h1>&#9313; Suba su plantilla de datos completa</h1>
       </div>
-      <div className='register-form'>
+      <div className='upload-form'>
         <label>
           <input
             required
             placeholder=""
             type="text"
-            className="register-input"
+            className="upload-input"
             value={ligueName}
             onChange={(e) => setLigueName(e.target.value)}
           />
@@ -136,7 +136,7 @@ function Upload() {
             required
             placeholder=""
             type="number"
-            className="register-input"
+            className="upload-input"
             value={teamsNumber}
             onChange={(e) => setTeamsNumber(e.target.value)}
           />
