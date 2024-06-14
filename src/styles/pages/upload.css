@@ -1,5 +1,5 @@
 .upload-container {
-  width: 50vw; /* Width of the container */
+  width: 50%; /* Width of the container */
   min-width: 320px;
   height: auto; /* Height of the container */
   background-color: #ffffff; /* Background color */
@@ -27,49 +27,57 @@
   letter-spacing: 2px; /* Mismo espaciado entre letras */
   color: #1DB4BB; /* Mismo color de texto */
   text-align: center; /* Centra horizontalmente el texto */
-  margin-bottom: 0;
+  margin-bottom: 2%;
 }
 
+.upload-form{
+  width: 80%;
+}
 
-.register-flex label {
+.upload-flex label {
   flex: 1;
 }
 
-.register-form label {
+.upload-form label {
   position: relative;
 }
 
-.register-form label .register-input {
-  width: 100%;
-  padding: 10px 40px 10px 10px;
+.upload-form label .upload-input {
+  min-width: 100%;
+  margin: 10px;
+  padding: 10px 10px 10px 10px;
   outline: 0;
   border: 1px solid rgba(105, 105, 105, 0.397);
   border-radius: 10px;
   box-sizing: border-box;
 }
 
-.register-form label .register-input + span {
-  position: absolute;
-  left: 10px;
-  top: 10px;
+.upload-form label .upload-input + span {
+  display: flex; /* Muestra el span en una sola línea */
+  /* Mantén tus estilos existentes */
+  position: relative;
+  left: 10%;
+  top: 10%;
   color: grey;
   font-size: 0.9em;
   cursor: text;
   transition: 0.3s ease;
 }
 
-.register-form label .register-input:placeholder-shown + span {
-  top: 16px;
-  font-size: 0.9em;
+.upload-form label .upload-input:placeholder-shown + span {
+  /* Mantén tus estilos existentes */
+  top: -10px;
+  font-size: 0.7em;
 }
 
-.register-form label .register-input:focus + span,
-.register-form label .register-input:not(placeholder-shown) + span {
-  top: -11px;
-  font-size: 0.7em;
+.upload-form label .upload-input:focus + span,
+.upload-form label .upload-input:not(placeholder-shown) + span {
+  /* Mantén tus estilos existentes */
+  top: -65px;
+  font-size: 0.9em;
   font-weight: 600;
 }
 
-.register-form label .register-input:valid + span {
+.upload-form label .upload-input:valid + span {
   color: green;
 }
