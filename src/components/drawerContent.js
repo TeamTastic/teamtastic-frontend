@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import '../styles/components/drawerContent.css';
 import userIcon from '../assets/drawer/user-icon.svg';
 import { useOrganizations } from '../contexts/OrganizationsContext';
@@ -13,11 +15,19 @@ const DrawerContent = ({ isOpen, user }) => {
   const handleOrganizationChange = (org) => {
     setCurrentOrganization(org);
     setShowDropdown(false);
-    navigate('/home'); // o cualquier ruta que deba mostrarse tras cambiar la organización
+    toast.success(`Organización cambiada a ${org}`); // Muestra un toast de éxito
+    setTimeout(() => {
+      navigate('/home');
+    }, 3000);
   };
+
+  const filteredOrganizations = organizations
+    .filter(org => org !== currentOrganization)
+    .sort((a, b) => a.localeCompare(b));
 
   return (
     <div className={`drawer-content ${isOpen ? 'open' : ''}`}>
+      <ToastContainer /> {/* Contenedor de toast */}
       {user ? (
         <div className='user-block'>
           <img className='user-img' src={userIcon} alt="SVG"/>
@@ -27,13 +37,12 @@ const DrawerContent = ({ isOpen, user }) => {
 
       {currentOrganization && (
         <div className="current-organization">
-          <p>Organización actual: {currentOrganization}</p>
-          <button onClick={() => setShowDropdown(!showDropdown)}>
-            Cambiar organización
+          <button className='btn2' onClick={() => setShowDropdown(!showDropdown)}>
+            <span className="arrow"> {currentOrganization} {showDropdown ? '▲' : '▼'}</span>
           </button>
           {showDropdown && (
             <ul className="organization-dropdown">
-              {organizations.map((org, index) => (
+              {filteredOrganizations.map((org, index) => (
                 <li key={index} onClick={() => handleOrganizationChange(org)}>
                   {org}
                 </li>
@@ -43,7 +52,7 @@ const DrawerContent = ({ isOpen, user }) => {
         </div>
       )}
 
-      <Options/>
+      <Options />
     </div>
   );
 }
