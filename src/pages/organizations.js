@@ -10,13 +10,15 @@ import withAuthorization from "../components/withAuthorization";
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Header from "../components/header";
-
+import { useOrganizations } from '../contexts/OrganizationsContext';
+import { useNavigate } from 'react-router-dom';
 
 function Organizations() {
+  const { setCurrentOrganization, organizations, setOrganizations } = useOrganizations();
   const [showRegisterForm, setShowRegisterForm] = useState(false);
   const [showAddForm, setShowAddForm] = useState(false);
   const [isRegisteredInOrg, setIsRegisteredInOrg] = useState(false);
-  const [organizations, setOrganizations] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchOrganizations = async () => {
@@ -36,7 +38,7 @@ function Organizations() {
     };
 
     fetchOrganizations();
-  }, []);
+  }, [setOrganizations]);
 
   const toggleRegisterForm = () => {
     setShowRegisterForm(!showRegisterForm);
@@ -79,6 +81,11 @@ function Organizations() {
     }
   };
 
+  const handleOrganizationClick = (org) => {
+    setCurrentOrganization(org);
+    navigate('/home');
+  };
+
   return (
     <div className="organization">
       <ToastContainer />
@@ -90,7 +97,10 @@ function Organizations() {
             <div className="organization-list">
               {organizations.map((org, index) => (
                 <ul key={index}>
-                  <button className="organization-button">
+                  <button 
+                    className="organization-button"
+                    onClick={() => handleOrganizationClick(org)}
+                  >
                     <span className="circle" aria-hidden="true">
                       <span className="icon arrow"></span>
                     </span>
