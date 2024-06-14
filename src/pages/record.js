@@ -74,7 +74,7 @@ function Record() {
           </>
         ) : (
           <>
-            <p>Vemos que aún no tienes ninguna liga creada... ¡haz una ahora!</p>
+            <p>Vemos que aún no hay ninguna liga creada en {currentOrganization}... ¡haz una ahora!</p>
             <div className="line"></div>
             <div className="actions">
               <button className="add-organization-button" onClick={() => navigate('/download')}>

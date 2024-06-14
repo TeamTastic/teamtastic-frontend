@@ -1,4 +1,4 @@
-
+/* Estilo para el cuerpo de la información */
 .information-body {
     background-color: #173b4c; 
     font-family: 'Roboto Serif', serif; 
@@ -7,125 +7,135 @@
     margin: 0; 
     padding: 20px; 
     display: flex; 
-    justify-content: center; 
-    align-items: flex-start; 
-    flex-direction: column; 
-    min-height: 100vh; 
+    flex-direction: column;
+    justify-content: flex-start; /* Alinea los elementos al principio */
+    align-items: center; 
+    height: 100vh; /* Altura total de la ventana gráfica */
+    width: 90vw;
     box-sizing: border-box; 
 }
 
+/* Contenedor principal */
 .information-main-container {
     display: flex;
     justify-content: space-between; 
     align-items: center; 
-    width: 100vw; 
-    max-width: 1200px; 
+    width: 90vw; 
     margin-bottom: 3%; 
     flex-wrap: wrap; 
-    margin-top: 25%; 
+    margin-top: 5vh; /* Reducido para que el contenido esté más centrado */
 }
 
-.information-image {
-    max-width: 100%; 
-    height: auto; 
-    border-radius: 8px; 
-}
-
+/* Contenedor de pasos */
 .information-steps-container {
-    width: 80vw; 
+    width: 90vw; 
     max-width: 1200px; 
     background-color: #173b4c; 
     border-radius: 50px; 
-    padding: 40px 20px; 
-    margin-bottom: 20px; 
-    margin-top: 10px; 
+    padding: 0rem 2rem; 
+    margin-bottom: 2rem; 
 }
 
+/* Contenedor de pasos individuales */
 .information-steps {
     display: flex; 
     justify-content: space-between; 
     flex-wrap: wrap; 
 }
 
+/* Paso individual */
 .information-step {
     flex: 1; 
-    margin: 10px;
+    margin: 1rem;
     background-color: #ffffff; 
-    padding: 20px; 
+    padding: 2rem; 
     border-radius: 8px; 
     text-align: center;
     display: flex;
     flex-direction: column; 
     align-items: center; 
+    justify-content: space-between; /* Distribuye el contenido uniformemente */
 }
 
+/* Título del paso */
 .information-step-title {
-    font-size: 24px; 
+    font-size: 1.5rem; 
     font-weight: bold; 
     color: #1DB4BB; 
-    margin-bottom: 10px; 
+    margin-bottom: 1rem; 
     text-align: center; 
 }
 
+/* Imagen del paso */
 .information-step-image {
-    max-width: 50px; 
+    max-width: 3rem; 
     height: auto;
-    margin-bottom: 10px; 
+    margin-bottom: 1rem; 
 }
 
+/* Texto del paso y lista */
 .information-step p,
 .information-step ul {
     text-align: center;
+    font-size: 1rem;
 }
 
+/* Título principal */
 .information-h1 {
     font-family: 'Inter', sans-serif;
     font-weight: 700;
-    font-size: 48px; 
+    font-size: 3.5rem; 
     letter-spacing: 1px; 
     color: #6B9080; 
     text-align: center; 
     line-height: 1.2; 
+    margin-top: 2rem; /* Agregado para espacio superior */
 }
 
+/* Título secundario */
 .information-h2 {
     font-family: 'Inter', sans-serif;
     font-weight: 400; 
-    font-size: 40px; 
+    font-size: 2rem; 
     letter-spacing: 1px;
     color: #6B9080; 
     text-align: center; 
-    margin-bottom: 10px;
-    margin-top: 10px;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
 }
 
+/* Texto final */
 .information-final-text {
-    font-size: 20px; 
+    font-size: 1.5rem; 
     color: #ffffff;
-    margin-bottom: 20px; 
+    margin-bottom: 2rem; 
 }
 
+/* Contenedor de botones */
 .button-container {
     display: flex;
     justify-content: center; 
     width: 100%; 
+    margin-bottom: 5px;
 }
 
+/* Estilo de botones */
 .information-button {
     cursor: pointer;
-    width: 100%;
+    width: 90%; 
     max-width: 335px; 
     height: 48px; 
     border: 0; 
     border-radius: 100px; 
     background-color: #1DB4BB; 
     color: #ffffff;
-    font-size: 18px;
+    font-size: 1rem;
     font-family: "Inter"; 
     font-weight: 700; 
     outline: none; 
-    margin-top: 20px; 
+    margin-top: 2rem; 
     transition: background-color 0.3s ease; 
+    margin-bottom: 2%;
 }
 
 .information-button:hover {
