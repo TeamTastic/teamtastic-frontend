@@ -5,7 +5,7 @@ import "../styles/pages/download.css";
 import Add from '../assets/add.svg';
 import generateTemplate from '../components/generateTemplate';
 import { useNavigate } from 'react-router-dom';
-import PopUp from '../pages/PopUp';
+import PopUp from '../components/download-pop-up';
 import starIcon from "../assets/info-icons/star-icon.svg";
 import MoreInfo from "../components/moreInfo";
 import Header from "../components/header";
@@ -164,7 +164,7 @@ function Download() {
             <ul>
               <li>Selecciona Habilidades: Elige hasta 5 habilidades esenciales para tus equipos.</li>
               <li>Descarga la Plantilla: Haz clic en "Descargar Template".</li>
-              <li>Completa la Plantilla: Llena con nombres de participantes y sus puntuaciones (1 a 99) para las habilidades elegidas.</li>
+              <li>Completa la Plantilla: Llena con nombres de participantes y sus puntuaciones (1 a 50) para las habilidades elegidas.</li>
             </ul>
           </div>
         </MoreInfo>
@@ -185,6 +185,19 @@ function Download() {
     return (
     <div className="download-container">
       <Header />
+      <MoreInfo>
+          <div className='info-container'>
+            <div className='info-header'>
+              <img src={starIcon} alt="Star Icon" />
+              <h1> ¿Cómo usar? </h1>
+            </div>
+            <ul>
+              <li>Selecciona Habilidades: Elige hasta 5 habilidades esenciales para tus equipos.</li>
+              <li>Descarga la Plantilla: Haz clic en "Descargar Template".</li>
+              <li>Completa la Plantilla: Llena con nombres de participantes y sus puntuaciones (1 a 50) para las habilidades elegidas.</li>
+            </ul>
+          </div>
+      </MoreInfo>
       <ToastContainer />
       {skills.length - 1 < 5 && (
         <div className='addBox'>

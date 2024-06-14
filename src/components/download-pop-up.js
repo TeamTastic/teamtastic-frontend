@@ -1,7 +1,7 @@
-import "../styles/pages/PopUp.css";
+import "../styles/components/download-pop-up.css";
 import React from 'react';
 
-function PopUp({ onClose, onContinue }) {
+function DownloadPopUp({ onClose, onContinue }) {
   return (
     <div className="popup-overlay">
       <div className="popup-content">
@@ -14,4 +14,4 @@ function PopUp({ onClose, onContinue }) {
   );
 }
 
-export default PopUp;
+export default DownloadPopUp;
