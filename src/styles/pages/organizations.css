@@ -1,5 +1,5 @@
 .organization {
-  color: aliceblue;
+  color: #1DB4BB;
   display: flex;
   flex-direction: column; /* Por defecto, columna */
   height: 100vh; /* Toma toda la altura de la ventana del navegador */
@@ -72,6 +72,10 @@
   color: #1DB4BB; /* Mismo color de texto */
   text-align: center; /* Centra horizontalmente el texto */
   margin-bottom: 0;
+}
+
+.welcome h2{
+  color: #1DB4AA;
 }
 
 .organization p {
