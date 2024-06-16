@@ -7,7 +7,7 @@ const generateTemplate = async (columnas) => {
     // Agregar encabezados de columna y configurar estilo
     const headers = columnas.map((columna) => columna.header);
     ws.addRow(headers);
-    ws.getRow(1).font = { size: 22, bold: true, font: 'Cambria' };
+    ws.getRow(1).font = { size: 18, font: 'Cambria' };
     ws.getRow(1).alignment = { vertical: 'middle', horizontal: 'center' }; // Centrar los encabezados
     
     // Configurar restricciones y opciones para cada columna
@@ -31,7 +31,7 @@ const generateTemplate = async (columnas) => {
     });
 
     // Asegurar que haya un total de 100 filas con listas desplegables
-    for (let rowIndex = 3; rowIndex <= 102; rowIndex++) {
+    for (let rowIndex = 3; rowIndex <= 1024; rowIndex++) {
         columnas.forEach((columna, index) => {
             const cellAddress = String.fromCharCode(65 + index) + rowIndex; // Dirección de la celda para la validación de datos
             if (Array.isArray(columna.opciones)) {
@@ -49,7 +49,7 @@ const generateTemplate = async (columnas) => {
     }
 
     // Establecer el ancho de las columnas
-    ws.columns.forEach((col) => (col.width = 30));
+    ws.columns.forEach((col) => (col.width = 20));
 
     // Ajustar automáticamente el tamaño de las celdas al contenido
     ws.columns.forEach((column, index) => {
