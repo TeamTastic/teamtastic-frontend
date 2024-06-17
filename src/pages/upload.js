@@ -31,7 +31,7 @@ function Upload() {
       }, 3000)
     } catch (error) {
       console.error("Error al subir datos:", error);
-      toast.error('Error al subir datos al backend');
+      toast.error(error);
     } 
   }, [navigate, ligueName, teamsNumber]);
 

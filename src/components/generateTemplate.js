@@ -30,7 +30,7 @@ const generateTemplate = async (columnas) => {
         ws.getCell(cellAddress).alignment = { wrapText: true };
     });
 
-    // Asegurar que haya un total de 100 filas con listas desplegables
+    // Asegurar que haya un total de 1024 filas con listas desplegables
     for (let rowIndex = 3; rowIndex <= 1024; rowIndex++) {
         columnas.forEach((columna, index) => {
             const cellAddress = String.fromCharCode(65 + index) + rowIndex; // Dirección de la celda para la validación de datos
