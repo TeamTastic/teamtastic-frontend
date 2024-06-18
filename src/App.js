@@ -8,7 +8,9 @@ import PrivateRoute from './pages/privateRoute';
 import Upload from './pages/upload';
 import Download from './pages/download';
 import Teams from './pages/teams';
-import Organizations from './pages/organizations';
+import Information from './pages/Information';
+// import AfterLogin from './pages/afterLogin';
+// import ExcelPage from './pages/panic';
 import Home from './pages/home';
 import Record from './pages/record';
 
@@ -28,7 +30,7 @@ const App = () => {
             <Route path="/teams" element={<Teams />} />
             <Route path="/home" element={<Home />} />
             <Route path="/record" element={<Record />} />
-            <Route path="/organizations" element={<Organizations />} />
+            <Route path="/information" element={<Information />} />
             {/*<Route path="/afterlogin" element={<AfterLogin />} />*/}
             {/*<Route path="/panic" element={<ExcelPage />} />*/}
           </Routes>
