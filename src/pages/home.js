@@ -50,7 +50,7 @@ function Home() {
             <div className="information-step-title">1.1. Ingreso de Habilidades:</div>
             <p>Aquí podrás definir los atributos que deseas considerar para formar los equipos. Hay dos tipos de atributos:</p>
             <ul>
-              <li>Opciones predefinidas.</li>
+              <li>Roles predefinidos.</li>
               <li>Rangos numéricos.</li>
             </ul>
           </div>
