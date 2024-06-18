@@ -10,8 +10,11 @@ import Header from "../components/header";
 import { useNavigate } from "react-router-dom";
 import anotherInstance from "../anotherInstance";
 import withAuthorization from "../components/withAuthorization";
+import { useOrganizations } from '../contexts/OrganizationsContext';
 
 function Upload() {
+  const { currentOrganization } = useOrganizations();
+
   const fileTypes = ["XLSX"];
   const [files, setFiles] = useState(null);
   const [isUploading, setIsUploading] = useState(false);
@@ -31,16 +34,18 @@ function Upload() {
       }, 3000)
     } catch (error) {
       console.error("Error al subir datos:", error);
-      toast.error('Error al subir datos al backend');
+      toast.error(error);
     } 
   }, [navigate, ligueName, teamsNumber]);
 
   const sendDataToBucket = useCallback(async (file) => {
-    const filename = encodeURI(file.name);
+    const day = new Date().toISOString().split('T')[0];
+    const filename = `${currentOrganization}-${ligueName}-${day}.${file.name.split('.').pop()}`;
+    const encodedFilename = encodeURI(filename);
     const contentType = file.type;
     setIsUploading(true);
     try {
-      const response = await axios.get('/generate-signed-url', { params: { filename, contentType } });
+      const response = await axios.get('/generate-signed-url', { params: { filename: encodedFilename, contentType } });
       const { url } = response.data;
 
       await anotherInstance.put(url, file, {
@@ -49,7 +54,7 @@ function Upload() {
         },
       });
 
-      const publicUrl = `https://storage.googleapis.com/team_tastic_excels/${filename}`;
+      const publicUrl = `https://storage.googleapis.com/team_tastic_excels/${encodedFilename}`;
       setPublicUrl(publicUrl);
 
       await sendDataToBackend(publicUrl);
@@ -58,7 +63,7 @@ function Upload() {
       toast.error('Error al subir el archivo al bucket');
       setIsUploading(false);
     }
-  }, [sendDataToBackend]);
+  }, [sendDataToBackend, currentOrganization, ligueName]);
 
   useEffect(() => {
     if (files) {
@@ -66,17 +71,10 @@ function Upload() {
       const reader = new FileReader();
       reader.onload = () => {
         sendDataToBucket(files).then(() => console.log(publicUrl));
-
-
-
-        // const jsonData = XLSX.utils.sheet_to_json(workbook.Sheets[sheetName]);
-
-        // sendDataToBackend(jsonData).then(r => console.log(r))
-        // console.log(jsonData);
       };
       reader.readAsBinaryString(files);
     }
-  }, [files, sendDataToBucket]);
+  }, [files, publicUrl, sendDataToBucket]);
 
   const handleChange = (file) => {
     if (validateFileType(file)) {
@@ -119,13 +117,13 @@ function Upload() {
       <div className='upload-header'>
         <h1>&#9313; Suba su plantilla de datos completa</h1>
       </div>
-      <div className='register-form'>
+      <div className='upload-form'>
         <label>
           <input
             required
             placeholder=""
             type="text"
-            className="register-input"
+            className="upload-input"
             value={ligueName}
             onChange={(e) => setLigueName(e.target.value)}
           />
@@ -136,7 +134,7 @@ function Upload() {
             required
             placeholder=""
             type="number"
-            className="register-input"
+            className="upload-input"
             value={teamsNumber}
             onChange={(e) => setTeamsNumber(e.target.value)}
           />

@@ -8,6 +8,7 @@
   flex-direction: column;
   align-items: center;
   padding: 20px;
+  overflow-y:scroll;
 }
 
 .download-header {
@@ -28,16 +29,46 @@
   margin-bottom: 0;
 }
 
+.inputBox h1 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 300; /* Misma fuente en negrita */
+  font-size: 30px; /* Mismo tamaño de fuente */
+  letter-spacing: 2px; /* Mismo espaciado entre letras */
+  color: #1DB4BB; /* Mismo color de texto */
+  text-align: center; /* Centra horizontalmente el texto */
+  margin-bottom: 0;
+  margin-top: 5%;
+}
+
+
 .startButton {
   font-family: 'Inter', sans-serif;
-  font-size: 15px;
-  padding: 10px 20px;
+  font-size: 20px;
+  width: 60px;
+  height: 40px;
   background-color: #1DB4BB;
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 25px;
   cursor: pointer;
   margin-top: 20px;
+  margin-left: 5px;
+  margin-right: 5px ;
+}
+
+.nextButton {
+  font-family: 'Inter', sans-serif;
+  font-size: 20px;
+  width: 60%;
+  height: 40px;
+  background-color: #1DB4BB;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  margin-top: 20px;
+  margin-left: 5px;
+  margin-right: 5px ;
 }
 
 .startButton:hover {
@@ -46,7 +77,7 @@
 
 .addBox {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
   width: 100%;
@@ -136,10 +167,10 @@
   font-size: 12px;
 }
 
-.actions {
+.download-actions {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
   width: 100%;
   margin-top: 20px;
 }

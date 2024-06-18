@@ -5,16 +5,26 @@ import '../styles/components/organization-button.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Header from "../components/header";
+import { useOrganizations } from '../contexts/OrganizationsContext';
 
 function Record() {
+  const { currentOrganization } = useOrganizations();
   const navigate = useNavigate();
   const [isRegisteredInOrg, setIsRegisteredInOrg] = useState(false);
   const [leagues, setLeagues] = useState([]);
 
   useEffect(() => {
     const fetchLeagues = async () => {
+      if (!currentOrganization) {
+        return;
+      }
+
       try {
-        const response = await axios.get('/api/organization/leagues');
+        const response = await axios.get(`/get_organization_leagues`, {
+          params: {
+            organization: currentOrganization
+          }
+        });
         if (response.data && response.data.length > 0) {
           setIsRegisteredInOrg(true);
           setLeagues(response.data);
@@ -22,19 +32,17 @@ function Record() {
           setIsRegisteredInOrg(false);
         }
       } catch (error) {
-        console.error('Error fetching organizations:', error);
+        console.error('Error fetching leagues:', error);
         setIsRegisteredInOrg(false);
       }
     };
 
     fetchLeagues();
-  }, []);
-
+  }, [currentOrganization]);
 
   return (
-
     <div className="record">
-      <Header/>            
+      <Header />
       <h1> &#9314; Vea el historial de equipos armados</h1>
       <div className="welcome">
         {isRegisteredInOrg ? (
@@ -53,30 +61,30 @@ function Record() {
             </div>
             <div className="line"></div>
             <div className="actions">
-                <h2>¿Prefieres agregar una nueva?</h2>
-                <button className="add-organization-button" onClick={() => navigate('/download')}>
-                  <span></span><span></span><span></span><span></span>
-                  Descargar Template
-                </button>
-                <button className="add-organization-button" onClick={() => navigate('/upload')}>
-                  <span></span><span></span><span></span><span></span>
-                  Cargar Planilla
-                </button>
+              <h2>¿Prefieres agregar una nueva?</h2>
+              <button className="add-organization-button" onClick={() => navigate('/download')}>
+                <span></span><span></span><span></span><span></span>
+                Descargar Template
+              </button>
+              <button className="add-organization-button" onClick={() => navigate('/upload')}>
+                <span></span><span></span><span></span><span></span>
+                Cargar Planilla
+              </button>
             </div>
           </>
         ) : (
           <>
-            <p>Vemos que aún no tienes ninguna liga creada... ¡haz una ahora!</p>
+            <p>Vemos que aún no hay ninguna liga creada en {currentOrganization}... ¡haz una ahora!</p>
             <div className="line"></div>
             <div className="actions">
-            <button className="add-organization-button" onClick={() => navigate('/download')}>
+              <button className="add-organization-button" onClick={() => navigate('/download')}>
                 <span></span><span></span><span></span><span></span>
                 Descargar Template
-            </button>
-            <button className="add-organization-button" onClick={() => navigate('/upload')}>
+              </button>
+              <button className="add-organization-button" onClick={() => navigate('/upload')}>
                 <span></span><span></span><span></span><span></span>
                 Cargar Planilla
-            </button>
+              </button>
             </div>
           </>
         )}
