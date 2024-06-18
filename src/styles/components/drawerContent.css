@@ -43,7 +43,7 @@
 }
 
 .drawer-content ul li a:hover {
-  color: #888;
+  color: #1DB4BB;
 }
 
 .user-block {
@@ -138,7 +138,7 @@
 }
 
 .btn2:hover {
-  border: 2px solid #2d2d2d;
+  border: 2px solid #000;
 }
 
 .btn2 span {
@@ -160,8 +160,7 @@ button {
   list-style: none;
   padding: 0;
   margin: 10px 0 0 0;
-  background-color: rgb(159, 214, 248);
-  border: 1px solid #ccc;
+  border: 1px solid #1DB4BB;
   border-radius: 5px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
@@ -174,5 +173,24 @@ button {
 }
 
 .organization-dropdown li:hover {
-  background-color: #f0f0f0;
+  background-color: #1DB4BB;
+}
+
+.list-item-button {
+  margin: 2px solid grey;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: large;
+  font-family: 'Roboto Serif', serif; 
+  font-weight: bold; 
+}
+
+.list-item-button .list-item {
+  text-decoration: none;
+  color: #000;
+}
+
+.list-item-button .list-item:hover {
+  color: #1DB4BB;
 }

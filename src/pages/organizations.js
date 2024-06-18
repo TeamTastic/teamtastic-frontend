@@ -89,7 +89,6 @@ function Organizations() {
   return (
     <div className="organization">
       <ToastContainer />
-      <Header/>
       <div className="welcome">
         {isRegisteredInOrg ? (
           <>
