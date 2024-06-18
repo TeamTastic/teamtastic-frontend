@@ -12,17 +12,48 @@ const renderWithRouter = (ui, { route = '/' } = {}) => {
 };
 
 describe('Register Component', () => {
+    test('successful register', async () => {
+        renderWithRouter(<Register />);
+
+        const nameInput = screen.getAllByLabelText(/nombre/i)[0];
+        const surnameInput = screen.getByLabelText(/apellido/i);
+        const usernameInput = screen.getByLabelText(/nombre de usuario/i);
+        const emailInput = screen.getByLabelText(/email/i);
+        const passwordInput = screen.getAllByLabelText(/contraseña/i)[0];
+        const confirmPasswordInput = screen.getByLabelText(/confirma contraseña/i);
+
+        fireEvent.change(nameInput, { target: { value: 'John' } });
+        fireEvent.change(surnameInput, { target: { value: 'Doe' } });
+        fireEvent.change(usernameInput, { target: { value: 'johndoe' } });
+        fireEvent.change(emailInput, { target: { value: 'john.doe@example.com' } });
+        fireEvent.change(passwordInput, { target: { value: 'secretpassword' } });
+        fireEvent.change(confirmPasswordInput, { target: { value: 'secretpassword' } });
+
+        const submitButton = screen.getByText('Enviar');
+        fireEvent.click(submitButton);
+
+        await waitFor(() => {
+            expect(nameInput.validity.valueMissing).toBe(false);
+            expect(surnameInput.validity.valueMissing).toBe(false);
+            expect(usernameInput.validity.valueMissing).toBe(false);
+            expect(emailInput.validity.valueMissing).toBe(false);
+            expect(passwordInput.validity.valueMissing).toBe(false);
+            expect(confirmPasswordInput.validity.valueMissing).toBe(false);
+        });
+    });
 
     test('Missing Name Error', async () => {
         renderWithRouter(<Register />);
 
         const surnameInput = screen.getByLabelText(/apellido/i);
         const usernameInput = screen.getByLabelText(/nombre de usuario/i);
+        const emailInput = screen.getByLabelText(/email/i);
         const passwordInput = screen.getAllByLabelText(/contraseña/i)[0];
         const confirmPasswordInput = screen.getByLabelText(/confirma contraseña/i);
 
         fireEvent.change(surnameInput, { target: { value: 'Doe' } });
         fireEvent.change(usernameInput, { target: { value: 'johndoe' } });
+        fireEvent.change(emailInput, { target: { value: 'john.doe@example.com' } });
         fireEvent.change(passwordInput, { target: { value: 'secretpassword' } });
         fireEvent.change(confirmPasswordInput, { target: { value: 'secretpassword' } });
 
@@ -41,11 +72,13 @@ describe('Register Component', () => {
 
         const nameInput = screen.getAllByLabelText(/nombre/i)[0];
         const surnameInput = screen.getByLabelText(/apellido/i);
+        const emailInput = screen.getByLabelText(/email/i);
         const passwordInput = screen.getAllByLabelText(/contraseña/i)[0];
         const confirmPasswordInput = screen.getByLabelText(/confirma contraseña/i);
 
         fireEvent.change(nameInput, { target: { value: 'John' } });
         fireEvent.change(surnameInput, { target: { value: 'Doe' } });
+        fireEvent.change(emailInput, { target: { value: 'john.doe@example.com' } });
         fireEvent.change(passwordInput, { target: { value: 'secretpassword' } });
         fireEvent.change(confirmPasswordInput, { target: { value: 'secretpassword' } });
 
@@ -64,11 +97,13 @@ describe('Register Component', () => {
 
         const nameInput = screen.getAllByLabelText(/nombre/i)[0];
         const usernameInput = screen.getByLabelText(/nombre de usuario/i);
+        const emailInput = screen.getByLabelText(/email/i);
         const passwordInput = screen.getAllByLabelText(/contraseña/i)[0];
         const confirmPasswordInput = screen.getByLabelText(/confirma contraseña/i);
 
         fireEvent.change(nameInput, { target: { value: 'John' } });
         fireEvent.change(usernameInput, { target: { value: 'johndoe' } });
+        fireEvent.change(emailInput, { target: { value: 'john.doe@example.com' } });
         fireEvent.change(passwordInput, { target: { value: 'secretpassword' } });
         fireEvent.change(confirmPasswordInput, { target: { value: 'secretpassword' } });
 
@@ -82,6 +117,30 @@ describe('Register Component', () => {
         });
     });
 
+    test('Missing Email Error', async () => {
+        renderWithRouter(<Register />);
+
+        const nameInput = screen.getAllByLabelText(/nombre/i)[0];
+        const surnameInput = screen.getByLabelText(/apellido/i);
+        const usernameInput = screen.getByLabelText(/nombre de usuario/i);
+        const passwordInput = screen.getAllByLabelText(/contraseña/i)[0];
+        const confirmPasswordInput = screen.getByLabelText(/confirma contraseña/i);
+
+        fireEvent.change(nameInput, { target: { value: 'John' } });
+        fireEvent.change(surnameInput, { target: { value: 'Doe' } });
+        fireEvent.change(usernameInput, { target: { value: 'johndoe' } });
+        fireEvent.change(passwordInput, { target: { value: 'secretpassword' } });
+        fireEvent.change(confirmPasswordInput, { target: { value: 'secretpassword' } });
+
+        const emailInput = screen.getByLabelText(/email/i);
+
+        const submitButton = screen.getByText('Enviar');
+        fireEvent.click(submitButton);
+
+        await waitFor(() => {
+            expect(emailInput.validity.valueMissing).toBe(true);
+        });
+    });
 
     test('Missing Password Error', async () => {
         renderWithRouter(<Register />);
@@ -89,11 +148,13 @@ describe('Register Component', () => {
         const nameInput = screen.getAllByLabelText(/nombre/i)[0];
         const surnameInput = screen.getByLabelText(/apellido/i);
         const usernameInput = screen.getByLabelText(/nombre de usuario/i);
+        const emailInput = screen.getByLabelText(/email/i);
         const confirmPasswordInput = screen.getByLabelText(/confirma contraseña/i);
 
         fireEvent.change(nameInput, { target: { value: 'John' } });
         fireEvent.change(surnameInput, { target: { value: 'Doe' } });
         fireEvent.change(usernameInput, { target: { value: 'johndoe' } });
+        fireEvent.change(emailInput, { target: { value: 'john.doe@example.com' } });
         fireEvent.change(confirmPasswordInput, { target: { value: 'secretpassword' } });
 
         const passwordInput = screen.getAllByLabelText(/contraseña/i)[0];
@@ -112,11 +173,13 @@ describe('Register Component', () => {
         const nameInput = screen.getAllByLabelText(/nombre/i)[0];
         const surnameInput = screen.getByLabelText(/apellido/i);
         const usernameInput = screen.getByLabelText(/nombre de usuario/i);
+        const emailInput = screen.getByLabelText(/email/i);
         const passwordInput = screen.getAllByLabelText(/contraseña/i)[0];
 
         fireEvent.change(nameInput, { target: { value: 'John' } });
         fireEvent.change(surnameInput, { target: { value: 'Doe' } });
         fireEvent.change(usernameInput, { target: { value: 'johndoe' } });
+        fireEvent.change(emailInput, { target: { value: 'john.doe@example.com' } });
         fireEvent.change(passwordInput, { target: { value: 'secretpassword' } });
 
         const confirmPasswordInput = screen.getByLabelText(/confirma contraseña/i);
@@ -126,6 +189,20 @@ describe('Register Component', () => {
 
         await waitFor(() => {
             expect(confirmPasswordInput.validity.valueMissing).toBe(true);
+        });
+    });
+
+    test('Invalid Email Error', async () => {
+        renderWithRouter(<Register />);
+
+        const emailInput = screen.getByLabelText(/email/i);
+        fireEvent.change(emailInput, { target: { value: 'john.doe.example.com' } });
+
+        const submitButton = screen.getByText('Enviar');
+        fireEvent.click(submitButton);
+
+        await waitFor(() => {
+            expect(emailInput.validity.typeMismatch).toBe(true);
         });
     });
 
@@ -144,5 +221,5 @@ describe('Register Component', () => {
         await waitFor(() => {
             expect(passwordInput.value).toBe(confirmPasswordInput.value);
         });
-    }); 
+    });
 });
