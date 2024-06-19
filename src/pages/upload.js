@@ -25,7 +25,8 @@ function Upload() {
 
   const sendDataToBackend = useCallback(async (publicUrl) => {
     try {
-      const response = await axios.post('/uploaded_data', { data: publicUrl, ligueName, teamsNumber });
+      const response = await axios.post('/uploaded_data', { input_file_name: publicUrl, league_name:ligueName, teams_number:teamsNumber, org_name:currentOrganization });
+
       console.log('Backend response:', response.data);
       toast.success('¡Datos subidos correctamente!');
       setIsUploading(false);
@@ -52,12 +53,17 @@ function Upload() {
         headers: {
           'Content-Type': contentType,
         },
-      });
+      }).then(async () => {
+        console.log('Archivo subido exitosamente:', encodedFilename);
+        const publicUrl = `https://storage.googleapis.com/team_tastic_excels/${encodedFilename}`;
+        setPublicUrl(publicUrl);
 
-      const publicUrl = `https://storage.googleapis.com/team_tastic_excels/${encodedFilename}`;
-      setPublicUrl(publicUrl);
+        await sendDataToBackend(publicUrl);
+        console.log('Archivo subido exitosamente:', publicUrl);
+      })
+          .catch((error) => {console.error('Error al subir archivo:', error);});
 
-      await sendDataToBackend(publicUrl);
+
     } catch (error) {
       console.error("Error durante la carga del archivo:", error);
       toast.error('Error al subir el archivo al bucket');
