@@ -13,7 +13,7 @@ import DownloadTemplateButton from '../components/download-template-button';
 function Download2() {
   const [skills] = useState([{ header: 'Nombre' }, { header: 'No juega con' }]);
   const [roles, setRoles] = useState([]);
-  const [,setShowPopup] = useState(false);
+  const [, setShowPopup] = useState(false);
   const [currentStep, setCurrentStep] = useState(0);
   const [specifyRoles, setSpecifyRoles] = useState(null);
   const [additionalInputValue, setAdditionalInputValue] = useState('');
@@ -48,9 +48,17 @@ function Download2() {
     }
   };
 
-
   const handleAdditionalInputChange = (event) => {
     setAdditionalInputValue(event.target.value);
+  };
+
+  const handleKeyPressRole = (event) => {
+    if (event.key === 'Enter') {
+      event.preventDefault(); // Evita que se envíe un formulario si está dentro de uno
+      if (specifyRoles !== null) {
+        handleAddRole();
+      }
+    }
   };
 
   const handleAddRole = () => {
@@ -70,7 +78,6 @@ function Download2() {
     setAdditionalInputValue('');
   };
 
-
   const handleAddAttribute = () => {
     const lastAttribute = attributes[attributes.length - 1];
     if (!lastAttribute.header.trim()) {
@@ -82,25 +89,27 @@ function Download2() {
     setAttributes([...attributes, newAttribute]);
   };
 
+  const handleKeyPressAttribute = (event) => {
+    if (event.key === 'Enter') {
+      event.preventDefault(); // Evita que se envíe un formulario si está dentro de uno
+      if (specifyRoles !== null) {
+        handleAddAttribute();
+      }
+    }
+  };
+
   const handleAttributeChange = (index, event) => {
     const newAttributes = [...attributes];
     newAttributes[index].header = event.target.value;
     setAttributes(newAttributes);
   };
 
-  const handleKeyPress = (event) => {
-    if (event.key === 'Enter' && specifyRoles !== null) {
-      handleAddRole();
-    }
-  };
-
   const handleStart = (answer) => {
     console.log("handleStart called with answer:", answer);
-    if (answer){
+    if (answer) {
       setSpecifyRoles(answer);
-      setCurrentStep(1);      
-    }
-    else{
+      setCurrentStep(1);
+    } else {
       setCurrentStep(2);
     }
   };
@@ -109,8 +118,6 @@ function Download2() {
     console.log("handleNextStep called");
     setCurrentStep(2);
   };
-
-
 
   if (currentStep === 0) {
     return (
@@ -129,7 +136,7 @@ function Download2() {
             </ul>
           </div>
         </MoreInfo>
-        <ToastContainer/>
+        <ToastContainer />
         <div className='download-header'>
           <h1> &#9312; ¿Deseas especificar el rol de cada participante?</h1>
         </div>
@@ -166,7 +173,7 @@ function Download2() {
               placeholder="Nuevo rol"
               value={additionalInputValue}
               onChange={handleAdditionalInputChange}
-              onKeyPress={handleKeyPress}
+              onKeyPress={handleKeyPressRole} // Aquí agregamos el manejador de tecla
             />
             <button
               className="addButton roundButton"
@@ -224,6 +231,7 @@ function Download2() {
                   value={attribute.header}
                   onChange={(e) => handleAttributeChange(index, e)}
                   placeholder={`Nuevo atributo ${attribute.id}`}
+                  onKeyPress={handleKeyPressAttribute}
                 />
               </div>
             ))}
@@ -243,8 +251,6 @@ function Download2() {
         )}
       </div>
     );
-    
-    
   }
 }
 
