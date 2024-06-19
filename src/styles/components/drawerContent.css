@@ -162,6 +162,7 @@ button {
   margin: 10px 0 0 0;
   border: 1px solid #1DB4BB;
   border-radius: 5px;
+  border-bottom-left-radius: 15px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
@@ -184,6 +185,7 @@ button {
   font-size: large;
   font-family: 'Roboto Serif', serif; 
   font-weight: bold; 
+  border-bottom-left-radius: 15px;
 }
 
 .list-item-button .list-item {

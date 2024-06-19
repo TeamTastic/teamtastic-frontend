@@ -8,8 +8,8 @@ function AddOrganization({ handleSubmit, handleClose }) {
       <form onSubmit={handleSubmit} className="form">
         <h2>Agregar Organización existente</h2>
         <div className="form-group">
-          <label htmlFor="orgCode">Código de la organización:</label>
-          <input type="text" id="orgCode" name="orgCode" required />
+          <label htmlFor="token">Código de la organización:</label>
+          <input type="text" id="token" name="token" required />
         </div>
         <button type="submit" className="form-submit-btn">
           <span>Agregar</span>

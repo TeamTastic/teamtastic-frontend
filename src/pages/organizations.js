@@ -66,10 +66,10 @@ function Organizations() {
   const handleSubmitAdd = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
-    const orgCode = formData.get('orgCode');
+    const token = formData.get('token');
 
     try {
-      await axios.post('/org/add', { code: orgCode });
+      await axios.post('/org/add', { organization_token: token });
       toast.success('Organización agregada exitosamente');
       setShowAddForm(false);
       setTimeout(() => {
