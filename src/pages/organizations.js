@@ -69,7 +69,7 @@ function Organizations() {
     const orgCode = formData.get('orgCode');
 
     try {
-      await axios.post('/api/organizations/add', { code: orgCode });
+      await axios.post('/org/add', { code: orgCode });
       toast.success('Organización agregada exitosamente');
       setShowAddForm(false);
       setTimeout(() => {
