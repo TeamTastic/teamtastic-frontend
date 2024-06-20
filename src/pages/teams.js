@@ -7,7 +7,6 @@ import { useOrganizations } from '../contexts/OrganizationsContext';
 import { useLeague } from '../contexts/LeagueContext';
 import axios from '../axiosConfig';
 import anotherInstance from "../anotherInstance";
-import * as XLSX from 'xlsx';
 
 const Teams = () => {
   const [equipos, setEquipos] = useState([]);
@@ -78,26 +77,9 @@ const Teams = () => {
     }
   };
 
-
-
-  const handleDownload = () => {
-    const header = equiposFiltrados.map(equipo => equipo.name);
-    const maxMembers = Math.max(...equiposFiltrados.map(equipo => equipo.members.length));
-    const data = Array.from({ length: maxMembers }, (_, i) => {
-      return equiposFiltrados.map(equipo => equipo.members[i] || '');
-    });
-
-    const ws = XLSX.utils.aoa_to_sheet([header, ...data]);
-    const wb = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, 'Equipos');
-
-    XLSX.writeFile(wb, 'equipos.xlsx');
-  };
-
   return (
       <div className="equipos-container">
         <Header />
-        <button onClick={handleDownload} className="descargar-boton">Descargar</button>
         <h2>Equipos</h2>
         <input
             type="text"
