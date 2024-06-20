@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import '../styles/pages/record.css';
 import '../styles/components/add-organization-button.css';
 import '../styles/components/organization-button.css';
-import axios from 'axios';
+import axios from '../axiosConfig';
 import { useNavigate } from 'react-router-dom';
 import Header from "../components/header";
 import { useOrganizations } from '../contexts/OrganizationsContext';
@@ -13,7 +13,7 @@ import { toast, ToastContainer } from 'react-toastify';
 function Record() {
   const { currentOrganization } = useOrganizations();
   const navigate = useNavigate();
-  const { selectLeague } = useLeague(); // Obtener la función para seleccionar la liga del contexto
+  const { selectedLeague, setSelectedLeague } = useLeague(); // Obtener la función para seleccionar la liga del contexto
   const [isRegisteredInOrg, setIsRegisteredInOrg] = useState(false);
   const [leagues, setLeagues] = useState([]);
 
@@ -28,13 +28,13 @@ function Record() {
           params: {
             org: currentOrganization
           }
-        });
-        if (response.data && response.data.length > 0) {
+        }).then((response) => {
+          console.log('Leagues:', response.data);
           setIsRegisteredInOrg(true);
           setLeagues(response.data);
-        } else {
-          setIsRegisteredInOrg(false);
-        }
+
+        })
+            .catch((error) => {console.error('Error fetching leagues:', error);});
       } catch (error) {
         console.error('Error fetching leagues:', error);
         setIsRegisteredInOrg(false);
@@ -63,8 +63,8 @@ function Record() {
 
   // Función para navegar a la pantalla de equipos
   const navigateToTeams = (league) => {
-    selectLeague(league); // Actualizar el contexto con la liga seleccionada
-    navigate('/teams'); // Navegar a la pantalla de equipos
+    setSelectedLeague(league);
+    navigate('/teams');
   };
 
   return (
@@ -75,13 +75,13 @@ function Record() {
         {isRegisteredInOrg ? (
           <>
             <div className="organization-list">
-              {leagues.map((org, index) => (
+              {leagues.map((league, index) => (
                 <ul key={index}>
-                  <button className="organization-button" onClick={() => navigateToTeams(org)}>
+                  <button className="organization-button" onClick={() => navigateToTeams(league)}>
                     <span className="circle" aria-hidden="true">
                       <span className="icon arrow"></span>
                     </span>
-                    <span className="button-text">{org}</span>
+                    <span className="button-text" >{league}</span>
                   </button>
                 </ul>
               ))}

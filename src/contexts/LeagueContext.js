@@ -8,12 +8,10 @@ export const useLeague = () => useContext(LeagueContext);
 export const LeagueProvider = ({ children }) => {
   const [selectedLeague, setSelectedLeague] = useState(null);
 
-  const selectLeague = (league) => {
-    setSelectedLeague(league);
-  };
+
 
   return (
-    <LeagueContext.Provider value={{ selectedLeague, selectLeague }}>
+    <LeagueContext.Provider value={{ selectedLeague, setSelectedLeague }}>
       {children}
     </LeagueContext.Provider>
   );
