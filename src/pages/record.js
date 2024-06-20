@@ -44,23 +44,6 @@ function Record() {
     fetchLeagues();
   }, [currentOrganization]);
 
-  // Función para manejar la obtención de ligas al hacer clic en un botón de liga
-  const handleGetOrganizationLeagues = async (currentOrganization) => {
-    try {
-      const response = await axios.get(`/get_organization_leagues`, {
-        params: {
-          organization: currentOrganization
-        }
-      });
-      if (response.data && response.data.length > 0) {
-        setLeagues(response.data);
-      }
-    } catch (error) {
-      console.error('Error fetching leagues:', error);
-      toast.error('Error al obtener las ligas');
-    }
-  };
-
   // Función para navegar a la pantalla de equipos
   const navigateToTeams = (league) => {
     setSelectedLeague(league);

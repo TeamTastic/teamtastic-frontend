@@ -24,7 +24,9 @@ function Register() {
       .then(() => {
         navigate('/home');
       })
-      .catch(error => { });
+      .catch(error => {
+        console.error('Error fetching organizations:', error);
+      });
   }, [navigate]);
 
   const handleRegister = async (event) => {
