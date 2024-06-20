@@ -13,7 +13,7 @@ import { toast, ToastContainer } from 'react-toastify';
 function Record() {
   const { currentOrganization } = useOrganizations();
   const navigate = useNavigate();
-  const { selectedLeague, setSelectedLeague } = useLeague(); // Obtener la función para seleccionar la liga del contexto
+  const { setSelectedLeague } = useLeague(); // Obtener la función para seleccionar la liga del contexto
   const [isRegisteredInOrg, setIsRegisteredInOrg] = useState(false);
   const [leagues, setLeagues] = useState([]);
 

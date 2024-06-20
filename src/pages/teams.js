@@ -121,4 +121,3 @@ const Teams = () => {
 };
 
 export default withAuthorization(Teams);
-;
