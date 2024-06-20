@@ -14,38 +14,54 @@ import { useOrganizations } from '../contexts/OrganizationsContext';
 
 function Upload() {
   const { currentOrganization } = useOrganizations();
-
   const fileTypes = ["XLSX"];
   const [files, setFiles] = useState(null);
   const [isUploading, setIsUploading] = useState(false);
   const navigate = useNavigate();
   const [publicUrl, setPublicUrl] = useState('');
-  const [ligueName, setLigueName] = useState('');
+  const [leagueName, setLeagueName] = useState('');
   const [teamsNumber, setTeamsNumber] = useState('');
+
+  const sanitizedOrganization = currentOrganization.replace(/\s+/g, '-').replace(/#/g, '-').replace(/_/g, '-');
+  const sanitizedLeagueName = leagueName.replace(/\s+/g, '-').replace(/_/g, '-'); // Reemplazar espacios con guiones bajos
+
 
   const sendDataToBackend = useCallback(async (publicUrl) => {
     try {
-      const response = await axios.post('/uploaded_data', { data: publicUrl, ligueName, teamsNumber });
+      const response = await axios.post('/uploaded_data', {
+        'input_file_name': publicUrl,
+        'league_name': sanitizedLeagueName,
+        'teams_number': teamsNumber,
+        'org_name': sanitizedOrganization
+      });
       console.log('Backend response:', response.data);
       toast.success('¡Datos subidos correctamente!');
       setIsUploading(false);
       setTimeout(() => {
-        navigate('/teams');
-      }, 3000)
+        navigate('/record');
+      }, 3000);
     } catch (error) {
       console.error("Error al subir datos:", error);
-      toast.error(error);
-    } 
-  }, [navigate, ligueName, teamsNumber]);
+      toast.error('Error al subir datos al servidor');
+      setIsUploading(false);
+    }
+  }, [sanitizedLeagueName, teamsNumber, sanitizedOrganization, navigate]);
 
   const sendDataToBucket = useCallback(async (file) => {
+    if (!leagueName || !teamsNumber) {
+      toast.error('Por favor complete todos los campos requeridos');
+      setIsUploading(false);
+      return;
+    }
+
     const day = new Date().toISOString().split('T')[0];
-    const filename = `${currentOrganization}-${ligueName}-${day}.${file.name.split('.').pop()}`;
-    const encodedFilename = encodeURI(filename);
+    console.log(sanitizedLeagueName)
+    const filename = `${sanitizedOrganization}-${sanitizedLeagueName}-${day}`;
     const contentType = file.type;
     setIsUploading(true);
+
     try {
-      const response = await axios.get('/generate-signed-url', { params: { filename: encodedFilename, contentType } });
+      const response = await axios.get('/generate-signed-url', { params: { filename: filename, contentType } });
       const { url } = response.data;
 
       await anotherInstance.put(url, file, {
@@ -54,7 +70,7 @@ function Upload() {
         },
       });
 
-      const publicUrl = `https://storage.googleapis.com/team_tastic_excels/${encodedFilename}`;
+      const publicUrl = `https://storage.googleapis.com/team_tastic_excels/${filename}`;
       setPublicUrl(publicUrl);
 
       await sendDataToBackend(publicUrl);
@@ -63,18 +79,13 @@ function Upload() {
       toast.error('Error al subir el archivo al bucket');
       setIsUploading(false);
     }
-  }, [sendDataToBackend, currentOrganization, ligueName]);
+  }, [leagueName, teamsNumber, sanitizedLeagueName, sanitizedOrganization, sendDataToBackend]);
 
   useEffect(() => {
     if (files) {
       sendDataToBucket(files);
-      const reader = new FileReader();
-      reader.onload = () => {
-        sendDataToBucket(files).then(() => console.log(publicUrl));
-      };
-      reader.readAsBinaryString(files);
     }
-  }, [files, publicUrl, sendDataToBucket]);
+  }, [files, sendDataToBucket]);
 
   const handleChange = (file) => {
     if (validateFileType(file)) {
@@ -124,8 +135,8 @@ function Upload() {
             placeholder=""
             type="text"
             className="upload-input"
-            value={ligueName}
-            onChange={(e) => setLigueName(e.target.value)}
+            value={leagueName}
+            onChange={(e) => setLeagueName(e.target.value)}
           />
           <span>Nombre de la Liga</span>
         </label>

@@ -2,9 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { FaPlus, FaMinus } from 'react-icons/fa';
 import "../styles/pages/teams.css";
 import withAuthorization from "../components/withAuthorization";
+import Header from "../components/header";
+import { useOrganizations } from '../contexts/OrganizationsContext';
+import { useLeague } from '../contexts/LeagueContext'; 
+import axios from '../axiosConfig';
 
-function Teams() {
-  const [equipos] = useState([
+async function Teams() {
+  const [equipos, setEquipos] = useState();
+  /*const [equipos] = useState([
     { name: 'Team1', members: ['David', 'Belen P', 'Sofia', 'Joaco', 'Baltasar', 'Valentin', 'Belen F', 'Agus', 'Ana', 'Carlos', 'Laura', 'Miguel', 'Jose', 'Luis', 'Lucia', 'Andres', 'Elena', 'Ramon', 'Paula', 'Pedro', 'Marcos', 'Fernando', 'Natalia', 'Sergio', 'Gema', 'Hugo', 'Cristina', 'Antonio', 'Ricardo', 'Victor'] },
     { name: 'Team2', members: ['Patricia', 'Ivan', 'Nerea', 'Emilio', 'Oscar', 'Samuel', 'Carmen', 'Raul', 'Isabel', 'Pablo', 'Sara', 'Jaime', 'Javier', 'Diego', 'Clara', 'Miquel', 'Silvia', 'Adrian', 'Teresa', 'Alberto', 'Elias', 'Rodrigo', 'Eva', 'Joaquin', 'Jorge', 'Miriam', 'Andrea', 'Gabriel', 'Borja', 'Tomas'] },
     { name: 'Team3', members: ['Irene', 'Hector', 'Yolanda', 'Luis', 'Blanca', 'Carlos', 'Julio', 'Mateo', 'Ana', 'Manuel', 'Angela', 'Ruben', 'Gloria', 'Lucas', 'Dario', 'Raul', 'Sonia', 'Federico', 'Sandra', 'Alvaro', 'Eva', 'Miguel', 'Cesar', 'Mariano', 'Rocio', 'Ignacio', 'Veronica', 'Sergio', 'Nuria', 'David'] },
@@ -56,6 +61,24 @@ function Teams() {
     { name: 'Team49', members: ['Cesar', 'Mariano', 'Rocio', 'Ignacio', 'Veronica', 'Sergio', 'Nuria', 'David', 'Paco', 'Cristobal', 'Maria', 'Eugenio', 'Ines', 'Marcos', 'Claudia', 'Jesus', 'Marcel', 'Julian', 'Luz', 'Esteban', 'Olga', 'Oscar', 'Diana', 'Victor', 'Ruben', 'Francisco', 'Elisa', 'Jordi', 'Marina', 'Eduardo', 'Jimena', 'Alex', 'Felipe', 'Guillermo', 'Rebeca', 'Santiago', 'Lara', 'Juan'] },
     { name: 'Team50', members: ['Lidia', 'Adrian', 'Emilio', 'Andres', 'Marta', 'Pedro', 'Esther', 'Carlos', 'Raquel', 'Daniel', 'Pablo', 'Jorge', 'Teresa', 'Alfonso', 'Alicia', 'Victor', 'Elena', 'Gabriel', 'Ignacio', 'Roberto', 'Rosa', 'Miguel', 'Nuria', 'Alvaro', 'Beatriz', 'Felix', 'Javier', 'Tomas', 'Ana', 'Fernando'] }
   ]);
+*/
+
+  const { currentOrganization } = useOrganizations();
+  const { currentLeague } = useLeague()
+
+  const url = axios.get('get_league_url', {
+    'org' : currentOrganization,
+    'league' : currentLeague
+  })
+
+  const response = await fetch(url);
+  if (!response.ok) {
+    throw new Error('Network response was not ok');
+  }
+
+  const data = await response.json();
+  setEquipos(data.teams);
+  
   const equiposPorPagina = 8;
   const [paginaActual, setPaginaActual] = useState(1);
   const [equipoSeleccionado, setEquipoSeleccionado] = useState(null);
@@ -98,8 +121,8 @@ function Teams() {
   const equiposPaginaActual = equiposFiltrados.slice(indexOfFirstEquipo, indexOfLastEquipo);
 
   return (
-  
     <div className="equipos-container">
+      <Header />
       <h2>Equipos</h2>
       <input
         type="text"
