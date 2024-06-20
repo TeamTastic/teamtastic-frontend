@@ -5,7 +5,6 @@ import withAuthorization from "../components/withAuthorization";
 import {useLocation} from "react-router-dom";
 import axios from "../axiosConfig";
 import anotherInstance from "../anotherInstance";
-import {Drawer} from "@mui/material";
 import Header from "../components/header";
 
 function Teams() {
@@ -18,7 +17,6 @@ function Teams() {
   const [equiposFiltrados, setEquiposFiltrados] = useState([]);
   const location = useLocation();
   const {league, currentOrganization} = location.state || {};
-  const {teamsUrl, setTeamsUrl} = useState('');
   const [allTeams, setAllTeams] = useState(null);
   const [teams, setTeams] = useState([]);
 
@@ -129,6 +127,6 @@ function Teams() {
       </div>
     </div>
   );
-};
+}
 
 export default withAuthorization(Teams);

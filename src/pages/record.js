@@ -10,7 +10,6 @@ import { useOrganizations } from '../contexts/OrganizationsContext';
 function Record() {
   const { currentOrganization } = useOrganizations();
   const navigate = useNavigate();
-  const location = useLocation();
   const [isRegisteredInOrg, setIsRegisteredInOrg] = useState(false);
   const [leagues, setLeagues] = useState([]);
 
