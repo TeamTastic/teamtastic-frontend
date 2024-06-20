@@ -2,16 +2,18 @@ import React, { useState, useEffect } from 'react';
 import '../styles/pages/record.css';
 import '../styles/components/add-organization-button.css';
 import '../styles/components/organization-button.css';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import axios from '../axiosConfig';
+import {useLocation, useNavigate} from 'react-router-dom';
 import Header from "../components/header";
 import { useOrganizations } from '../contexts/OrganizationsContext';
 
 function Record() {
   const { currentOrganization } = useOrganizations();
   const navigate = useNavigate();
+  const location = useLocation();
   const [isRegisteredInOrg, setIsRegisteredInOrg] = useState(false);
   const [leagues, setLeagues] = useState([]);
+
 
   useEffect(() => {
     const fetchLeagues = async () => {
@@ -22,7 +24,7 @@ function Record() {
       try {
         const response = await axios.get(`/get_organization_leagues`, {
           params: {
-            organization: currentOrganization
+            org: currentOrganization
           }
         });
         if (response.data && response.data.length > 0) {
@@ -40,6 +42,13 @@ function Record() {
     fetchLeagues();
   }, [currentOrganization]);
 
+  function showTeams(league) {
+    console.log('showTeams:', league);
+    return () => {
+      navigate('/teams', { state: { league, currentOrganization } });
+    };
+  }
+
   return (
     <div className="record">
       <Header />
@@ -48,13 +57,13 @@ function Record() {
         {isRegisteredInOrg ? (
           <>
             <div className="organization-list">
-              {leagues.map((org, index) => (
+              {leagues.map((league, index) => (
                 <ul key={index}>
-                  <button className="organization-button">
+                  <button className="organization-button" onClick={showTeams(league)}>
                     <span className="circle" aria-hidden="true">
                       <span className="icon arrow"></span>
                     </span>
-                    <span className="button-text">{org}</span>
+                    <span className="button-text">{league}</span>
                   </button>
                 </ul>
               ))}
