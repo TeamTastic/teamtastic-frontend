@@ -9,7 +9,7 @@ import { toast, ToastContainer } from 'react-toastify';
 
 function Login() { // Define el componente funcional Login
   const navigate = useNavigate(); // Obtiene la función navigate del hook useNavigate
-  const [email, setEmail] = useState(''); // Estado para el correo electrónico
+  const [user, setUser] = useState(''); // Estado para el correo electrónico
   const [password, setPassword] = useState(''); // Estado para la contraseña
   const [showPassword, setShowPassword] = useState(false); // Estado para mostrar/ocultar la contraseña
   const [error, setError] = useState(''); // Estado para manejar errores
@@ -21,7 +21,7 @@ function Login() { // Define el componente funcional Login
     // Lógica de autenticación
     try {
       await axios.post('/user/login', {
-        email,
+        username: user,
         password,
       });
 
@@ -49,12 +49,12 @@ function Login() { // Define el componente funcional Login
           <input
             required
             placeholder=""
-            type="email"
+            type="text"
             className="register-input"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={user}
+            onChange={(e) => setUser(e.target.value)}
           />
-          <span>Email</span>
+          <span>Nombre de Usuario</span>
         </label>
         <label className="register-password-label">
           <input
