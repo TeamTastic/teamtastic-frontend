@@ -25,6 +25,7 @@ function Upload() {
     setFiles(null);
     setIsUploading(false);
   };
+  console.log("holis")
 
   const sendDataToBackend = useCallback(async (publicUrl) => {
     const inputFileName = publicUrl.split('/').pop();
