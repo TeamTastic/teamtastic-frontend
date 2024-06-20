@@ -12,6 +12,7 @@
     font-family: inherit;
     min-width: 12rem;
     width: 20rem;
+    margin-right: 5px;
    }
    
    .organization-button .circle {
@@ -55,23 +56,23 @@
    }
    
    .organization-button .button-text {
-    transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+    transition: all 0.45s ease-in-out;
     position: absolute;
     top: 0;
     left: 10;
     right: 0;
     bottom: 0;
     padding: 0.75rem 0;
-    margin: 0 0 0 1.85rem;
+    margin-right: 5%;
     color: aliceblue;
     font-weight: 700;
     line-height: 1.6;
-    text-align: center;
+    text-align: left;
     text-transform: uppercase;
    }
    
    .organization-button:hover .circle {
-    width: 110%;
+    width: 100%;
    }
    
    .organization-button:hover .circle .icon.arrow {
