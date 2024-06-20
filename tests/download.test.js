@@ -6,7 +6,6 @@ import '@testing-library/jest-dom';
 import Download from '../src/pages/download';
 import { ToastContainer } from 'react-toastify';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
 import generateTemplate from '../src/components/generateTemplate';
 
 jest.mock('react-router-dom', () => ({
@@ -17,7 +16,6 @@ jest.mock('react-router-dom', () => ({
 jest.mock('axios');
 jest.mock('../src/components/withAuthorization', () => (component) => component);
 const mock = new MockAdapter(axios);
-//const navigate = useNavigate();
 
 beforeEach(() => {
   mock.onGet('/private_route').reply(200);
@@ -55,13 +53,6 @@ jest.mock('../src/components/switchButton', () => ({ value, onChange, options })
 ));
 jest.mock('../src/components/moreInfo', () => ({ children }) => <div>{children}</div>);
 jest.mock('../src/components/header', () => () => <div>Header</div>);
-jest.mock('../src/pages/PopUp', () => ({ onClose, onContinue }) => (
-  <div>
-    <button onClick={onClose}>Close</button>
-    <button onClick={onContinue}>Continue</button>
-  </div>
-));
-
 
 describe('Download component', () => {
 
@@ -73,23 +64,22 @@ describe('Download component', () => {
     );
 
     await waitFor(() => {
-      expect(screen.getByText(/① Ingrese hasta 5 habilidades/i)).toBeInTheDocument();
+      expect(screen.getByText(/① ¿Deseas especificar el rol de cada participante?/i)).toBeInTheDocument();
     });
 
-    const botonComenzar = screen.getByRole('button', { name: /Comenzar/i });
+    const botonComenzar = screen.getByText('Sí');
     fireEvent.click(botonComenzar);
 
-    expect(screen.getByText(/Lista de Opciones/i)).toBeInTheDocument();
-    expect(screen.getByText(/Rango numérico/i)).toBeInTheDocument();
-    expect(screen.getByText(/Agregar atributo/i)).toBeInTheDocument();
-    expect(screen.getByText(/Descargar Template/i)).toBeInTheDocument();
-    
-    const listaDeOpBoton = screen.getByRole('button', { name: /Lista de Opciones/i });
-    fireEvent.click(listaDeOpBoton);
+    expect(screen.getByPlaceholderText(/Nuevo rol/i)).toBeInTheDocument();
+    fireEvent.change(screen.getByPlaceholderText(/Nuevo rol/i), { target: { value: 'Rol 1' } });
+    const addAtributeButton = screen.getByRole('button', { name: /Add Icon/i });
+    fireEvent.click(addAtributeButton);
+        
+    const siguienteBoton = screen.getByRole('button', { name: /Siguiente/i });
+    fireEvent.click(siguienteBoton);
 
+    expect(screen.getByPlaceholderText(/Atributo 1/i)).toBeInTheDocument();
     expect(screen.getByPlaceholderText(/Nuevo atributo 1/i)).toBeInTheDocument();
-    expect(screen.getByText(/Agregar atributo/i)).toBeInTheDocument();
-    expect(screen.getByText(/Descargar Template/i)).toBeInTheDocument();
     
   });
 
@@ -101,20 +91,23 @@ describe('Download component', () => {
     </Router>);
 
     await waitFor(() => {
-      expect(screen.getByText(/① Ingrese hasta 5 habilidades/i)).toBeInTheDocument();
+      expect(screen.getByText(/① ¿Deseas especificar el rol de cada participante?/i)).toBeInTheDocument();
     });
 
-    const botonComenzar = screen.getByRole('button', { name: /Comenzar/i });
+    const botonComenzar = screen.getByText('No');
     fireEvent.click(botonComenzar);
 
     const habilidadInput = screen.getByPlaceholderText('Nuevo atributo 1');
-    const addButton = screen.getByRole('button', { name: /Agregar atributo/i });
+    const addButton = screen.getByRole('button', { name: /Add Icon/i });
 
     fireEvent.change(habilidadInput, { target: { value: 'Habilidad 1' } });
     fireEvent.click(addButton);
 
-    await waitFor(() => expect(screen.getByText(/Habilidad 1/i)).toBeInTheDocument());
-    expect(habilidadInput).toHaveValue('');
+    await waitFor(() => expect(screen.getByDisplayValue('Habilidad 1')).toBeInTheDocument());
+
+    expect(screen.getByPlaceholderText(/Atributo 2/i)).toBeInTheDocument();
+    expect(screen.getByPlaceholderText(/Nuevo atributo 2/i)).toBeInTheDocument();
+    expect(screen.getByRole('button', {name: /DESCARGAR TEMPLATE/i})).toBeInTheDocument();
 
   });
 
@@ -126,16 +119,16 @@ describe('Download component', () => {
     </Router>);
 
     await waitFor(() => {
-      expect(screen.getByText(/① Ingrese hasta 5 habilidades/i)).toBeInTheDocument();
+      expect(screen.getByText(/① ¿Deseas especificar el rol de cada participante?/i)).toBeInTheDocument();
     });
 
-    const botonComenzar = screen.getByRole('button', { name: /Comenzar/i });
+    const botonComenzar = screen.getByText('No');
     fireEvent.click(botonComenzar);
 
-    const addButton = screen.getByRole('button', { name: /Agregar atributo/i });
+    const addButton = screen.getByRole('button', { name: /Add Icon/i });
     fireEvent.click(addButton);
 
-    await waitFor(() => expect(screen.getByText(/Por favor, ingresa un atributo/i)).toBeInTheDocument());
+    await waitFor(() => expect(screen.getByText(/Por favor, ingresa un nombre para el atributo actual antes de agregar uno nuevo/i)).toBeInTheDocument());
   });
 
   test('Mostrar error al intentar cargar una habilidad vacia de tipo lista de opciones', async () => {
@@ -146,49 +139,17 @@ describe('Download component', () => {
     </Router>);
 
     await waitFor(() => {
-      expect(screen.getByText(/① Ingrese hasta 5 habilidades/i)).toBeInTheDocument();
+      expect(screen.getByText(/① ¿Deseas especificar el rol de cada participante?/i)).toBeInTheDocument();
     });
 
-    const botonComenzar = screen.getByRole('button', { name: /Comenzar/i });
+    const botonComenzar = screen.getByText('Sí');
     fireEvent.click(botonComenzar);
 
-    const sButton = screen.getByText('Lista de Opciones'); 
-    fireEvent.click(sButton);
-
-    const addButton = screen.getByRole('button', { name: /Agregar atributo/i });
+    const addButton = screen.getByRole('button', { name: /Add Icon/i });
     fireEvent.click(addButton);
 
-    await waitFor(() => expect(screen.getByText(/Por favor, ingresa un atributo/i)).toBeInTheDocument());
+    await waitFor(() => expect(screen.getByText(/Por favor, ingresa un rol/i)).toBeInTheDocument());
 
-  });
-
-  test('Mostrar error cuando se intente agregar una habilidad duplicada de tipo rango numerico', async () => {
-    render
-    (<Router>
-      <Download />
-      <ToastContainer />
-    </Router>);
-    
-    await waitFor(() => {
-      expect(screen.getByText(/① Ingrese hasta 5 habilidades/i)).toBeInTheDocument();
-    });
-
-    const botonComenzar = screen.getByRole('button', { name: /Comenzar/i });
-    fireEvent.click(botonComenzar);
-
-    const habilidadInput = screen.getByPlaceholderText('Nuevo atributo 1');
-    const addButton = screen.getByRole('button', { name: /Agregar atributo/i });
-
-    fireEvent.change(habilidadInput, { target: { value: 'Habilidad 1' } });
-    fireEvent.click(addButton);
-
-    const habilidadInput2 = screen.getByPlaceholderText('Nuevo atributo 2');
-    fireEvent.click(addButton);
-
-    fireEvent.change(habilidadInput2, { target: { value: 'Habilidad 1' } });
-    fireEvent.click(addButton);
-
-    await waitFor(() => expect(screen.getByText(/Este atributo ya ha sido ingresado/i)).toBeInTheDocument());
   });
 
   test('Mostrar error cuando se intente agregar una habilidad de tipo lista de opciones con opción duplicada', async () => {
@@ -200,77 +161,27 @@ describe('Download component', () => {
     );
   
     await waitFor(() => {
-      expect(screen.getByText(/① Ingrese hasta 5 habilidades/i)).toBeInTheDocument();
+      expect(screen.getByText(/① ¿Deseas especificar el rol de cada participante?/i)).toBeInTheDocument();
     });
 
-    const botonComenzar = screen.getByRole('button', { name: /Comenzar/i });
+    const botonComenzar = screen.getByText('Sí');
     fireEvent.click(botonComenzar);
 
-    const sButton = screen.getByText('Lista de Opciones'); 
-    fireEvent.click(sButton);
+    expect(screen.getByPlaceholderText(/Nuevo rol/i)).toBeInTheDocument();
+    fireEvent.change(screen.getByPlaceholderText(/Nuevo rol/i), { target: { value: 'Rol 1' } });
 
-    const habilidadInput = screen.getByPlaceholderText('Nuevo atributo 1');
-    const addButton = screen.getByRole('button', { name: /Agregar atributo/i });
-    const addAtributeButton = screen.getByRole('button', { name: /Add Icon/i });
-    const optionInput = screen.getByPlaceholderText('Agregue nueva opción');
-
-    fireEvent.change(habilidadInput, { target: { value: 'Habilidad 1' } });
-    fireEvent.change(optionInput, { target: { value: 'Opción 1' } });
-    fireEvent.click(addAtributeButton);
-    fireEvent.change(optionInput, { target: { value: 'Opción 2' } });
-    fireEvent.click(addAtributeButton);
-    fireEvent.change(optionInput, { target: { value: 'Opción 3' } });
-    fireEvent.click(addAtributeButton);
+    const addButton = screen.getByRole('button', { name: /Add Icon/i });
     fireEvent.click(addButton);
 
-    const habilidadInput2 = screen.getByPlaceholderText('Nuevo atributo 2');
+    expect(screen.getByPlaceholderText(/Nuevo rol/i)).toBeInTheDocument();
+    fireEvent.change(screen.getByPlaceholderText(/Nuevo rol/i), { target: { value: 'Rol 1' } });
 
-    fireEvent.change(habilidadInput2, { target: { value: 'Habilidad 1' } });
-    fireEvent.change(optionInput, { target: { value: 'Opción 1' } });
-    fireEvent.click(addAtributeButton);
-    fireEvent.change(optionInput, { target: { value: 'Opción 2' } });
-    fireEvent.click(addAtributeButton);
-    fireEvent.change(optionInput, { target: { value: 'Opción 3' } });
-    fireEvent.click(addAtributeButton);
     fireEvent.click(addButton);
-  
-    await waitFor(() => expect(screen.getByText(/Este atributo ya ha sido ingresado/i)).toBeInTheDocument());
+
+    await waitFor(() => expect(screen.getByText(/Este rol ya ha sido ingresado/i)).toBeInTheDocument());
+    
   });
   
-  test('Mostrar error cuando se intente agregar una habilidad de tipo lista de opciones con menos de tres opciones', async () => {
-    render(
-      <Router>
-        <Download />
-        <ToastContainer />
-      </Router>
-    );
-  
-    await waitFor(() => {
-      expect(screen.getByText(/① Ingrese hasta 5 habilidades/i)).toBeInTheDocument();
-    });
-
-    const botonComenzar = screen.getByRole('button', { name: /Comenzar/i });
-    fireEvent.click(botonComenzar);
-
-    const sButton = screen.getByText('Lista de Opciones'); 
-    fireEvent.click(sButton);
-
-    const habilidadInput = screen.getByPlaceholderText('Nuevo atributo 1');
-    const addButton = screen.getByRole('button', { name: /Agregar atributo/i });
-    const addAtributeButton = screen.getByRole('button', { name: /Add Icon/i });
-    const optionInput = screen.getByPlaceholderText('Agregue nueva opción');
-
-    fireEvent.change(habilidadInput, { target: { value: 'Habilidad 1' } });
-    fireEvent.change(optionInput, { target: { value: 'Opción 1' } });
-    fireEvent.click(addAtributeButton);
-    fireEvent.change(optionInput, { target: { value: 'Opción 2' } });
-    fireEvent.click(addAtributeButton);
-
-    fireEvent.click(addButton);
-  
-    await waitFor(() => expect(screen.getByText(/Se requiere un mínimo de 3 opciones para "Lista de Opciones"/i)).toBeInTheDocument());
-  }); 
-
   test('debería iniciar la descarga del template', async () => {
     render(
       <Router>
@@ -280,33 +191,30 @@ describe('Download component', () => {
     );
 
     await waitFor(() => {
-      expect(screen.getByText(/① Ingrese hasta 5 habilidades/i)).toBeInTheDocument();
+      expect(screen.getByText(/① ¿Deseas especificar el rol de cada participante?/i)).toBeInTheDocument();
     });
 
-    const botonComenzar = screen.getByRole('button', { name: /Comenzar/i });
+    const botonComenzar = screen.getByText('No');
     fireEvent.click(botonComenzar);
 
-    const habilidadInput = screen.getByPlaceholderText('Nuevo atributo 1');
-    const addButton = screen.getByRole('button', { name: /Agregar atributo/i });
+    fireEvent.change(screen.getByPlaceholderText(/Nuevo atributo 1/i), { target: { value: 'Habilidad 1' } });
+    const addAtributeButton = screen.getByRole('button', { name: /Add Icon/i });
+    fireEvent.click(addAtributeButton);
 
-    fireEvent.change(habilidadInput, { target: { value: 'Habilidad 1' } });
-    fireEvent.click(addButton);
+    fireEvent.change(screen.getByPlaceholderText(/Nuevo atributo 2/i), { target: { value: 'Habilidad 2' } });
+    fireEvent.click(addAtributeButton);
+
+    fireEvent.change(screen.getByPlaceholderText(/Nuevo atributo 3/i), { target: { value: 'Habilidad 3' } });
+    fireEvent.click(addAtributeButton);
         
-    const habilidadInput2 = screen.getByPlaceholderText('Nuevo atributo 2');
-    fireEvent.change(habilidadInput2, { target: { value: 'Habilidad 2' } });
-    fireEvent.click(addButton);
-
-    const habilidadInput3 = screen.getByPlaceholderText('Nuevo atributo 3');
-    fireEvent.change(habilidadInput3, { target: { value: 'Habilidad 3' } });
-    fireEvent.click(addButton);
-
-    const downloadButton = screen.getByRole('button', { name: /Descargar Template/i });
-    fireEvent.click(downloadButton);
+    const descargarButton = screen.getByRole('button', { name: /DESCARGAR TEMPLATE/i });
+    fireEvent.click(descargarButton);
 
     await waitFor(() => {
       expect(generateTemplate).toHaveBeenCalledTimes(1);
       expect(generateTemplate).toHaveBeenCalledWith([
         { header: 'Nombre' },
+        { header: "No juega con" },
         {
           header: 'Habilidad 1',
           opciones: Array.from({ length: 50 }, (_, i) => i + 1)
@@ -318,12 +226,11 @@ describe('Download component', () => {
         {
           header: 'Habilidad 3',
           opciones: Array.from({ length: 50 }, (_, i) => i + 1)
-        },
-        { header: 'No juega con' }
+        }
       ]);
     });
     
-  }); 
+  });  
  
 
 });
