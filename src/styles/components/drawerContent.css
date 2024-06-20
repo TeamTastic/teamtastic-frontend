@@ -4,8 +4,6 @@
   left: -300px; /* Oculta el contenido del Drawer por defecto */
   width: 300px;
   height: 100%;
-
-  /*background-color: #E3E3E3;*/
   background-color: rgb(189, 224, 246);
   transition: left 0.3s ease-in-out;
   z-index: 10;
@@ -18,10 +16,12 @@
 .drawer-content ul {
   list-style: none;
   padding: 0;
+  margin: 0;
 }
 
 .drawer-content ul li {
   padding: 10px;
+  cursor: pointer;
 }
 
 .drawer-content .list-item {
@@ -31,13 +31,11 @@
   font-size: large;
 }
 
-.drawer-content .list-item img{
+.drawer-content .list-item img {
   width: 13%;
   height: 13%;
   margin-right: 10px;
 }
-
-
 
 .drawer-content ul li a {
   text-decoration: none;
@@ -45,15 +43,15 @@
 }
 
 .drawer-content ul li a:hover {
-  color: #888;
+  color: #1DB4BB;
 }
 
 .user-block {
   display: flex;
   align-items: center;
   padding: 10px;
-  border-bottom: 1px solid #ccc;
   margin-left: 55px;
+  margin-right: 55px;
 }
 
 .user-block img {
@@ -71,13 +69,130 @@
   border: none;
   height: 100%;
   width: 100%;
-
 }
 
 .user-block .gotologin:hover {
-    background-color: #6B908A;
+  background-color: #6B908A;
 }
 
 .nested-list {
   margin-left: 20px;
+}
+
+.logout {
+  position: absolute;
+  bottom: 10px;
+  width: 100%;
+}
+
+.current-organization {
+  padding: 10px;
+  text-align: center;
+}
+
+.btn2 {
+  position: relative;
+  display: inline-block;
+  padding: 15px 10px;
+  border: 2px solid #000000;
+  text-transform: uppercase;
+  color: #000000;
+  text-decoration: none;
+  font-weight: 400;
+  font-size: 16px;
+  transition: 0.3s;
+}
+
+.btn2::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  width: calc(100% + 4px);
+  height: calc(100% - -2px);
+  background-color: rgb(189, 224, 246);
+  transition: 0.3s ease-out;
+  transform: scaleY(1);
+}
+
+.btn2::after {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  width: calc(100% + 4px);
+  height: calc(100% - 50px);
+  background-color: rgb(189, 224, 246);
+  transition: 0.3s ease-out;
+  transform: scaleY(1);
+}
+
+.btn2:hover::before {
+  transform: translateY(-25px);
+  height: 0;
+}
+
+.btn2:hover::after {
+  transform: scaleX(0);
+  transition-delay: 0.15s;
+}
+
+.btn2:hover {
+  border: 2px solid #000;
+}
+
+.btn2 span {
+  position: relative;
+  z-index: 3;
+}
+
+button {
+  text-decoration: none;
+  border: none;
+  background-color: transparent;
+}
+
+.current-organization .arrow {
+  margin-left: 10px;
+}
+
+.organization-dropdown {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0 0 0;
+  border: 1px solid #1DB4BB;
+  border-radius: 5px;
+  border-bottom-left-radius: 15px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.organization-dropdown li {
+  padding: 10px;
+  color: #000;
+  cursor: pointer;
+  border: 0.5px solid #ccc;
+}
+
+.organization-dropdown li:hover {
+  background-color: #1DB4BB;
+}
+
+.list-item-button {
+  margin: 2px solid grey;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: large;
+  font-family: 'Roboto Serif', serif; 
+  font-weight: bold; 
+  border-bottom-left-radius: 15px;
+}
+
+.list-item-button .list-item {
+  text-decoration: none;
+  color: #000;
+}
+
+.list-item-button .list-item:hover {
+  color: #1DB4BB;
 }

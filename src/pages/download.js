@@ -1,40 +1,25 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import "../styles/pages/download.css";
 import Add from '../assets/add.svg';
-import DownloadTemplateButton from '../components/download-template-button';
-import SwitchButton from '../components/switchButton';
 import generateTemplate from '../components/generateTemplate';
-import starIcon from "../assets/info-icons/star-icon.svg";
-import MoreInfo from "../components/moreInfo";
-import { useNavigate } from 'react-router-dom';
-import PopUp from '../pages/PopUp'
-import Header from "../components/header";
-import withAuthorization from "../components/withAuthorization";
+import starIcon from '../assets/info-icons/star-icon.svg';
+import MoreInfo from '../components/moreInfo';
+import Header from '../components/header';
+import withAuthorization from '../components/withAuthorization';
+import DownloadTemplateButton from '../components/download-template-button';
 
-function Download() {
-  const [inputValue, setInputValue] = useState('');
-  const [skills, setSkills] = useState([{ header: 'Nombre' }]);
-  const [selectedOption, setSelectedOption] = useState('Lista de Opciones');
+function Download2() {
+  const [skills] = useState([{ header: 'Nombre' }, { header: 'No juega con' }]);
+  const [roles, setRoles] = useState([]);
+  const [, setShowPopup] = useState(false);
+  const [currentStep, setCurrentStep] = useState(0);
+  const [specifyRoles, setSpecifyRoles] = useState(null);
   const [additionalInputValue, setAdditionalInputValue] = useState('');
-  const [options, setOptions] = useState([]);
-  const [isHovered, setIsHovered] = useState(false); // Define el estado isHovered
-  const [showOptionsInput, setShowOptionsInput] = useState(true); // Nuevo estado para controlar la visibilidad del input de opciones
-  const [showPopup, setShowPopup] = useState(false);
-  const navigate = useNavigate();
+  const [attributes, setAttributes] = useState([{ id: 1, header: '', opciones: Array.from({ length: 50 }, (_, index) => index + 1) }]);
 
-  useEffect(() => {
-    // Limpiar las opciones cuando se cambie la opción seleccionada
-    if(selectedOption){
-      setOptions([]);
-      // Mostrar u ocultar el input de opciones basado en la opción seleccionada
-      setShowOptionsInput(selectedOption === 'Lista de Opciones');
-    }
-
-  }, [selectedOption]);
-
-  function handleDownload() {
+  const handleDownload = () => {
     try {
       const formattedSkills = skills.map(skill => {
         if (skill.opciones && skill.opciones.length > 0) {
@@ -43,217 +28,230 @@ function Download() {
           return { header: skill.header };
         }
       });
-      formattedSkills.push({ header: 'No juega con' }); // Corrección aquí
+
+      if (specifyRoles) {
+        formattedSkills.push({ header: 'Rol', opciones: roles });
+      }
+
+      // Add attributes to the template
+      attributes.forEach(attribute => {
+        if (attribute.header.trim()) {
+          formattedSkills.push({ header: attribute.header, opciones: attribute.opciones });
+        }
+      });
+
       generateTemplate(formattedSkills);
       setShowPopup(true);
     } catch (error) {
       console.error('Error downloading file:', error);
       toast.error('Error al descargar el archivo');
     }
-  }
-  
-  function handleInputChange(event) {
-    setInputValue(event.target.value);
-  }
+  };
 
-  function handleAdditionalInputChange(event) {
+  const handleAdditionalInputChange = (event) => {
     setAdditionalInputValue(event.target.value);
-  }
+  };
 
-  function handleAddSkill() {
-    if (skills.length >= 6) {
-      toast.error('Ya has ingresado 5 nuevos atributos');
-      return;
+  const handleKeyPressRole = (event) => {
+    if (event.key === 'Enter') {
+      event.preventDefault(); // Evita que se envíe un formulario si está dentro de uno
+      if (specifyRoles !== null) {
+        handleAddRole();
+      }
     }
-  
-    const trimmedSkill = inputValue.trim().toLowerCase();
-  
-    if (!trimmedSkill) {
-      toast.error('Por favor, ingresa un atributo');
-      return;
-    }
-  
-    if (skills.map(skill => skill.header.toLowerCase()).includes(trimmedSkill)) {
-      toast.error('Este atributo ya ha sido ingresado');
-      return;
-    }
-  
-    if (selectedOption === 'Lista de Opciones' && options.length < 3) {
-      toast.error('Se requiere un mínimo de 3 opciones para "Lista de Opciones"');
+  };
+
+  const handleAddRole = () => {
+    const trimmedRole = additionalInputValue.trim();
+
+    if (!trimmedRole) {
+      toast.error('Por favor, ingresa un rol');
       return;
     }
 
-    let newSkill;
-  
-    if (selectedOption === 'Lista de Opciones') {
-      newSkill = {
-        header: inputValue.trim(),
-        opciones: options
-      };
-    } else if (selectedOption === 'Rango numérico') {
-      const numericOptions = Array.from({ length: 50 }, (_, index) => index + 1);
-      newSkill = {
-        header: inputValue.trim(),
-        opciones: numericOptions
-      };
-    }
-  
-    setSkills([...skills, newSkill]);
-    setInputValue('');
-    setOptions([]); // Reiniciar opciones después de agregar una habilidad
-  }
-
-  function handleAddOption() {
-    const trimmedOption = additionalInputValue.trim().toLowerCase();
-  
-    if (!trimmedOption) {
-      toast.error('Por favor, ingresa una opción');
+    if (roles.map(role => role.toLowerCase()).includes(trimmedRole.toLowerCase())) {
+      toast.error('Este rol ya ha sido ingresado');
       return;
     }
-  
-    if (options.map(option => option.toLowerCase()).includes(trimmedOption)) {
-      toast.error('Esta opción ya ha sido ingresada');
+
+    setRoles([...roles, trimmedRole]);
+    setAdditionalInputValue('');
+  };
+
+  const handleAddAttribute = () => {
+    const lastAttribute = attributes[attributes.length - 1];
+    if (!lastAttribute.header.trim()) {
+      toast.error('Por favor, ingresa un nombre para el atributo actual antes de agregar uno nuevo');
       return;
     }
-  
-    setOptions([...options, trimmedOption]); // Agregar la nueva opción a las opciones existentes
-    setAdditionalInputValue(''); // Limpiar el valor del input
-  }
 
-  function handleKeyPress(event) {
-    if (event.key === 'Enter' && selectedOption === 'Lista de Opciones') {
-      handleAddOption();
+    const newAttribute = { id: attributes.length + 1, header: '', opciones: Array.from({ length: 50 }, (_, index) => index + 1) };
+    setAttributes([...attributes, newAttribute]);
+  };
+
+  const handleKeyPressAttribute = (event) => {
+    if (event.key === 'Enter') {
+      event.preventDefault(); // Evita que se envíe un formulario si está dentro de uno
+      if (specifyRoles !== null) {
+        handleAddAttribute();
+      }
     }
-  }
+  };
 
-  // Función para cerrar el Pop Up
-  function handleClosePopup() {
-    setShowPopup(false);
-  }
+  const handleAttributeChange = (index, event) => {
+    const newAttributes = [...attributes];
+    newAttributes[index].header = event.target.value;
+    setAttributes(newAttributes);
+  };
 
-  function handleContinue() {
-    navigate('/upload');
-    setShowPopup(false);
-  }
+  const handleStart = (answer) => {
+    console.log("handleStart called with answer:", answer);
+    if (answer) {
+      setSpecifyRoles(answer);
+      setCurrentStep(1);
+    } else {
+      setCurrentStep(2);
+    }
+  };
 
-  return (
+  const handleNextStep = () => {
+    console.log("handleNextStep called");
+    setCurrentStep(2);
+  };
+
+  if (currentStep === 0) {
+    return (
       <div className="download-container">
-        <Header/>
+        <Header />
         <MoreInfo>
           <div className='info-container'>
             <div className='info-header'>
-              <img src={starIcon} alt="Star Icon"/>
+              <img src={starIcon} alt="Star Icon" />
               <h1> ¿Cómo usar? </h1>
             </div>
             <ul>
-              <li>Selecciona Habilidades: Elige hasta 5 habilidades esenciales para tus equipos.</li>
-              <li>Descarga la Plantilla: Haz clic en "Descargar Template".</li>
-              <li>Completa la Plantilla: Llena con nombres de participantes y sus puntuaciones (1 a 99) para las habilidades elegidas.</li>
+              <h3>¿Deseas atribuirle un rol a cada participante?</h3>
+              <li>En ese caso, ¡haz click en "Si" y añade a tu template todos los roles posibles!</li>
+              <li>En caso contrario, haz click en "No" y procede a añadir los atributos numéricos que harán que tus equipos se repartan de forma pareja.</li>
             </ul>
           </div>
         </MoreInfo>
-
-        <ToastContainer/>
-
+        <ToastContainer />
         <div className='download-header'>
-          <h1> &#9312; Ingrese hasta 5 nuevos atributos</h1>
+          <h1> &#9312; ¿Deseas especificar el rol de cada participante?</h1>
         </div>
-
-        <div className="addBox">
+        <div className="download-actions">
+          <button className="startButton" onClick={() => handleStart(true)}>Sí</button>
+          <button className="startButton" onClick={() => handleStart(false)}>No</button>
+        </div>
+      </div>
+    );
+  } else if (currentStep === 1 && specifyRoles) {
+    return (
+      <div className="download-container">
+        <Header />
+        <MoreInfo>
+          <div className='info-container'>
+            <div className='info-header'>
+              <img src={starIcon} alt="Star Icon" />
+              <h1> ¿Cómo usar? </h1>
+            </div>
+            <ul>
+              <li>Añade todos los roles que adoptarán los miembros de tus equipos con el botón de +.</li>
+              <li>Recuerda que podrás asignar un solo rol a cada participante.</li>
+              <li>Una vez añadidos todos, haz click en "Siguiente".</li>
+            </ul>
+          </div>
+        </MoreInfo>
+        <ToastContainer />
+        <div className='addBox'>
           <div className="inputBox">
+            <h2>Roles</h2>
             <input
-                className="textInput"
-                type="text"
-                name=""
-                placeholder="Nuevo atributo"
-                value={inputValue}
-                onChange={handleInputChange}
-                onKeyPress={handleKeyPress}
+              className="textInput"
+              type="text"
+              placeholder="Nuevo rol"
+              value={additionalInputValue}
+              onChange={handleAdditionalInputChange}
+              onKeyPress={handleKeyPressRole} // Aquí agregamos el manejador de tecla
             />
-
-            <div className="additionalInput">
-              <p className={`toggleOption ${selectedOption === 'Lista de Opciones' ? 'active' : ''}`}
-                 onClick={() => setSelectedOption('Lista de Opciones')}>
-                Lista de Opciones
-              </p>
-              <SwitchButton
-                  value={selectedOption}
-                  onChange={(newValue) => {
-                    setSelectedOption(newValue);
-                    // Limpiar las opciones si la opción seleccionada cambia
-                    setOptions([]);
-                  }}
-                  options={['Lista de Opciones', 'Rango numérico']}
-              />
-              <p className={`toggleOption ${selectedOption === 'Rango numérico' ? 'active' : ''}`}
-                 onClick={() => setSelectedOption('Rango numérico')}>
-                Rango numérico
-              </p>
-            </div>
-
-            <div className='optionsBox'>
-              {showOptionsInput && (
-                  <React.Fragment>
-                    <input
-                        className="optionsInput"
-                        type="text"
-                        name=""
-                        placeholder="Agregue nueva opción"
-                        value={additionalInputValue}
-                        onChange={handleAdditionalInputChange}
-                        onKeyPress={handleKeyPress}
-                    />
-                    <button
-                        className="addOptionButton"
-                        onClick={handleAddOption}
-                        onMouseEnter={() => setIsHovered(true)}
-                        onMouseLeave={() => setIsHovered(false)}
-                    >
-                      <p>Agregar</p>
-                      <svg className='download-template-button-svg'> Add</svg>
-                    </button>
-                  </React.Fragment>
-              )}
-            </div>
-
-            {selectedOption === 'Lista de Opciones' && options.length > 0 && (
-                <div className="options-list">
-                  <h2>Opciones ingresadas:</h2>
-                  <ul className="options-added-list">
-                    {options.map((option, index) => (
-                        <li key={index}>{option}</li>
-                    ))}
-                  </ul>
-                </div>
+            <button
+              className="addButton roundButton"
+              onClick={handleAddRole}
+            >
+              <div className="add-hability-svg-container">
+                <img src={Add} alt="Add Icon" />
+              </div>
+            </button>
+            {roles.length > 0 && (
+              <div className="options-list">
+                <h2>Roles ingresados:</h2>
+                <ul className="options-added-list">
+                  {roles.map((role, index) => (
+                    <li key={index}>{role}</li>
+                  ))}
+                </ul>
+              </div>
             )}
           </div>
-
-          <button
-              className="addButton"
-              onClick={handleAddSkill}
-              onMouseEnter={() => setIsHovered(true)}
-              onMouseLeave={() => setIsHovered(false)}>
-            <div className="add-hability-svg-container">
-              <img src={Add} alt="Add Icon"/>
-            </div>
-          </button>
+          <div className="download-actions">
+            <button className="nextButton" onClick={handleNextStep}>Siguiente</button>
+          </div>
         </div>
-
-        <div className="skills-list">
-          <h2>Atributos ingresados:</h2>
-          <ul className="skills-added-list">
-            {skills.slice(1).map((skill, index) => ( // Utiliza slice(1) para omitir la primera habilidad
-              <li key={index}>
-                <p>{skill.header}</p>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <DownloadTemplateButton onClick={handleDownload}>Descargar Template</DownloadTemplateButton>
-        {showPopup && <PopUp onClose={handleClosePopup} onContinue={handleContinue} />}
       </div>
-  );
+    );
+  } else if (currentStep === 2) {
+    return (
+      <div className="download-container">
+        <Header />
+        <MoreInfo>
+          <div className='info-container'>
+            <div className='info-header'>
+              <img src={starIcon} alt="Star Icon" />
+              <h1> ¿Cómo usar? </h1>
+            </div>
+            <ul>
+              <li>Agrega todos los atributos numéricos que quieras asignarle a los miembros de tus equipos con el botón +.</li>
+              <p>¡Recuerda que estos serán cruciales a la hora de realizar el emparejamiento de los equipos!</p>
+              <li>Descarga la Plantilla: Haz clic en "Descargar Template".</li>
+              <li>Completa la Plantilla: Llena con nombres de participantes y sus puntuaciones (1 a 50) para las habilidades elegidas.</li>
+            </ul>
+          </div>
+        </MoreInfo>
+        <ToastContainer />
+        <div className='addBox'>
+          <div className="inputBox">
+            <h1>Atributos Numéricos</h1>
+            {attributes.map((attribute, index) => (
+              <div key={attribute.id}>
+                <h2>Atributo {attribute.id}</h2>
+                <input
+                  className="textInput"
+                  type="text"
+                  value={attribute.header}
+                  onChange={(e) => handleAttributeChange(index, e)}
+                  placeholder={`Nuevo atributo ${attribute.id}`}
+                  onKeyPress={handleKeyPressAttribute}
+                />
+              </div>
+            ))}
+            <button
+              className="addButton roundButton"
+              onClick={handleAddAttribute}
+            >
+              <div className="add-hability-svg-container">
+                <img src={Add} alt="Add Icon" />
+              </div>
+            </button>
+          </div>
+        </div>
+        {/* Conditional rendering of the download button */}
+        {attributes.length > 1 && (
+          <DownloadTemplateButton onClick={handleDownload}>Descargar Template</DownloadTemplateButton>
+        )}
+      </div>
+    );
+  }
 }
 
-export default withAuthorization(Download);
+export default withAuthorization(Download2);

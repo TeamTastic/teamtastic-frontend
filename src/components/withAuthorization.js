@@ -11,7 +11,7 @@ const withAuthorization = (WrappedComponent) => {
         useEffect(() => {
             const checkAuthorization = async () => {
                 try {
-                    await axios.get('/private_route');
+                    await axios.get('/private_route').then(() => {setLoading(false);})
                     setLoading(false);  // User is authorized, stop loading
                 } catch (error) {
                     console.error('Error al acceder a la ruta privada:', error);

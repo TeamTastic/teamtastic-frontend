@@ -1,81 +1,93 @@
 import React, { useState, useEffect } from 'react';
-import '../styles/pages/home.css';
+import '../styles/pages/record.css';
 import '../styles/components/add-organization-button.css';
 import '../styles/components/organization-button.css';
-import axios from 'axios';
+import axios from '../axiosConfig';
 import { useNavigate } from 'react-router-dom';
 import Header from "../components/header";
+import { useOrganizations } from '../contexts/OrganizationsContext';
+import { useLeague } from '../contexts/LeagueContext'; // Importar el contexto de la liga
+import { toast, ToastContainer } from 'react-toastify';
 
 function Record() {
+  const { currentOrganization } = useOrganizations();
   const navigate = useNavigate();
-  const [isRegisteredInOrg, setIsRegisteredInOrg] = useState(false);
+  const { setSelectedLeague } = useLeague(); // Obtener la función para seleccionar la liga del contexto
   const [leagues, setLeagues] = useState([]);
 
   useEffect(() => {
     const fetchLeagues = async () => {
+      if (!currentOrganization) {
+        return;
+      }
+
       try {
-        const response = await axios.get('/api/organization/leagues');
-        if (response.data && response.data.length > 0) {
-          setIsRegisteredInOrg(true);
-          setLeagues(response.data);
-        } else {
-          setIsRegisteredInOrg(false);
-        }
+        const response = await axios.get(`/get_organization_leagues`, {
+          params: {
+            org: currentOrganization
+          }
+        });
+        console.log('Leagues:', response.data);
+        setLeagues(response.data);
       } catch (error) {
-        console.error('Error fetching organizations:', error);
-        setIsRegisteredInOrg(false);
+        console.error('Error fetching leagues:', error);
       }
     };
 
     fetchLeagues();
-  }, []);
+  }, [currentOrganization]);
 
+  // Función para navegar a la pantalla de equipos
+  const navigateToTeams = (league) => {
+    setSelectedLeague(league);
+    navigate('/teams');
+  };
 
   return (
-    <div className="home">
-      <Header/>
-      <div className="welcome">
-        {isRegisteredInOrg ? (
+    <div className="record">
+      <Header />
+      <h1> &#9314; Vea el historial de equipos armados</h1>
+      <div className="record-container">
+        {leagues.length > 0 ? (
           <>
-            <h2>Vea el historial de equipos armados</h2>
-            <div className="organization-list">
-              {leagues.map((org, index) => (
+            <div className="record-list">
+              {leagues.map((league, index) => (
                 <ul key={index}>
-                  <button className="organization-button">
+                  <button className="organization-button" onClick={() => navigateToTeams(league)}>
                     <span className="circle" aria-hidden="true">
                       <span className="icon arrow"></span>
                     </span>
-                    <span className="button-text">{org}</span>
+                    <span className="button-text">{league}</span>
                   </button>
                 </ul>
               ))}
             </div>
             <div className="line"></div>
             <div className="actions">
-                <h2>¿Prefieres agregar una nueva?</h2>
-                <button className="add-organization-button" onClick={() => navigate('/download')}>
-                  <span></span><span></span><span></span><span></span>
-                  Descargar Template
-                </button>
-                <button className="add-organization-button" onClick={() => navigate('/upload')}>
-                  <span></span><span></span><span></span><span></span>
-                  Cargar Planilla
-                </button>
+              <h2>¿Prefieres agregar una nueva?</h2>
+              <button className="add-organization-button" onClick={() => navigate('/download')}>
+                <span></span><span></span><span></span><span></span>
+                Descargar Template
+              </button>
+              <button className="add-organization-button" onClick={() => navigate('/upload')}>
+                <span></span><span></span><span></span><span></span>
+                Cargar Planilla
+              </button>
             </div>
           </>
         ) : (
           <>
-            <p>Vemos que aún no tienes ninguna liga creada... ¡haz una ahora!</p>
+            <p>Vemos que aún no hay ninguna liga creada en {currentOrganization}... ¡haz una ahora!</p>
             <div className="line"></div>
             <div className="actions">
-            <button className="add-organization-button" onClick={() => navigate('/download')}>
+              <button className="add-organization-button" onClick={() => navigate('/download')}>
                 <span></span><span></span><span></span><span></span>
                 Descargar Template
-            </button>
-            <button className="add-organization-button" onClick={() => navigate('/upload')}>
+              </button>
+              <button className="add-organization-button" onClick={() => navigate('/upload')}>
                 <span></span><span></span><span></span><span></span>
                 Cargar Planilla
-            </button>
+              </button>
             </div>
           </>
         )}

@@ -1,85 +1,143 @@
-.home {
-  color: aliceblue;
-  display: flex;
-  flex-direction: column; /* Por defecto, columna */
-  height: 100vh; /* Toma toda la altura de la ventana del navegador */
-  align-items: center; /* Centra verticalmente los elementos */
-  justify-content: center;
+/* Estilo para el cuerpo de la información */
+.information-body {
+    background-color: #173b4c; 
+    font-family: 'Roboto Serif', serif; 
+    font-weight: bold; 
+    text-align: center; 
+    margin: 0; 
+    padding: 20px; 
+    display: flex; 
+    flex-direction: column;
+    justify-content: flex-start; /* Alinea los elementos al principio */
+    align-items: center; 
+    height: 100vh; /* Altura total de la ventana gráfica */
+    width: 90vw;
+    box-sizing: border-box; 
 }
 
-@media (min-width: 768px) {
-  .home {
-      flex-direction: row; /* En pantallas anchas, cambia a fila */
-  }
+/* Contenedor principal */
+.information-main-container {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center; 
+    width: 90vw; 
+    margin-bottom: 3%; 
+    flex-wrap: wrap; 
+    margin-top: 5vh; /* Reducido para que el contenido esté más centrado */
 }
 
-.line {
-  width: 100%;
-  height: 2px; /* Línea horizontal por defecto */
-  background-color: #ccc;
-  margin: 20px 0;
+/* Contenedor de pasos */
+.information-steps-container {
+    width: 90vw; 
+    max-width: 1200px; 
+    background-color: #173b4c; 
+    border-radius: 50px; 
+    padding: 0rem 2rem; 
+    margin-bottom: 2rem; 
 }
 
-@media (min-width: 768px) {
-  .line {
-      width: 2px; /* Línea vertical en pantallas anchas */
-      height: 50%;
-      margin: 0 20px;
-  }
+/* Contenedor de pasos individuales */
+.information-steps {
+    display: flex; 
+    justify-content: space-between; 
+    flex-wrap: wrap; 
 }
 
-.welcome {
-  padding: 20px;
-  max-width: 800px;
+/* Paso individual */
+.information-step {
+    flex: 1; 
+    margin: 1rem;
+    background-color: #ffffff; 
+    padding: 2rem; 
+    border-radius: 8px; 
+    text-align: center;
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: space-between; /* Distribuye el contenido uniformemente */
 }
 
-.actions {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+/* Título del paso */
+.information-step-title {
+    font-size: 1.5rem; 
+    font-weight: bold; 
+    color: #1DB4BB; 
+    margin-bottom: 1rem; 
+    text-align: center; 
 }
 
-.actions button {
-  margin-top: 10px;
+/* Imagen del paso */
+.information-step-image {
+    max-width: 3rem; 
+    height: auto;
+    margin-bottom: 1rem; 
 }
 
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
-  z-index: 999; /* Asegura que el overlay esté sobre todo */
+/* Texto del paso y lista */
+.information-step p,
+.information-step ul {
+    text-align: center;
+    font-size: 1rem;
 }
 
-.form-popup {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: white;
-  padding: 20px;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+/* Título principal */
+.information-h1 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 3.5rem; 
+    letter-spacing: 1px; 
+    color: #6B9080; 
+    text-align: center; 
+    line-height: 1.2; 
+    margin-top: 2rem; /* Agregado para espacio superior */
 }
 
-.home h1 {
-  font-family: 'Inter', sans-serif;
-  font-weight: 400; /* Misma fuente en negrita */
-  font-size: 50px; /* Mismo tamaño de fuente */
-  letter-spacing: 2px; /* Mismo espaciado entre letras */
-  color: #1DB4BB; /* Mismo color de texto */
-  text-align: center; /* Centra horizontalmente el texto */
-  margin-bottom: 0;
+/* Título secundario */
+.information-h2 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400; 
+    font-size: 2rem; 
+    letter-spacing: 1px;
+    color: #6B9080; 
+    text-align: center; 
+    margin-bottom: 1rem;
+    margin-top: 1rem;
 }
 
-.home p {
-  font-family: 'Inter', sans-serif;
-  font-weight: 200; /* Misma fuente en negrita */
-  font-size: 25px; /* Mismo tamaño de fuente */
-  letter-spacing: 2px; /* Mismo espaciado entre letras */
-  color: #1DB4AA; /* Mismo color de texto */
-  text-align: center; /* Centra horizontalmente el texto */
-  margin-bottom: 0;
+/* Texto final */
+.information-final-text {
+    font-size: 1.5rem; 
+    color: #ffffff;
+    margin-bottom: 2rem; 
+}
+
+/* Contenedor de botones */
+.button-container {
+    display: flex;
+    justify-content: center; 
+    width: 100%; 
+    margin-bottom: 5px;
+}
+
+/* Estilo de botones */
+.information-button {
+    cursor: pointer;
+    width: 90%; 
+    max-width: 335px; 
+    height: 48px; 
+    border: 0; 
+    border-radius: 100px; 
+    background-color: #1DB4BB; 
+    color: #ffffff;
+    font-size: 1rem;
+    font-family: "Inter"; 
+    font-weight: 700; 
+    outline: none; 
+    margin-top: 2rem; 
+    transition: background-color 0.3s ease; 
+    margin-bottom: 2%;
+}
+
+.information-button:hover {
+    background-color: #14918a; 
 }
