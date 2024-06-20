@@ -13,7 +13,7 @@ function Welcome() { // Define el componente funcional Welcome
   useEffect(() => {
     axios.get('/private_route')
         .then(() => {
-          navigate('/privateRoute')
+          navigate('/home')
         })
         .catch(error => {
             console.error('Error fetching organizations:', error);

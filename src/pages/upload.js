@@ -18,21 +18,19 @@ function Upload() {
   const [files, setFiles] = useState(null);
   const [isUploading, setIsUploading] = useState(false);
   const navigate = useNavigate();
-  const [publicUrl, setPublicUrl] = useState('');
   const [leagueName, setLeagueName] = useState('');
   const [teamsNumber, setTeamsNumber] = useState('');
 
-  const sanitizedOrganization = currentOrganization.replace(/\s+/g, '-').replace(/#/g, '-').replace(/_/g, '-');
-  const sanitizedLeagueName = leagueName.replace(/\s+/g, '-').replace(/_/g, '-'); // Reemplazar espacios con guiones bajos
 
 
   const sendDataToBackend = useCallback(async (publicUrl) => {
+    const inputFileName = publicUrl.split('/').pop();
     try {
       const response = await axios.post('/uploaded_data', {
-        'input_file_name': publicUrl,
-        'league_name': sanitizedLeagueName,
+        'input_file_name': inputFileName,
+        'league_name': leagueName,
         'teams_number': teamsNumber,
-        'org_name': sanitizedOrganization
+        'org_name': currentOrganization
       });
       console.log('Backend response:', response.data);
       toast.success('¡Datos subidos correctamente!');
@@ -45,7 +43,7 @@ function Upload() {
       toast.error('Error al subir datos al servidor');
       setIsUploading(false);
     }
-  }, [sanitizedLeagueName, teamsNumber, sanitizedOrganization, navigate]);
+  }, [teamsNumber, navigate,leagueName,currentOrganization]);
 
   const sendDataToBucket = useCallback(async (file) => {
     if (!leagueName || !teamsNumber) {
@@ -55,8 +53,7 @@ function Upload() {
     }
 
     const day = new Date().toISOString().split('T')[0];
-    console.log(sanitizedLeagueName)
-    const filename = `${sanitizedOrganization}-${sanitizedLeagueName}-${day}`;
+    const filename = `${currentOrganization}${leagueName}-${day}`;
     const contentType = file.type;
     setIsUploading(true);
 
@@ -71,15 +68,13 @@ function Upload() {
       });
 
       const publicUrl = `https://storage.googleapis.com/team_tastic_excels/${filename}`;
-      setPublicUrl(publicUrl);
-
       await sendDataToBackend(publicUrl);
     } catch (error) {
       console.error("Error durante la carga del archivo:", error);
       toast.error('Error al subir el archivo al bucket');
       setIsUploading(false);
     }
-  }, [leagueName, teamsNumber, sanitizedLeagueName, sanitizedOrganization, sendDataToBackend]);
+  }, [leagueName, teamsNumber, sendDataToBackend, currentOrganization]);
 
   useEffect(() => {
     if (files) {

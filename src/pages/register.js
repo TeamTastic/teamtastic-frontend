@@ -22,7 +22,7 @@ function Register() {
   useEffect(() => {
     axios.get('/private_route')
       .then(() => {
-        navigate('/privateRoute');
+        navigate('/home');
       })
       .catch(error => { });
   }, [navigate]);

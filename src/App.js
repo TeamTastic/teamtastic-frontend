@@ -22,7 +22,7 @@ const App = () => {
       <OrganizationsProvider> <LeagueProvider>
         <Router>
           <Routes>
-            <Route path="/" element={<Welcome />} />
+            <Route path="/" element={<Home />} />
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
             <Route path="/logout" element={<Logout />} />
