@@ -103,17 +103,6 @@ function Register() {
           />
           <span>Nombre de Usuario</span>
         </label>
-        <label>
-          <input
-            required
-            placeholder=""
-            type="email"
-            className="register-input"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <span>Email</span>
-        </label>
         <label className="register-password-label">
           <input
             required
