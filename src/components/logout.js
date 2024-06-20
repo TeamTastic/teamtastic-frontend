@@ -8,7 +8,7 @@ function Logout() {
     useEffect(() => {
         axios.post('/user/logout')
             .then(() => {
-                navigate('/')
+                navigate('/login')
             })
             .catch(error => {
                 console.error("Error al cerrar sesión:", error);

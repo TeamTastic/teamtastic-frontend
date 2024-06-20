@@ -21,7 +21,10 @@ function Upload() {
   const [leagueName, setLeagueName] = useState('');
   const [teamsNumber, setTeamsNumber] = useState('');
 
-
+  const resetState = () => {
+    setFiles(null);
+    setIsUploading(false);
+  };
 
   const sendDataToBackend = useCallback(async (publicUrl) => {
     const inputFileName = publicUrl.split('/').pop();
@@ -34,16 +37,16 @@ function Upload() {
       });
       console.log('Backend response:', response.data);
       toast.success('¡Datos subidos correctamente!');
-      setIsUploading(false);
+      resetState();
       setTimeout(() => {
         navigate('/record');
       }, 3000);
     } catch (error) {
       console.error("Error al subir datos:", error);
       toast.error('Error al subir datos al servidor');
-      setIsUploading(false);
+      resetState();
     }
-  }, [teamsNumber, navigate,leagueName,currentOrganization]);
+  }, [teamsNumber, navigate, leagueName, currentOrganization]);
 
   const sendDataToBucket = useCallback(async (file) => {
     if (!leagueName || !teamsNumber) {
@@ -72,7 +75,7 @@ function Upload() {
     } catch (error) {
       console.error("Error durante la carga del archivo:", error);
       toast.error('Error al subir el archivo al bucket');
-      setIsUploading(false);
+      resetState();
     }
   }, [leagueName, teamsNumber, sendDataToBackend, currentOrganization]);
 
@@ -104,65 +107,65 @@ function Upload() {
   };
 
   return (
-    <div className="upload-container">
-      <Header />
-      <MoreInfo>
-        <div className='info-container'>
-          <div className='info-header'>
-            <img src={starIcon} alt="Star Icon" />
-            <h1>Subir Plantilla Llena</h1>
+      <div className="upload-container">
+        <Header />
+        <MoreInfo>
+          <div className='info-container'>
+            <div className='info-header'>
+              <img src={starIcon} alt="Star Icon" />
+              <h1>Subir Plantilla Llena</h1>
+            </div>
+            <ul>
+              <li>Una vez completada la planilla con las puntuaciones, vuelve a esta página.</li>
+              <li>Carga la planilla Excel llena utilizando el botón "Subir Planilla".</li>
+            </ul>
           </div>
-          <ul>
-            <li>Una vez completada la planilla con las puntuaciones, vuelve a esta página.</li>
-            <li>Carga la planilla Excel llena utilizando el botón "Subir Planilla".</li>
-          </ul>
+        </MoreInfo>
+        <ToastContainer />
+        {isUploading && <div className="uploading-indicator">Cargando...</div>}
+        <div className='upload-header'>
+          <h1>&#9313; Suba su plantilla de datos completa</h1>
         </div>
-      </MoreInfo>
-      <ToastContainer />
-      {isUploading && <div className="uploading-indicator">Cargando...</div>}
-      <div className='upload-header'>
-        <h1>&#9313; Suba su plantilla de datos completa</h1>
-      </div>
-      <div className='upload-form'>
-        <label>
-          <input
-            required
-            placeholder=""
-            type="text"
-            className="upload-input"
-            value={leagueName}
-            onChange={(e) => setLeagueName(e.target.value)}
-          />
-          <span>Nombre de la Liga</span>
-        </label>
-        <label>
-          <input
-            required
-            placeholder=""
-            type="number"
-            className="upload-input"
-            value={teamsNumber}
-            onChange={(e) => setTeamsNumber(e.target.value)}
-          />
-          <span>Cantidad de Equipos</span>
-        </label>
-      </div>
-      <div className='fileUploader'>
-        <div className="file-uploader-container">
-          <FileUploader
-            handleChange={handleChange}
-            name="file"
-            label=''
-            types={fileTypes}
-            multiple={false}
-            message="Arrastre y suelte el archivo aquí o haga clic para seleccionar"
-            onDrop={handleUploadSuccess}
-            onSizeError={(error) => handleUploadError(error)}
-            onTypeError={(error) => handleUploadError(error)}
-          />
+        <div className='upload-form'>
+          <label>
+            <input
+                required
+                placeholder=""
+                type="text"
+                className="upload-input"
+                value={leagueName}
+                onChange={(e) => setLeagueName(e.target.value)}
+            />
+            <span>Nombre de la Liga</span>
+          </label>
+          <label>
+            <input
+                required
+                placeholder=""
+                type="number"
+                className="upload-input"
+                value={teamsNumber}
+                onChange={(e) => setTeamsNumber(e.target.value)}
+            />
+            <span>Cantidad de Equipos</span>
+          </label>
+        </div>
+        <div className='fileUploader'>
+          <div className="file-uploader-container">
+            <FileUploader
+                handleChange={handleChange}
+                name="file"
+                label=''
+                types={fileTypes}
+                multiple={false}
+                message="Arrastre y suelte el archivo aquí o haga clic para seleccionar"
+                onDrop={handleUploadSuccess}
+                onSizeError={(error) => handleUploadError(error)}
+                onTypeError={(error) => handleUploadError(error)}
+            />
+          </div>
         </div>
       </div>
-    </div>
   );
 }
 
