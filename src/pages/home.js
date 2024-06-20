@@ -28,7 +28,7 @@ function Home() {
         navigate('/upload');
         break;
       case 4:
-        navigate('/teams');
+        navigate('/record');
         break;
       default:
         break;

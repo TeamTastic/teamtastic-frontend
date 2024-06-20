@@ -9,12 +9,10 @@ import { useOrganizations } from '../contexts/OrganizationsContext';
 import { useLeague } from '../contexts/LeagueContext'; // Importar el contexto de la liga
 import { toast, ToastContainer } from 'react-toastify';
 
-
 function Record() {
   const { currentOrganization } = useOrganizations();
   const navigate = useNavigate();
   const { setSelectedLeague } = useLeague(); // Obtener la función para seleccionar la liga del contexto
-  const [isRegisteredInOrg, setIsRegisteredInOrg] = useState(false);
   const [leagues, setLeagues] = useState([]);
 
   useEffect(() => {
@@ -28,16 +26,11 @@ function Record() {
           params: {
             org: currentOrganization
           }
-        }).then((response) => {
-          console.log('Leagues:', response.data);
-          setIsRegisteredInOrg(true);
-          setLeagues(response.data);
-
-        })
-            .catch((error) => {console.error('Error fetching leagues:', error);});
+        });
+        console.log('Leagues:', response.data);
+        setLeagues(response.data);
       } catch (error) {
         console.error('Error fetching leagues:', error);
-        setIsRegisteredInOrg(false);
       }
     };
 
@@ -54,17 +47,17 @@ function Record() {
     <div className="record">
       <Header />
       <h1> &#9314; Vea el historial de equipos armados</h1>
-      <div className="welcome">
-        {isRegisteredInOrg ? (
+      <div className="record-container">
+        {leagues.length > 0 ? (
           <>
-            <div className="organization-list">
+            <div className="record-list">
               {leagues.map((league, index) => (
                 <ul key={index}>
                   <button className="organization-button" onClick={() => navigateToTeams(league)}>
                     <span className="circle" aria-hidden="true">
                       <span className="icon arrow"></span>
                     </span>
-                    <span className="button-text" >{league}</span>
+                    <span className="button-text">{league}</span>
                   </button>
                 </ul>
               ))}
