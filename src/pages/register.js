@@ -13,6 +13,7 @@ function Register() {
   const [name, setName] = useState('');
   const [surname, setSurname] = useState('');
   const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -40,7 +41,7 @@ function Register() {
     }
 
     try {
-      await axios.post('/user/signup', { name, surname, username, email:'', password });
+      await axios.post('/user/signup', { name, surname, username,  email, password });
       toast.success('Registro exitoso. Redirigiendo al inicio de sesión...');
       setTimeout(() => {
         navigate('/login');
@@ -101,6 +102,17 @@ function Register() {
             onChange={(e) => setUsername(e.target.value)}
           />
           <span>Nombre de Usuario</span>
+        </label>
+        <label>
+          <input
+            required
+            placeholder=""
+            type="email"
+            className="register-input"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <span>Email</span>
         </label>
         <label className="register-password-label">
           <input

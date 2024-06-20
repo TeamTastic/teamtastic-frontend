@@ -1,0 +1,133 @@
+
+.information-body {
+    background-color: #173b4c; 
+    font-family: 'Roboto Serif', serif; 
+    font-weight: bold; 
+    text-align: center; 
+    margin: 0; 
+    padding: 20px; 
+    display: flex; 
+    justify-content: center; 
+    align-items: flex-start; 
+    flex-direction: column; 
+    min-height: 100vh; 
+    box-sizing: border-box; 
+}
+
+.information-main-container {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center; 
+    width: 100vw; 
+    max-width: 1200px; 
+    margin-bottom: 3%; 
+    flex-wrap: wrap; 
+    margin-top: 25%; 
+}
+
+.information-image {
+    max-width: 100%; 
+    height: auto; 
+    border-radius: 8px; 
+}
+
+.information-steps-container {
+    width: 80vw; 
+    max-width: 1200px; 
+    background-color: #173b4c; 
+    border-radius: 50px; 
+    padding: 40px 20px; 
+    margin-bottom: 20px; 
+    margin-top: 10px; 
+}
+
+.information-steps {
+    display: flex; 
+    justify-content: space-between; 
+    flex-wrap: wrap; 
+}
+
+.information-step {
+    flex: 1; 
+    margin: 10px;
+    background-color: #ffffff; 
+    padding: 20px; 
+    border-radius: 8px; 
+    text-align: center;
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
+}
+
+.information-step-title {
+    font-size: 24px; 
+    font-weight: bold; 
+    color: #1DB4BB; 
+    margin-bottom: 10px; 
+    text-align: center; 
+}
+
+.information-step-image {
+    max-width: 50px; 
+    height: auto;
+    margin-bottom: 10px; 
+}
+
+.information-step p,
+.information-step ul {
+    text-align: center;
+}
+
+.information-h1 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 48px; 
+    letter-spacing: 1px; 
+    color: #6B9080; 
+    text-align: center; 
+    line-height: 1.2; 
+}
+
+.information-h2 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400; 
+    font-size: 40px; 
+    letter-spacing: 1px;
+    color: #6B9080; 
+    text-align: center; 
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.information-final-text {
+    font-size: 20px; 
+    color: #ffffff;
+    margin-bottom: 20px; 
+}
+
+.button-container {
+    display: flex;
+    justify-content: center; 
+    width: 100%; 
+}
+
+.information-button {
+    cursor: pointer;
+    width: 100%;
+    max-width: 335px; 
+    height: 48px; 
+    border: 0; 
+    border-radius: 100px; 
+    background-color: #1DB4BB; 
+    color: #ffffff;
+    font-size: 18px;
+    font-family: "Inter"; 
+    font-weight: 700; 
+    outline: none; 
+    margin-top: 20px; 
+    transition: background-color 0.3s ease; 
+}
+
+.information-button:hover {
+    background-color: #14918a; 
+}
